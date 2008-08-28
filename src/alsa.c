@@ -199,6 +199,10 @@ static int translate_error(int error) {
             return CA_ERROR_OOM;
         case -EBUSY:
             return CA_ERROR_NOTAVAILABLE;
+        case -EINVAL:
+            return CA_ERROR_INVALID;
+        case -ENOSYS:
+            return CA_ERROR_NOTSUPPORTED;
         default:
             if (ca_debug())
                 fprintf(stderr, "Got unhandled error from ALSA: %s\n", snd_strerror(error));

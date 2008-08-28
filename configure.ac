@@ -21,7 +21,7 @@
 
 AC_PREREQ(2.62)
 
-AC_INIT([libcanberra], 0.7, [mzyvopnaoreen (at) 0pointer (dot) de])
+AC_INIT([libcanberra], 0.8, [mzyvopnaoreen (at) 0pointer (dot) de])
 AC_CONFIG_SRCDIR([src/common.c])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR(m4)
@@ -30,7 +30,7 @@ AM_INIT_AUTOMAKE([foreign 1.9 -Wall])
 
 AC_SUBST(PACKAGE_URL, [http://0pointer.de/lennart/projects/libcanberra/])
 
-AC_SUBST(LIBCANBERRA_VERSION_INFO, [1:0:1])
+AC_SUBST(LIBCANBERRA_VERSION_INFO, [1:1:1])
 AC_SUBST(LIBCANBERRA_GTK_VERSION_INFO, [0:3:0])
 
 AC_CANONICAL_HOST
@@ -54,7 +54,7 @@ AC_GNU_SOURCE
 
 AC_PROG_CXX
 
-DESIRED_FLAGS="-Wall -W -Wextra -pedantic -pipe -Wbad-function-cast -Wunreachable-code -Wno-long-long -Wvla -Wno-overlength-strings -Wconversion -Wundef -Wformat -Wlogical-op -Wmissing-format-attribute -Wpacked -Waggregate-return -Wformat-security -Wmissing-include-dirs -Wformat-nonliteral -Wold-style-definition -Wdeclaration-after-statement -Wfloat-equal -Wmissing-declarations -Wmissing-prototypes -Wstrict-prototypes -Wredundant-decls -Wmissing-noreturn -Wshadow -Wendif-labels -Wpointer-arith -Wcast-align -Wwrite-strings -Winline -Wno-unused-parameter -ffast-math"
+DESIRED_FLAGS="-Wall -W -Wextra -pedantic -pipe -Wno-long-long -Wvla -Wno-overlength-strings -Wconversion -Wundef -Wformat -Wlogical-op -Wpacked -Wformat-security -Wmissing-include-dirs -Wformat-nonliteral -Wold-style-definition -Wdeclaration-after-statement -Wfloat-equal -Wmissing-declarations -Wmissing-prototypes -Wstrict-prototypes -Wredundant-decls -Wmissing-noreturn -Wshadow -Wendif-labels -Wpointer-arith -Wcast-align -Wwrite-strings -Winline -Wno-unused-parameter -ffast-math"
 
 for flag in $DESIRED_FLAGS ; do
   CC_CHECK_CFLAGS([$flag], [CFLAGS="$CFLAGS $flag"])
@@ -139,6 +139,9 @@ AC_CHECK_FUNCS([strerror_r])
 # BSD
 AC_CHECK_FUNCS([lstat])
 
+# GNU
+AC_CHECK_FUNCS([strndup])
+
 #### POSIX threads ####
 
 ACX_PTHREAD
@@ -199,6 +202,35 @@ fi
 AC_SUBST(ALSA_CFLAGS)
 AC_SUBST(ALSA_LIBS)
 
+### OSS support (optional) ###
+AC_ARG_ENABLE([oss],
+    AC_HELP_STRING([--disable-oss], [Disable optional OSS support]),
+        [
+            case "${enableval}" in
+                yes) oss=yes ;;
+                no) oss=no ;;
+                *) AC_MSG_ERROR(bad value ${enableval} for --disable-oss) ;;
+            esac
+        ],
+        [oss=auto])
+
+if test "x${oss}" != xno ; then
+    AC_CHECK_HEADERS(soundcard.h sys/soundcard.h machine/soundcard.h)
+    if test "${ac_cv_header_sys_soundcard_h}" = "yes" || \
+	test "${ac_cv_header_soundcard_h}" = "yes" || \
+	test "${ac_cv_header_machine_soundcard_h}" = "yes"; then
+	HAVE_OSS=1
+        AC_DEFINE([HAVE_OSS], 1, [Have OSS?])
+    else
+	HAVE_OSS=0
+        if test "x$oss" = xyes ; then
+            AC_MSG_ERROR([*** OSS not found ***])
+        fi
+    fi
+else
+    HAVE_OSS=0
+fi
+
 ### PulseAudio (optional) ####
 
 AC_ARG_ENABLE([pulse],
@@ -239,6 +271,38 @@ fi
 
 AC_SUBST(PULSE_CFLAGS)
 AC_SUBST(PULSE_LIBS)
+
+#### GStreamer support (optional) ####
+
+AC_ARG_ENABLE([gstreamer],
+    AC_HELP_STRING([--disable-gstreamer], [Disable optional GStreamer support]),
+        [
+            case "${enableval}" in
+                yes) gstreamer=yes ;;
+                no) gstreamer=no ;;
+                *) AC_MSG_ERROR(bad value ${enableval} for --disable-gstreamer) ;;
+            esac
+        ],
+        [gstreamer=auto])
+
+if test "x${gstreamer}" != xno ; then
+    PKG_CHECK_MODULES(GST, [ gstreamer-0.10 >= 0.10.15 ],
+        [
+            HAVE_GSTREAMER=1
+            AC_DEFINE([HAVE_GSTREAMER], 1, [Have GStreamer?])
+        ],
+        [
+            HAVE_GSTREAMER=0
+            if test "x$gstreamer" = xyes ; then
+                AC_MSG_ERROR([*** GStreamer not found ***])
+            fi
+        ])
+else
+    HAVE_GSTREAMER=0
+fi
+
+AC_SUBST(GSTREAMER_CFLAGS)
+AC_SUBST(GSTREAMER_LIBS)
 
 ### Null output (optional) ####
 
@@ -336,6 +400,8 @@ HAVE_DSO=0
 BUILTIN_DSO=0
 BUILTIN_PULSE=0
 BUILTIN_ALSA=0
+BUILTIN_OSS=0
+BUILTIN_GSTREAMER=0
 BUILTIN_NULL=0
 
 case "x$with_builtin" in
@@ -346,6 +412,8 @@ case "x$with_builtin" in
 
         BUILTIN_PULSE=1
         HAVE_ALSA=0
+	HAVE_OSS=0
+	HAVE_GSTREAMER=0
         HAVE_NULL=0
      ;;
 
@@ -355,8 +423,34 @@ case "x$with_builtin" in
         fi
 
         BUILTIN_ALSA=1
+	HAVE_OSS=0
+        HAVE_PULSE=0
+	HAVE_GSTREAMER=0
+        HAVE_NULL=0
+     ;;
+
+     xgstreamer)
+        if test "x$HAVE_GSTREAMER" != x1 ; then
+                AC_MSG_ERROR([*** GStremaer selected for builtin driver, but not enabled. ***])
+        fi
+
+        BUILTIN_GSTREAMER=1
+        HAVE_ALSA=0
+	HAVE_OSS=0
         HAVE_PULSE=0
         HAVE_NULL=0
+     ;;
+
+     xoss)
+        if test "x$HAV_OSS" != x1 ; then
+	        AC_MSG_ERROR([*** OSS selected for builtin driver, but not enabled. ***])
+	fi
+
+	BUILTIN_OSS=1
+	HAVE_ALSA=0
+	HAVE_PULSE=0
+	HAVE_GSTREAMER=0
+	HAVE_NULL=0
      ;;
 
      xnull)
@@ -367,6 +461,8 @@ case "x$with_builtin" in
         BUILTIN_NULL=1
         HAVE_PULSE=0
         HAVE_ALSA=0
+	HAVE_OSS=0
+	HAVE_GSTREAMER=0
      ;;
 
      xdso)
@@ -379,24 +475,32 @@ case "x$with_builtin" in
         AC_MSG_ERROR([*** Unknown driver $with_builtin selected for builtin ***])
 esac
 
-if test "x$HAVE_PULSE" != x1 -a "x$HAVE_ALSA" != x1 -a "x$HAVE_NULL" != x1 ; then
+if test "x$HAVE_PULSE" != x1 -a "x$HAVE_ALSA" != x1 -a "x$HAVE_OSS" != x1 -a "x$HAVE_GSTREAMER" != x1 -a "x$HAVE_NULL" != x1 ; then
    AC_MSG_ERROR([*** No backend enabled. ***])
 fi
 
 AC_SUBST(HAVE_DSO)
 AC_SUBST(HAVE_PULSE)
 AC_SUBST(HAVE_ALSA)
+AC_SUBST(HAVE_OSS)
+AC_SUBST(HAVE_GSTREAMER)
 AC_SUBST(HAVE_NULL)
 AC_SUBST(BUILTIN_DSO)
 AC_SUBST(BUILTIN_PULSE)
 AC_SUBST(BUILTIN_ALSA)
+AC_SUBST(BUILTIN_OSS)
+AC_SUBST(BUILTIN_GSTREAMER)
 AC_SUBST(BUILTIN_NULL)
 AM_CONDITIONAL([HAVE_PULSE], [test "x$HAVE_PULSE" = x1])
 AM_CONDITIONAL([HAVE_ALSA], [test "x$HAVE_ALSA" = x1])
+AM_CONDITIONAL([HAVE_OSS], [test "x$HAVE_OSS" = x1])
+AM_CONDITIONAL([HAVE_GSTREAMER], [test "x$HAVE_GSTREAMER" = x1])
 AM_CONDITIONAL([HAVE_NULL], [test "x$HAVE_NULL" = x1])
 AM_CONDITIONAL([BUILTIN_DSO], [test "x$BUILTIN_DSO" = x1])
 AM_CONDITIONAL([BUILTIN_PULSE], [test "x$BUILTIN_PULSE" = x1])
 AM_CONDITIONAL([BUILTIN_ALSA], [test "x$BUILTIN_ALSA" = x1])
+AM_CONDITIONAL([BUILTIN_OSS], [test "x$BUILTIN_OSS" = x1])
+AM_CONDITIONAL([BUILTIN_GSTREAMER], [test "x$BUILTIN_GSTREAMER" = x1])
 AM_CONDITIONAL([BUILTIN_NULL], [test "x$BUILTIN_NULL" = x1])
 
 GTK_DOC_CHECK(1.9)
@@ -440,6 +544,24 @@ if test "x$BUILTIN_ALSA" = "x1" ; then
    ENABLE_BUILTIN_ALSA=yes
 fi
 
+ENABLE_OSS=no
+if test "x$HAVE_OSS" = "x1" ; then
+    ENABLE_OSS=yes
+fi
+ENABLE_BUILTIN_OSS=no
+if test "x$BUILTIN_OSS" = "x1" ; then
+    ENABLE_BUILTIN_OSS=yes
+fi
+
+ENABLE_GSTREAMER=no
+if test "x$HAVE_GSTREAMER" = "x1" ; then
+   ENABLE_GSTREAMER=yes
+fi
+ENABLE_BUILTIN_GSTREAMER=no
+if test "x$BUILTIN_GSTREAMER" = "x1" ; then
+   ENABLE_BUILTIN_GSTREAMER=yes
+fi
+
 ENABLE_NULL=no
 if test "x$HAVE_NULL" = "x1" ; then
    ENABLE_NULL=yes
@@ -469,8 +591,36 @@ echo "
     Builtin PulseAudio:     ${ENABLE_BUILTIN_PULSE}
     Enable ALSA:            ${ENABLE_ALSA}
     Builtin ALSA:           ${ENABLE_BUILTIN_ALSA}
+    Enable OSS:             ${ENABLE_OSS}
+    Builtin OSS:            ${ENABLE_BUILTIN_OSS}
+    Enable GStreamer:       ${ENABLE_GSTREAMER}
+    Builtin GStreamer:      ${ENABLE_BUILTIN_GSTREAMER}
     Enable Null Output:     ${ENABLE_NULL}
     Builtin Null Output:    ${ENABLE_BUILTIN_NULL}
     Enable GTK+:            ${ENABLE_GTK}
     GTK Modules Directory:  ${GTK_MODULES_DIR}
 "
+
+
+if test "x$HAVE_OSS" = "x1" -a "x$HAVE_ALSA" = "x1" ; then
+
+   echo "
+WARNING! WARNING! WARNING! WARNING! WARNING! WARNING! WARNING!
+
+You enabled the OSS driver although the ALSA driver is
+available. Please note that if ALSA is available the OSS driver is a
+very bad choice, since it currently doesn't support resampling or
+converting sample types to the necessities of the hardware if the
+hardware does not directly support the format/rate of the sound file
+to play.
+
+Packagers of Linux distributions! Please think twice if you package
+the OSS driver! It is probably best to not to pacakge it at all -- at
+least until the OSS driver learned sample type conversion and the most
+basic resampling. Otherwise you might end up getting bug reports from
+users misunderstanding the OSS vs. ALSA situation.
+
+WARNING! WARNING! WARNING! WARNING! WARNING! WARNING! WARNING!
+"
+
+fi

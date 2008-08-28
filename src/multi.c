@@ -41,7 +41,7 @@ struct private {
 #define PRIVATE(c) ((struct private *) ((c)->private))
 
 static int add_backend(struct private *p, const char *name) {
-    struct backend *b;
+    struct backend *b, *last;
     int ret;
 
     ca_assert(p);
@@ -69,7 +69,11 @@ static int add_backend(struct private *p, const char *name) {
     if ((ret = ca_context_open(b->context)) < 0)
         goto fail;
 
-    CA_LLIST_PREPEND(struct backend, p->backends, b);
+    for (last = p->backends; last; last = last->next)
+        if (!last->next)
+            break;
+
+    CA_LLIST_INSERT_AFTER(struct backend, p->backends, last, b);
 
     return CA_SUCCESS;
 
@@ -101,7 +105,8 @@ int driver_open(ca_context *c) {
     int ret = CA_SUCCESS;
 
     ca_return_val_if_fail(c, CA_ERROR_INVALID);
-    ca_return_val_if_fail(!c->driver || ca_streq(c->driver, "multi"), CA_ERROR_NODRIVER);
+    ca_return_val_if_fail(c->driver, CA_ERROR_NODRIVER);
+    ca_return_val_if_fail(!strncmp(c->driver, "multi", 5), CA_ERROR_NODRIVER);
     ca_return_val_if_fail(!PRIVATE(c), CA_ERROR_STATE);
 
     if (!(c->private = p = ca_new0(struct private, 1)))
@@ -122,7 +127,7 @@ int driver_open(ca_context *c) {
             size_t n;
             ca_bool_t last;
 
-            n = strcspn(k, ":");
+            n = strcspn(k, ",:");
             last = k[n] == 0;
             k[n] = 0;
 
