@@ -86,7 +86,7 @@ int driver_open(ca_context *c) {
     ca_return_val_if_fail(!PRIVATE(c), CA_ERROR_INVALID);
     ca_return_val_if_fail(!c->driver || ca_streq(c->driver, "gstreamer"), CA_ERROR_NODRIVER);
 
-    gst_init_check (NULL, NULL, &error);
+    gst_init_check(NULL, NULL, &error);
     if (error != NULL) {
         g_warning("gst_init: %s ", error->message);
         g_error_free(error);
@@ -173,7 +173,7 @@ int driver_destroy(ca_context *c) {
 
     ca_free(p);
 
-    /* no gst_deinit (), see doc */
+    /* no gst_deinit(), see doc */
 
     return CA_SUCCESS;
 }
@@ -213,7 +213,7 @@ static GstBusSyncReply bus_cb(GstBus *bus, GstMessage *message, gpointer data) {
         case GST_MESSAGE_ERROR:
             err = CA_ERROR_SYSTEM;
             break;
-        /* only from bin */
+            /* only from bin */
         case GST_MESSAGE_EOS:
             if (GST_OBJECT(out->pipeline) != GST_MESSAGE_SRC(message))
                 return GST_BUS_DROP;
@@ -230,7 +230,7 @@ static GstBusSyncReply bus_cb(GstBus *bus, GstMessage *message, gpointer data) {
             /* g_debug (gst_element_state_get_name (pending)); */
 
             if (pending == GST_STATE_NULL || pending == GST_STATE_VOID_PENDING)
-                err = CA_SUCCESS;
+                return GST_BUS_PASS;
             else
                 return GST_BUS_DROP;
             break;
@@ -286,22 +286,37 @@ static int ca_gst_sound_file_open(ca_sound_file **_f, const char *fn) {
 
 static void on_pad_added(GstElement *element, GstPad *pad, gboolean arg1, gpointer data)
 {
-    GstPad *sinkpad;
-    GstElement *sink = GST_ELEMENT (data);
+    GstStructure *structure;
+    GstElement *sinkelement;
+    GstCaps *caps;
+    GstPad *vpad;
+    const char *type;
 
-    sinkpad = gst_element_get_static_pad (sink, "sink");
+    sinkelement = GST_ELEMENT(data);
 
-    gst_pad_link (pad, sinkpad);
+    caps = gst_pad_get_caps(pad);
+    if (gst_caps_is_empty(caps) || gst_caps_is_any(caps)) {
+        gst_caps_unref(caps);
+        return;
+    }
 
-    gst_object_unref (sinkpad);
+    structure = gst_caps_get_structure(caps, 0);
+    type = gst_structure_get_name(structure);
+    if (g_str_has_prefix(type, "audio/x-raw") == TRUE) {
+        vpad = gst_element_get_pad(sinkelement, "sink");
+        gst_pad_link(pad, vpad);
+        gst_object_unref(vpad);
+    }
+    gst_caps_unref(caps);
 }
 
 int driver_play(ca_context *c, uint32_t id, ca_proplist *proplist, ca_finish_callback_t cb, void *userdata) {
     struct private *p;
     struct outstanding *out = NULL;
     ca_sound_file *f;
-    GstElement *decodebin, *sink;
+    GstElement *decodebin, *sink, *audioconvert, *audioresample, *bin;
     GstBus *bus;
+    GstPad *audiopad;
     int ret;
 
     ca_return_val_if_fail(c, CA_ERROR_INVALID);
@@ -314,7 +329,7 @@ int driver_play(ca_context *c, uint32_t id, ca_proplist *proplist, ca_finish_cal
 
     p = PRIVATE(c);
 
-    if ((ret = ca_lookup_sound_with_callback(&f, ca_gst_sound_file_open, &p->theme, c->props, proplist)) < 0)
+    if ((ret = ca_lookup_sound_with_callback(&f, ca_gst_sound_file_open, NULL, &p->theme, c->props, proplist)) < 0)
         goto fail;
 
     if (!(out = ca_new0(struct outstanding, 1)))
@@ -327,26 +342,42 @@ int driver_play(ca_context *c, uint32_t id, ca_proplist *proplist, ca_finish_cal
 
     if (!(out->pipeline = gst_pipeline_new(NULL))
         || !(decodebin = gst_element_factory_make("decodebin2", NULL))
+        || !(audioconvert = gst_element_factory_make("audioconvert", NULL))
+        || !(audioresample = gst_element_factory_make("audioresample", NULL))
         || !(sink = gst_element_factory_make("autoaudiosink", NULL))) {
         ret = CA_ERROR_OOM;
         goto fail;
     }
+
+    bin = gst_bin_new("audiobin");
+
+    g_signal_connect(decodebin, "new-decoded-pad", G_CALLBACK (on_pad_added), bin);
 
     bus = gst_pipeline_get_bus(GST_PIPELINE (out->pipeline));
     gst_bus_set_sync_handler(bus, bus_cb, out);
     gst_object_unref(bus);
 
     gst_bin_add_many(GST_BIN (out->pipeline),
-                     f->fdsrc, decodebin, sink, NULL);
+                     f->fdsrc, decodebin, NULL);
 
     if (!gst_element_link(f->fdsrc, decodebin)) {
         f->fdsrc = NULL;
         decodebin = NULL;
+        audioconvert = NULL;
+        audioresample = NULL;
         sink = NULL;
         goto fail;
     }
 
-    g_signal_connect (decodebin, "new-decoded-pad", G_CALLBACK (on_pad_added), sink);
+    gst_bin_add_many(GST_BIN (bin), audioconvert, audioresample, sink, NULL);
+    gst_element_link_many(audioconvert, audioresample, sink, NULL);
+
+    audiopad = gst_element_get_pad(audioconvert, "sink");
+    gst_element_add_pad(bin, gst_ghost_pad_new("sink", audiopad));
+
+    gst_object_unref(audiopad);
+
+    gst_bin_add(GST_BIN (out->pipeline), bin);
 
     decodebin = NULL;
     sink = NULL;
@@ -368,7 +399,7 @@ int driver_play(ca_context *c, uint32_t id, ca_proplist *proplist, ca_finish_cal
 
     return CA_SUCCESS;
 
- fail:
+fail:
     if (f && f->fdsrc)
         gst_object_unref(f->fdsrc);
 
@@ -381,7 +412,7 @@ int driver_play(ca_context *c, uint32_t id, ca_proplist *proplist, ca_finish_cal
     if (decodebin)
         gst_object_unref(decodebin);
 
-    if (out->pipeline)
+    if (out && out->pipeline)
         gst_object_unref(out->pipeline);
 
     ca_free(out);

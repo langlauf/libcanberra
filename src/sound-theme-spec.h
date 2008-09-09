@@ -26,8 +26,13 @@
 
 typedef struct ca_theme_data ca_theme_data;
 
-int ca_lookup_sound(ca_sound_file **f, ca_theme_data **t, ca_proplist *cp, ca_proplist *sp);
-int ca_lookup_sound_with_callback(ca_sound_file **f, ca_sound_file_open_callback_t sfopen, ca_theme_data **t, ca_proplist *cp, ca_proplist *sp);
+typedef int (*ca_sound_file_open_callback_t)(ca_sound_file **f, const char *fn);
+
+int ca_lookup_sound(ca_sound_file **f, char **sound_path, ca_theme_data **t, ca_proplist *cp, ca_proplist *sp);
+int ca_lookup_sound_with_callback(ca_sound_file **f, ca_sound_file_open_callback_t sfopen, char **sound_path, ca_theme_data **t, ca_proplist *cp, ca_proplist *sp);
 void ca_theme_data_free(ca_theme_data *t);
+
+int ca_get_data_home(char **e);
+const char *ca_get_data_dirs(void);
 
 #endif

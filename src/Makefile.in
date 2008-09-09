@@ -56,75 +56,85 @@ build_triplet = @build@
 host_triplet = @host@
 noinst_PROGRAMS = test-canberra$(EXEEXT)
 @USE_VERSION_SCRIPT_TRUE@am__append_1 = -Wl,-version-script=$(srcdir)/map-file
-@BUILTIN_DSO_TRUE@am__append_2 = \
+@HAVE_CACHE_TRUE@am__append_2 = \
+@HAVE_CACHE_TRUE@	cache.c cache.h
+
+@HAVE_CACHE_TRUE@am__append_3 = \
+@HAVE_CACHE_TRUE@	$(TDB_CLFAGS) \
+@HAVE_CACHE_TRUE@	-DCA_MACHINE_ID=\"$(localstatedir)/lib/dbus/machine-id\"
+
+@HAVE_CACHE_TRUE@am__append_4 = \
+@HAVE_CACHE_TRUE@	$(TDB_LIBS)
+
+@BUILTIN_DSO_TRUE@am__append_5 = \
 @BUILTIN_DSO_TRUE@	dso.c \
 @BUILTIN_DSO_TRUE@	driver-order.c driver-order.h
 
-@BUILTIN_DSO_TRUE@am__append_3 = \
+@BUILTIN_DSO_TRUE@am__append_6 = \
 @BUILTIN_DSO_TRUE@	$(LTDLINCL)
 
-@BUILTIN_DSO_TRUE@am__append_4 = \
+@BUILTIN_DSO_TRUE@am__append_7 = \
 @BUILTIN_DSO_TRUE@	$(LIBLTDL)
 
-@BUILTIN_DSO_TRUE@am__append_5 = \
+@BUILTIN_DSO_TRUE@am__append_8 = \
 @BUILTIN_DSO_TRUE@	libcanberra-multi.la
 
-@BUILTIN_PULSE_TRUE@@HAVE_PULSE_TRUE@am__append_6 = \
+@BUILTIN_PULSE_TRUE@@HAVE_PULSE_TRUE@am__append_9 = \
 @BUILTIN_PULSE_TRUE@@HAVE_PULSE_TRUE@	pulse.c
 
-@BUILTIN_PULSE_TRUE@@HAVE_PULSE_TRUE@am__append_7 = \
+@BUILTIN_PULSE_TRUE@@HAVE_PULSE_TRUE@am__append_10 = \
 @BUILTIN_PULSE_TRUE@@HAVE_PULSE_TRUE@	$(PULSE_CFLAGS)
 
-@BUILTIN_PULSE_TRUE@@HAVE_PULSE_TRUE@am__append_8 = \
+@BUILTIN_PULSE_TRUE@@HAVE_PULSE_TRUE@am__append_11 = \
 @BUILTIN_PULSE_TRUE@@HAVE_PULSE_TRUE@	$(PULSE_LIBS)
 
-@BUILTIN_PULSE_FALSE@@HAVE_PULSE_TRUE@am__append_9 = \
+@BUILTIN_PULSE_FALSE@@HAVE_PULSE_TRUE@am__append_12 = \
 @BUILTIN_PULSE_FALSE@@HAVE_PULSE_TRUE@	libcanberra-pulse.la
 
-@BUILTIN_ALSA_TRUE@@HAVE_ALSA_TRUE@am__append_10 = \
+@BUILTIN_ALSA_TRUE@@HAVE_ALSA_TRUE@am__append_13 = \
 @BUILTIN_ALSA_TRUE@@HAVE_ALSA_TRUE@	alsa.c
 
-@BUILTIN_ALSA_TRUE@@HAVE_ALSA_TRUE@am__append_11 = \
+@BUILTIN_ALSA_TRUE@@HAVE_ALSA_TRUE@am__append_14 = \
 @BUILTIN_ALSA_TRUE@@HAVE_ALSA_TRUE@	$(ALSA_CFLAGS)
 
-@BUILTIN_ALSA_TRUE@@HAVE_ALSA_TRUE@am__append_12 = \
+@BUILTIN_ALSA_TRUE@@HAVE_ALSA_TRUE@am__append_15 = \
 @BUILTIN_ALSA_TRUE@@HAVE_ALSA_TRUE@	 $(ALSA_LIBS)
 
-@BUILTIN_ALSA_FALSE@@HAVE_ALSA_TRUE@am__append_13 = \
+@BUILTIN_ALSA_FALSE@@HAVE_ALSA_TRUE@am__append_16 = \
 @BUILTIN_ALSA_FALSE@@HAVE_ALSA_TRUE@	libcanberra-alsa.la
 
-@BUILTIN_OSS_TRUE@@HAVE_OSS_TRUE@am__append_14 = \
+@BUILTIN_OSS_TRUE@@HAVE_OSS_TRUE@am__append_17 = \
 @BUILTIN_OSS_TRUE@@HAVE_OSS_TRUE@	oss.c
 
-@BUILTIN_OSS_FALSE@@HAVE_OSS_TRUE@am__append_15 = \
+@BUILTIN_OSS_FALSE@@HAVE_OSS_TRUE@am__append_18 = \
 @BUILTIN_OSS_FALSE@@HAVE_OSS_TRUE@	libcanberra-oss.la
 
-@BUILTIN_GSTREAMER_TRUE@@HAVE_GSTREAMER_TRUE@am__append_16 = \
+@BUILTIN_GSTREAMER_TRUE@@HAVE_GSTREAMER_TRUE@am__append_19 = \
 @BUILTIN_GSTREAMER_TRUE@@HAVE_GSTREAMER_TRUE@	gstreamer.c
 
-@BUILTIN_GSTREAMER_TRUE@@HAVE_GSTREAMER_TRUE@am__append_17 = \
+@BUILTIN_GSTREAMER_TRUE@@HAVE_GSTREAMER_TRUE@am__append_20 = \
 @BUILTIN_GSTREAMER_TRUE@@HAVE_GSTREAMER_TRUE@	$(GST_CFLAGS)
 
-@BUILTIN_GSTREAMER_TRUE@@HAVE_GSTREAMER_TRUE@am__append_18 = \
+@BUILTIN_GSTREAMER_TRUE@@HAVE_GSTREAMER_TRUE@am__append_21 = \
 @BUILTIN_GSTREAMER_TRUE@@HAVE_GSTREAMER_TRUE@	 $(GST_LIBS)
 
-@BUILTIN_GSTREAMER_FALSE@@HAVE_GSTREAMER_TRUE@am__append_19 = \
+@BUILTIN_GSTREAMER_FALSE@@HAVE_GSTREAMER_TRUE@am__append_22 = \
 @BUILTIN_GSTREAMER_FALSE@@HAVE_GSTREAMER_TRUE@	libcanberra-gstreamer.la
 
-@BUILTIN_NULL_TRUE@@HAVE_NULL_TRUE@am__append_20 = \
+@BUILTIN_NULL_TRUE@@HAVE_NULL_TRUE@am__append_23 = \
 @BUILTIN_NULL_TRUE@@HAVE_NULL_TRUE@	null.c
 
-@BUILTIN_NULL_FALSE@@HAVE_NULL_TRUE@am__append_21 = \
+@BUILTIN_NULL_FALSE@@HAVE_NULL_TRUE@am__append_24 = \
 @BUILTIN_NULL_FALSE@@HAVE_NULL_TRUE@	libcanberra-null.la
 
-@HAVE_GTK_TRUE@am__append_22 = \
+@HAVE_GTK_TRUE@am__append_25 = \
 @HAVE_GTK_TRUE@	libcanberra-gtk.la
 
-@HAVE_GTK_TRUE@am__append_23 = \
+@HAVE_GTK_TRUE@am__append_26 = \
 @HAVE_GTK_TRUE@	canberra-gtk.h
 
 @HAVE_GTK_TRUE@bin_PROGRAMS = canberra-gtk-play$(EXEEXT)
-@HAVE_GTK_TRUE@am__append_24 = \
+@HAVE_GTK_TRUE@am__append_27 = \
 @HAVE_GTK_TRUE@	libcanberra-login-sound.desktop.in \
 @HAVE_GTK_TRUE@	libcanberra-logout-sound.sh.in
 
@@ -250,32 +260,35 @@ libcanberra_pulse_la_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(libcanberra_pulse_la_LDFLAGS) $(LDFLAGS) -o $@
 @BUILTIN_PULSE_FALSE@@HAVE_PULSE_TRUE@am_libcanberra_pulse_la_rpath =  \
 @BUILTIN_PULSE_FALSE@@HAVE_PULSE_TRUE@	-rpath $(plugindir)
-@BUILTIN_DSO_TRUE@am__DEPENDENCIES_2 = $(am__DEPENDENCIES_1)
-@BUILTIN_PULSE_TRUE@@HAVE_PULSE_TRUE@am__DEPENDENCIES_3 =  \
+@HAVE_CACHE_TRUE@am__DEPENDENCIES_2 = $(am__DEPENDENCIES_1)
+@BUILTIN_DSO_TRUE@am__DEPENDENCIES_3 = $(am__DEPENDENCIES_1)
+@BUILTIN_PULSE_TRUE@@HAVE_PULSE_TRUE@am__DEPENDENCIES_4 =  \
 @BUILTIN_PULSE_TRUE@@HAVE_PULSE_TRUE@	$(am__DEPENDENCIES_1)
-@BUILTIN_ALSA_TRUE@@HAVE_ALSA_TRUE@am__DEPENDENCIES_4 =  \
+@BUILTIN_ALSA_TRUE@@HAVE_ALSA_TRUE@am__DEPENDENCIES_5 =  \
 @BUILTIN_ALSA_TRUE@@HAVE_ALSA_TRUE@	$(am__DEPENDENCIES_1)
-@BUILTIN_GSTREAMER_TRUE@@HAVE_GSTREAMER_TRUE@am__DEPENDENCIES_5 = $(am__DEPENDENCIES_1)
+@BUILTIN_GSTREAMER_TRUE@@HAVE_GSTREAMER_TRUE@am__DEPENDENCIES_6 = $(am__DEPENDENCIES_1)
 libcanberra_la_DEPENDENCIES = $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_2) $(am__DEPENDENCIES_3) \
-	$(am__DEPENDENCIES_4) $(am__DEPENDENCIES_5)
+	$(am__DEPENDENCIES_4) $(am__DEPENDENCIES_5) \
+	$(am__DEPENDENCIES_6)
 am__libcanberra_la_SOURCES_DIST = canberra.h common.c common.h \
 	mutex-posix.c mutex.h proplist.c proplist.h driver.h \
 	read-sound-file.c read-sound-file.h read-vorbis.c \
 	read-vorbis.h read-wav.c read-wav.h sound-theme-spec.c \
 	sound-theme-spec.h llist.h macro.h macro.c malloc.c malloc.h \
-	dso.c driver-order.c driver-order.h pulse.c alsa.c oss.c \
-	gstreamer.c null.c
-@BUILTIN_DSO_TRUE@am__objects_1 = libcanberra_la-dso.lo \
+	cache.c cache.h dso.c driver-order.c driver-order.h pulse.c \
+	alsa.c oss.c gstreamer.c null.c
+@HAVE_CACHE_TRUE@am__objects_1 = libcanberra_la-cache.lo
+@BUILTIN_DSO_TRUE@am__objects_2 = libcanberra_la-dso.lo \
 @BUILTIN_DSO_TRUE@	libcanberra_la-driver-order.lo
-@BUILTIN_PULSE_TRUE@@HAVE_PULSE_TRUE@am__objects_2 =  \
+@BUILTIN_PULSE_TRUE@@HAVE_PULSE_TRUE@am__objects_3 =  \
 @BUILTIN_PULSE_TRUE@@HAVE_PULSE_TRUE@	libcanberra_la-pulse.lo
-@BUILTIN_ALSA_TRUE@@HAVE_ALSA_TRUE@am__objects_3 =  \
+@BUILTIN_ALSA_TRUE@@HAVE_ALSA_TRUE@am__objects_4 =  \
 @BUILTIN_ALSA_TRUE@@HAVE_ALSA_TRUE@	libcanberra_la-alsa.lo
-@BUILTIN_OSS_TRUE@@HAVE_OSS_TRUE@am__objects_4 =  \
+@BUILTIN_OSS_TRUE@@HAVE_OSS_TRUE@am__objects_5 =  \
 @BUILTIN_OSS_TRUE@@HAVE_OSS_TRUE@	libcanberra_la-oss.lo
-@BUILTIN_GSTREAMER_TRUE@@HAVE_GSTREAMER_TRUE@am__objects_5 = libcanberra_la-gstreamer.lo
-@BUILTIN_NULL_TRUE@@HAVE_NULL_TRUE@am__objects_6 =  \
+@BUILTIN_GSTREAMER_TRUE@@HAVE_GSTREAMER_TRUE@am__objects_6 = libcanberra_la-gstreamer.lo
+@BUILTIN_NULL_TRUE@@HAVE_NULL_TRUE@am__objects_7 =  \
 @BUILTIN_NULL_TRUE@@HAVE_NULL_TRUE@	libcanberra_la-null.lo
 am_libcanberra_la_OBJECTS = libcanberra_la-common.lo \
 	libcanberra_la-mutex-posix.lo libcanberra_la-proplist.lo \
@@ -284,7 +297,7 @@ am_libcanberra_la_OBJECTS = libcanberra_la-common.lo \
 	libcanberra_la-sound-theme-spec.lo libcanberra_la-macro.lo \
 	libcanberra_la-malloc.lo $(am__objects_1) $(am__objects_2) \
 	$(am__objects_3) $(am__objects_4) $(am__objects_5) \
-	$(am__objects_6)
+	$(am__objects_6) $(am__objects_7)
 libcanberra_la_OBJECTS = $(am_libcanberra_la_OBJECTS)
 libcanberra_la_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(libcanberra_la_CFLAGS) \
@@ -303,8 +316,8 @@ canberra_gtk_play_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) \
 	-o $@
 am_test_canberra_OBJECTS = test-canberra.$(OBJEXT)
 test_canberra_OBJECTS = $(am_test_canberra_OBJECTS)
-am__DEPENDENCIES_6 = $(am__DEPENDENCIES_1)
-test_canberra_DEPENDENCIES = $(am__DEPENDENCIES_6) libcanberra.la
+am__DEPENDENCIES_7 = $(am__DEPENDENCIES_1)
+test_canberra_DEPENDENCIES = $(am__DEPENDENCIES_7) libcanberra.la
 gnomeshutdownSCRIPT_INSTALL = $(INSTALL_SCRIPT)
 SCRIPTS = $(gnomeshutdown_SCRIPTS)
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
@@ -392,12 +405,14 @@ GTK_CFLAGS = @GTK_CFLAGS@
 GTK_LIBS = @GTK_LIBS@
 GTK_MODULES_DIR = @GTK_MODULES_DIR@
 HAVE_ALSA = @HAVE_ALSA@
+HAVE_CACHE = @HAVE_CACHE@
 HAVE_DSO = @HAVE_DSO@
 HAVE_GSTREAMER = @HAVE_GSTREAMER@
 HAVE_GTK = @HAVE_GTK@
 HAVE_NULL = @HAVE_NULL@
 HAVE_OSS = @HAVE_OSS@
 HAVE_PULSE = @HAVE_PULSE@
+HAVE_TDB = @HAVE_TDB@
 HTML_DIR = @HTML_DIR@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
@@ -440,6 +455,8 @@ SED = @SED@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
+TDB_CFLAGS = @TDB_CFLAGS@
+TDB_LIBS = @TDB_LIBS@
 VERSION = @VERSION@
 VORBIS_CFLAGS = @VORBIS_CFLAGS@
 VORBIS_LIBS = @VORBIS_LIBS@
@@ -506,24 +523,25 @@ gnomeautostartdir = $(datadir)/gnome/autostart
 AM_CFLAGS = $(PTHREAD_CFLAGS) -DCA_PLUGIN_PATH=\"$(plugindir)\"
 AM_CXXFLAGS = $(PTHREAD_CFLAGS)
 AM_LDADD = $(PTHREAD_LIBS)
-EXTRA_DIST = map-file $(am__append_24)
-lib_LTLIBRARIES = libcanberra.la $(am__append_22)
-include_HEADERS = canberra.h $(am__append_23)
+EXTRA_DIST = map-file $(am__append_27)
+lib_LTLIBRARIES = libcanberra.la $(am__append_25)
+include_HEADERS = canberra.h $(am__append_26)
 libcanberra_la_SOURCES = canberra.h common.c common.h mutex-posix.c \
 	mutex.h proplist.c proplist.h driver.h read-sound-file.c \
 	read-sound-file.h read-vorbis.c read-vorbis.h read-wav.c \
 	read-wav.h sound-theme-spec.c sound-theme-spec.h llist.h \
 	macro.h macro.c malloc.c malloc.h $(am__append_2) \
-	$(am__append_6) $(am__append_10) $(am__append_14) \
-	$(am__append_16) $(am__append_20)
+	$(am__append_5) $(am__append_9) $(am__append_13) \
+	$(am__append_17) $(am__append_19) $(am__append_23)
 libcanberra_la_CFLAGS = $(AM_CFLAGS) $(VORBIS_CFLAGS) $(am__append_3) \
-	$(am__append_7) $(am__append_11) $(am__append_17)
-libcanberra_la_LIBADD = $(VORBIS_LIBS) $(am__append_4) $(am__append_8) \
-	$(am__append_12) $(am__append_18)
+	$(am__append_6) $(am__append_10) $(am__append_14) \
+	$(am__append_20)
+libcanberra_la_LIBADD = $(VORBIS_LIBS) $(am__append_4) $(am__append_7) \
+	$(am__append_11) $(am__append_15) $(am__append_21)
 libcanberra_la_LDFLAGS = -export-dynamic -version-info \
 	$(LIBCANBERRA_VERSION_INFO) $(am__append_1)
-plugin_LTLIBRARIES = $(am__append_5) $(am__append_9) $(am__append_13) \
-	$(am__append_15) $(am__append_19) $(am__append_21)
+plugin_LTLIBRARIES = $(am__append_8) $(am__append_12) $(am__append_16) \
+	$(am__append_18) $(am__append_22) $(am__append_24)
 @BUILTIN_DSO_TRUE@libcanberra_multi_la_SOURCES = \
 @BUILTIN_DSO_TRUE@	multi.c
 
@@ -902,6 +920,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcanberra_gtk_la-canberra-gtk.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcanberra_gtk_module_la-canberra-gtk-module.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcanberra_la-alsa.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcanberra_la-cache.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcanberra_la-common.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcanberra_la-driver-order.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcanberra_la-dso.Plo@am__quote@
@@ -1062,6 +1081,13 @@ libcanberra_la-malloc.lo: malloc.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='malloc.c' object='libcanberra_la-malloc.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libcanberra_la_CFLAGS) $(CFLAGS) -c -o libcanberra_la-malloc.lo `test -f 'malloc.c' || echo '$(srcdir)/'`malloc.c
+
+libcanberra_la-cache.lo: cache.c
+@am__fastdepCC_TRUE@	$(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libcanberra_la_CFLAGS) $(CFLAGS) -MT libcanberra_la-cache.lo -MD -MP -MF $(DEPDIR)/libcanberra_la-cache.Tpo -c -o libcanberra_la-cache.lo `test -f 'cache.c' || echo '$(srcdir)/'`cache.c
+@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/libcanberra_la-cache.Tpo $(DEPDIR)/libcanberra_la-cache.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='cache.c' object='libcanberra_la-cache.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libcanberra_la_CFLAGS) $(CFLAGS) -c -o libcanberra_la-cache.lo `test -f 'cache.c' || echo '$(srcdir)/'`cache.c
 
 libcanberra_la-dso.lo: dso.c
 @am__fastdepCC_TRUE@	$(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libcanberra_la_CFLAGS) $(CFLAGS) -MT libcanberra_la-dso.lo -MD -MP -MF $(DEPDIR)/libcanberra_la-dso.Tpo -c -o libcanberra_la-dso.lo `test -f 'dso.c' || echo '$(srcdir)/'`dso.c
