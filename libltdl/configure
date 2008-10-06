@@ -23591,9 +23591,9 @@ _ACEOF
 
 cat >>$CONFIG_STATUS <<_ACEOF || ac_write_fail=1
 # Files that config.status was made for.
-config_files="$ac_config_files"
-config_headers="$ac_config_headers"
-config_commands="$ac_config_commands"
+config_files="`echo $ac_config_files`"
+config_headers="`echo $ac_config_headers`"
+config_commands="`echo $ac_config_commands`"
 
 _ACEOF
 
@@ -24040,9 +24040,9 @@ cat >>$CONFIG_STATUS <<_ACEOF || ac_write_fail=1
   }
   split(mac1, mac2, "(") #)
   macro = mac2[1]
+  prefix = substr(line, 1, index(line, defundef) - 1)
   if (D_is_set[macro]) {
     # Preserve the white space surrounding the "#".
-    prefix = substr(line, 1, index(line, defundef) - 1)
     print prefix "define", macro P[macro] D[macro]
     next
   } else {
@@ -24050,7 +24050,7 @@ cat >>$CONFIG_STATUS <<_ACEOF || ac_write_fail=1
     # in the case of _POSIX_SOURCE, which is predefined and required
     # on some systems where configure will not decide to define it.
     if (defundef == "undef") {
-      print "/*", line, "*/"
+      print "/*", prefix defundef, macro, "*/"
       next
     }
   }

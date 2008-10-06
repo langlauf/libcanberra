@@ -46,7 +46,7 @@
  * when we port this to platforms that do not have POSIX threading */
 
 static ca_mutex *mutex = NULL;
-struct tdb_context *database = NULL;
+static struct tdb_context *database = NULL;
 
 static void allocate_mutex_once(void) {
     mutex = ca_mutex_new();
@@ -529,7 +529,7 @@ finish:
     if (remove_entry)
         db_remove(key, klen);
 
-    if (sound_path)
+    if (sound_path && ret < 0)
         ca_free(*sound_path);
 
     ca_free(key);

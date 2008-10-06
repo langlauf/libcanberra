@@ -21,7 +21,7 @@
 
 AC_PREREQ(2.62)
 
-AC_INIT([libcanberra], 0.9, [mzyvopnaoreen (at) 0pointer (dot) de])
+AC_INIT([libcanberra], 0.10, [mzyvopnaoreen (at) 0pointer (dot) de])
 AC_CONFIG_SRCDIR([src/common.c])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR(m4)
@@ -30,8 +30,8 @@ AM_INIT_AUTOMAKE([foreign 1.9 -Wall])
 
 AC_SUBST(PACKAGE_URL, [http://0pointer.de/lennart/projects/libcanberra/])
 
-AC_SUBST(LIBCANBERRA_VERSION_INFO, [1:2:1])
-AC_SUBST(LIBCANBERRA_GTK_VERSION_INFO, [0:3:0])
+AC_SUBST(LIBCANBERRA_VERSION_INFO, [1:3:1])
+AC_SUBST(LIBCANBERRA_GTK_VERSION_INFO, [0:4:0])
 
 AC_CANONICAL_HOST
 AC_DEFINE_UNQUOTED([CANONICAL_HOST], "$host", [Canonical host string.])
@@ -204,6 +204,7 @@ AC_SUBST(ALSA_CFLAGS)
 AC_SUBST(ALSA_LIBS)
 
 ### OSS support (optional) ###
+
 AC_ARG_ENABLE([oss],
     AC_HELP_STRING([--disable-oss], [Disable optional OSS support]),
         [
@@ -344,6 +345,8 @@ if test "x${gtk}" != xno ; then
             HAVE_GTK=1
             AC_DEFINE([HAVE_GTK], 1, [Have GTK?])
 
+            AC_PATH_PROG(GCONFTOOL, gconftool-2)
+
             GTK_VERSION=`$PKG_CONFIG --variable=gtk_binary_version gtk+-2.0`
             GTK_MODULES_DIR="${libdir}/gtk-2.0/modules"
         ],
@@ -356,6 +359,8 @@ if test "x${gtk}" != xno ; then
 else
     HAVE_GTK=0
 fi
+
+AM_GCONF_SOURCE_2
 
 AC_SUBST(GTK_CFLAGS)
 AC_SUBST(GTK_LIBS)

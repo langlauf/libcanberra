@@ -84,10 +84,13 @@ am__vpath_adj = case $$p in \
     *) f=$$p;; \
   esac;
 am__strip_dir = `echo $$p | sed -e 's|^.*/||'`;
-am__installdirs = "$(DESTDIR)$(docdir)" "$(DESTDIR)$(pkgconfigdir)"
+am__installdirs = "$(DESTDIR)$(docdir)" "$(DESTDIR)$(pkgconfigdir)" \
+	"$(DESTDIR)$(schemasdir)"
 dist_docDATA_INSTALL = $(INSTALL_DATA)
 pkgconfigDATA_INSTALL = $(INSTALL_DATA)
-DATA = $(dist_doc_DATA) $(noinst_DATA) $(pkgconfig_DATA)
+schemasDATA_INSTALL = $(INSTALL_DATA)
+DATA = $(dist_doc_DATA) $(noinst_DATA) $(pkgconfig_DATA) \
+	$(schemas_DATA)
 RECURSIVE_CLEAN_TARGETS = mostlyclean-recursive clean-recursive	\
   distclean-recursive maintainer-clean-recursive
 ETAGS = etags
@@ -142,6 +145,9 @@ EGREP = @EGREP@
 EXEEXT = @EXEEXT@
 F77 = @F77@
 FFLAGS = @FFLAGS@
+GCONFTOOL = @GCONFTOOL@
+GCONF_SCHEMA_CONFIG_SOURCE = @GCONF_SCHEMA_CONFIG_SOURCE@
+GCONF_SCHEMA_FILE_DIR = @GCONF_SCHEMA_FILE_DIR@
 GREP = @GREP@
 GSTREAMER_CFLAGS = @GSTREAMER_CFLAGS@
 GSTREAMER_LIBS = @GSTREAMER_LIBS@
@@ -264,12 +270,14 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 dist_doc_DATA = README
-EXTRA_DIST = bootstrap.sh autogen.sh LGPL
+EXTRA_DIST = bootstrap.sh autogen.sh LGPL libcanberra.schemas
 SUBDIRS = src gtkdoc libltdl doc
 MAINTAINERCLEANFILES = README
 noinst_DATA = README
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libcanberra.pc $(am__append_1)
+schemasdir = $(GCONF_SCHEMA_FILE_DIR)
+schemas_DATA = libcanberra.schemas
 DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc
 ACLOCAL_AMFLAGS = -I m4
 all: config.h
@@ -372,6 +380,23 @@ uninstall-pkgconfigDATA:
 	  f=$(am__strip_dir) \
 	  echo " rm -f '$(DESTDIR)$(pkgconfigdir)/$$f'"; \
 	  rm -f "$(DESTDIR)$(pkgconfigdir)/$$f"; \
+	done
+install-schemasDATA: $(schemas_DATA)
+	@$(NORMAL_INSTALL)
+	test -z "$(schemasdir)" || $(MKDIR_P) "$(DESTDIR)$(schemasdir)"
+	@list='$(schemas_DATA)'; for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  f=$(am__strip_dir) \
+	  echo " $(schemasDATA_INSTALL) '$$d$$p' '$(DESTDIR)$(schemasdir)/$$f'"; \
+	  $(schemasDATA_INSTALL) "$$d$$p" "$(DESTDIR)$(schemasdir)/$$f"; \
+	done
+
+uninstall-schemasDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(schemas_DATA)'; for p in $$list; do \
+	  f=$(am__strip_dir) \
+	  echo " rm -f '$(DESTDIR)$(schemasdir)/$$f'"; \
+	  rm -f "$(DESTDIR)$(schemasdir)/$$f"; \
 	done
 
 # This directory's subdirectories are mostly independent; you can cd
@@ -657,7 +682,7 @@ check: check-recursive
 all-am: Makefile $(DATA) config.h
 installdirs: installdirs-recursive
 installdirs-am:
-	for dir in "$(DESTDIR)$(docdir)" "$(DESTDIR)$(pkgconfigdir)"; do \
+	for dir in "$(DESTDIR)$(docdir)" "$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(schemasdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-recursive
@@ -705,7 +730,8 @@ info: info-recursive
 
 info-am:
 
-install-data-am: install-dist_docDATA install-pkgconfigDATA
+install-data-am: install-data-local install-dist_docDATA \
+	install-pkgconfigDATA install-schemasDATA
 
 install-dvi: install-dvi-recursive
 
@@ -741,7 +767,8 @@ ps: ps-recursive
 
 ps-am:
 
-uninstall-am: uninstall-dist_docDATA uninstall-pkgconfigDATA
+uninstall-am: uninstall-dist_docDATA uninstall-pkgconfigDATA \
+	uninstall-schemasDATA
 
 .MAKE: $(RECURSIVE_CLEAN_TARGETS) $(RECURSIVE_TARGETS) install-am \
 	install-strip
@@ -753,17 +780,26 @@ uninstall-am: uninstall-dist_docDATA uninstall-pkgconfigDATA
 	distclean distclean-generic distclean-hdr distclean-libtool \
 	distclean-tags distcleancheck distdir distuninstallcheck dvi \
 	dvi-am html html-am info info-am install install-am \
-	install-data install-data-am install-dist_docDATA install-dvi \
-	install-dvi-am install-exec install-exec-am install-html \
-	install-html-am install-info install-info-am install-man \
-	install-pdf install-pdf-am install-pkgconfigDATA install-ps \
-	install-ps-am install-strip installcheck installcheck-am \
+	install-data install-data-am install-data-local \
+	install-dist_docDATA install-dvi install-dvi-am install-exec \
+	install-exec-am install-html install-html-am install-info \
+	install-info-am install-man install-pdf install-pdf-am \
+	install-pkgconfigDATA install-ps install-ps-am \
+	install-schemasDATA install-strip installcheck installcheck-am \
 	installdirs installdirs-am maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-generic \
 	mostlyclean-libtool pdf pdf-am ps ps-am tags tags-recursive \
 	uninstall uninstall-am uninstall-dist_docDATA \
-	uninstall-pkgconfigDATA
+	uninstall-pkgconfigDATA uninstall-schemasDATA
 
+
+@GCONF_SCHEMAS_INSTALL_TRUE@install-data-local:
+@GCONF_SCHEMAS_INSTALL_TRUE@                if test -z "$(DESTDIR)" ; then \
+@GCONF_SCHEMAS_INSTALL_TRUE@                        for p in $(schemas_DATA) ; do \
+@GCONF_SCHEMAS_INSTALL_TRUE@                                GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(top_builddir)/data/$$p ; \
+@GCONF_SCHEMAS_INSTALL_TRUE@                        done \
+@GCONF_SCHEMAS_INSTALL_TRUE@                fi
+@GCONF_SCHEMAS_INSTALL_FALSE@install-data-local:
 
 README:
 	rm -f README
