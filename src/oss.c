@@ -29,6 +29,12 @@
 #include <sys/uio.h>
 #include <math.h>
 #include <unistd.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <stdlib.h>
+#include <poll.h>
+#include <pthread.h>
+#include <semaphore.h>
 
 #ifdef HAVE_MACHINE_SOUNDCARD_H
 #  include <machine/soundcard.h>
@@ -39,13 +45,6 @@
 #    include <sys/soundcard.h>
 #  endif
 #endif
-
-#include <errno.h>
-#include <fcntl.h>
-#include <stdlib.h>
-#include <poll.h>
-#include <pthread.h>
-#include <semaphore.h>
 
 #include "canberra.h"
 #include "common.h"
@@ -182,7 +181,7 @@ int driver_destroy(ca_context *c) {
     return CA_SUCCESS;
 }
 
-int driver_change_device(ca_context *c, char *device) {
+int driver_change_device(ca_context *c, const char *device) {
     ca_return_val_if_fail(c, CA_ERROR_INVALID);
     ca_return_val_if_fail(c->private, CA_ERROR_STATE);
 
@@ -235,7 +234,7 @@ static int open_oss(ca_context *c, struct outstanding *out) {
     ca_return_val_if_fail(c, CA_ERROR_INVALID);
     ca_return_val_if_fail(c->private, CA_ERROR_STATE);
     ca_return_val_if_fail(out, CA_ERROR_INVALID);
-    ca_return_val_if_fail(ca_sound_file_get_nchannels(out->file) > 2, CA_ERROR_NOTSUPPORTED);
+    ca_return_val_if_fail(ca_sound_file_get_nchannels(out->file) <= 2, CA_ERROR_NOTSUPPORTED);
 
     p = PRIVATE(c);
 

@@ -8,7 +8,7 @@
 <link rel="up" href="ch01.html" title="libcanberra">
 <link rel="prev" href="ch01.html" title="libcanberra">
 <link rel="next" href="libcanberra-canberra-gtk.html" title="canberra-gtk">
-<meta name="generator" content="GTK-Doc V1.10 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 <link rel="chapter" href="ch01.html" title="libcanberra">
 </head>
@@ -21,9 +21,11 @@
 <th width="100%" align="center">libcanberra Reference Manual</th>
 <td><a accesskey="n" href="libcanberra-canberra-gtk.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr>
-<tr><td colspan="5" class="shortcuts"><nobr><a href="#libcanberra-canberra.synopsis" class="shortcut">Top</a>
-                   | 
-                  <a href="#libcanberra-canberra.description" class="shortcut">Description</a></nobr></td></tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libcanberra-canberra.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#libcanberra-canberra.description" class="shortcut">Description</a>
+</td></tr>
 </table>
 <div class="refentry" lang="en">
 <a name="libcanberra-canberra"></a><div class="titlepage"></div>
@@ -37,43 +39,43 @@
 <div class="refsynopsisdiv">
 <a name="libcanberra-canberra.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">
-#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-MEDIA-NAME:CAPS" title="CA_PROP_MEDIA_NAME">CA_PROP_MEDIA_NAME</a>
-#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-MEDIA-TITLE:CAPS" title="CA_PROP_MEDIA_TITLE">CA_PROP_MEDIA_TITLE</a>
-#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-MEDIA-ARTIST:CAPS" title="CA_PROP_MEDIA_ARTIST">CA_PROP_MEDIA_ARTIST</a>
-#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-MEDIA-LANGUAGE:CAPS" title="CA_PROP_MEDIA_LANGUAGE">CA_PROP_MEDIA_LANGUAGE</a>
-#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-MEDIA-FILENAME:CAPS" title="CA_PROP_MEDIA_FILENAME">CA_PROP_MEDIA_FILENAME</a>
-#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-MEDIA-ICON:CAPS" title="CA_PROP_MEDIA_ICON">CA_PROP_MEDIA_ICON</a>
-#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-MEDIA-ICON-NAME:CAPS" title="CA_PROP_MEDIA_ICON_NAME">CA_PROP_MEDIA_ICON_NAME</a>
-#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-MEDIA-ROLE:CAPS" title="CA_PROP_MEDIA_ROLE">CA_PROP_MEDIA_ROLE</a>
-#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-ID:CAPS" title="CA_PROP_EVENT_ID">CA_PROP_EVENT_ID</a>
-#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-DESCRIPTION:CAPS" title="CA_PROP_EVENT_DESCRIPTION">CA_PROP_EVENT_DESCRIPTION</a>
-#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-MOUSE-X:CAPS" title="CA_PROP_EVENT_MOUSE_X">CA_PROP_EVENT_MOUSE_X</a>
-#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-MOUSE-Y:CAPS" title="CA_PROP_EVENT_MOUSE_Y">CA_PROP_EVENT_MOUSE_Y</a>
-#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-MOUSE-HPOS:CAPS" title="CA_PROP_EVENT_MOUSE_HPOS">CA_PROP_EVENT_MOUSE_HPOS</a>
-#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-MOUSE-VPOS:CAPS" title="CA_PROP_EVENT_MOUSE_VPOS">CA_PROP_EVENT_MOUSE_VPOS</a>
-#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-MOUSE-BUTTON:CAPS" title="CA_PROP_EVENT_MOUSE_BUTTON">CA_PROP_EVENT_MOUSE_BUTTON</a>
-#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-WINDOW-NAME:CAPS" title="CA_PROP_WINDOW_NAME">CA_PROP_WINDOW_NAME</a>
-#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-WINDOW-ID:CAPS" title="CA_PROP_WINDOW_ID">CA_PROP_WINDOW_ID</a>
-#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-WINDOW-ICON:CAPS" title="CA_PROP_WINDOW_ICON">CA_PROP_WINDOW_ICON</a>
-#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-WINDOW-ICON-NAME:CAPS" title="CA_PROP_WINDOW_ICON_NAME">CA_PROP_WINDOW_ICON_NAME</a>
-#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-WINDOW-X11-DISPLAY:CAPS" title="CA_PROP_WINDOW_X11_DISPLAY">CA_PROP_WINDOW_X11_DISPLAY</a>
-#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-WINDOW-X11-SCREEN:CAPS" title="CA_PROP_WINDOW_X11_SCREEN">CA_PROP_WINDOW_X11_SCREEN</a>
-#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-WINDOW-X11-MONITOR:CAPS" title="CA_PROP_WINDOW_X11_MONITOR">CA_PROP_WINDOW_X11_MONITOR</a>
-#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-WINDOW-X11-XID:CAPS" title="CA_PROP_WINDOW_X11_XID">CA_PROP_WINDOW_X11_XID</a>
-#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-APPLICATION-NAME:CAPS" title="CA_PROP_APPLICATION_NAME">CA_PROP_APPLICATION_NAME</a>
-#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-APPLICATION-ID:CAPS" title="CA_PROP_APPLICATION_ID">CA_PROP_APPLICATION_ID</a>
-#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-APPLICATION-VERSION:CAPS" title="CA_PROP_APPLICATION_VERSION">CA_PROP_APPLICATION_VERSION</a>
-#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-APPLICATION-ICON:CAPS" title="CA_PROP_APPLICATION_ICON">CA_PROP_APPLICATION_ICON</a>
-#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-APPLICATION-ICON-NAME:CAPS" title="CA_PROP_APPLICATION_ICON_NAME">CA_PROP_APPLICATION_ICON_NAME</a>
-#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-APPLICATION-LANGUAGE:CAPS" title="CA_PROP_APPLICATION_LANGUAGE">CA_PROP_APPLICATION_LANGUAGE</a>
-#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-APPLICATION-PROCESS-ID:CAPS" title="CA_PROP_APPLICATION_PROCESS_ID">CA_PROP_APPLICATION_PROCESS_ID</a>
-#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-APPLICATION-PROCESS-BINARY:CAPS" title="CA_PROP_APPLICATION_PROCESS_BINARY">CA_PROP_APPLICATION_PROCESS_BINARY</a>
-#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-APPLICATION-PROCESS-USER:CAPS" title="CA_PROP_APPLICATION_PROCESS_USER">CA_PROP_APPLICATION_PROCESS_USER</a>
-#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-APPLICATION-PROCESS-HOST:CAPS" title="CA_PROP_APPLICATION_PROCESS_HOST">CA_PROP_APPLICATION_PROCESS_HOST</a>
-#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-CANBERRA-CACHE-CONTROL:CAPS" title="CA_PROP_CANBERRA_CACHE_CONTROL">CA_PROP_CANBERRA_CACHE_CONTROL</a>
-#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-CANBERRA-VOLUME:CAPS" title="CA_PROP_CANBERRA_VOLUME">CA_PROP_CANBERRA_VOLUME</a>
-#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-CANBERRA-XDG-THEME-NAME:CAPS" title="CA_PROP_CANBERRA_XDG_THEME_NAME">CA_PROP_CANBERRA_XDG_THEME_NAME</a>
-#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-CANBERRA-XDG-THEME-OUTPUT-PROFILE:CAPS" title="CA_PROP_CANBERRA_XDG_THEME_OUTPUT_PROFILE">CA_PROP_CANBERRA_XDG_THEME_OUTPUT_PROFILE</a>
+#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-MEDIA-NAME--CAPS" title="CA_PROP_MEDIA_NAME">CA_PROP_MEDIA_NAME</a>
+#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-MEDIA-TITLE--CAPS" title="CA_PROP_MEDIA_TITLE">CA_PROP_MEDIA_TITLE</a>
+#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-MEDIA-ARTIST--CAPS" title="CA_PROP_MEDIA_ARTIST">CA_PROP_MEDIA_ARTIST</a>
+#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-MEDIA-LANGUAGE--CAPS" title="CA_PROP_MEDIA_LANGUAGE">CA_PROP_MEDIA_LANGUAGE</a>
+#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-MEDIA-FILENAME--CAPS" title="CA_PROP_MEDIA_FILENAME">CA_PROP_MEDIA_FILENAME</a>
+#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-MEDIA-ICON--CAPS" title="CA_PROP_MEDIA_ICON">CA_PROP_MEDIA_ICON</a>
+#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-MEDIA-ICON-NAME--CAPS" title="CA_PROP_MEDIA_ICON_NAME">CA_PROP_MEDIA_ICON_NAME</a>
+#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-MEDIA-ROLE--CAPS" title="CA_PROP_MEDIA_ROLE">CA_PROP_MEDIA_ROLE</a>
+#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-ID--CAPS" title="CA_PROP_EVENT_ID">CA_PROP_EVENT_ID</a>
+#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-DESCRIPTION--CAPS" title="CA_PROP_EVENT_DESCRIPTION">CA_PROP_EVENT_DESCRIPTION</a>
+#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-MOUSE-X--CAPS" title="CA_PROP_EVENT_MOUSE_X">CA_PROP_EVENT_MOUSE_X</a>
+#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-MOUSE-Y--CAPS" title="CA_PROP_EVENT_MOUSE_Y">CA_PROP_EVENT_MOUSE_Y</a>
+#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-MOUSE-HPOS--CAPS" title="CA_PROP_EVENT_MOUSE_HPOS">CA_PROP_EVENT_MOUSE_HPOS</a>
+#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-MOUSE-VPOS--CAPS" title="CA_PROP_EVENT_MOUSE_VPOS">CA_PROP_EVENT_MOUSE_VPOS</a>
+#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-MOUSE-BUTTON--CAPS" title="CA_PROP_EVENT_MOUSE_BUTTON">CA_PROP_EVENT_MOUSE_BUTTON</a>
+#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-WINDOW-NAME--CAPS" title="CA_PROP_WINDOW_NAME">CA_PROP_WINDOW_NAME</a>
+#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-WINDOW-ID--CAPS" title="CA_PROP_WINDOW_ID">CA_PROP_WINDOW_ID</a>
+#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-WINDOW-ICON--CAPS" title="CA_PROP_WINDOW_ICON">CA_PROP_WINDOW_ICON</a>
+#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-WINDOW-ICON-NAME--CAPS" title="CA_PROP_WINDOW_ICON_NAME">CA_PROP_WINDOW_ICON_NAME</a>
+#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-WINDOW-X11-DISPLAY--CAPS" title="CA_PROP_WINDOW_X11_DISPLAY">CA_PROP_WINDOW_X11_DISPLAY</a>
+#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-WINDOW-X11-SCREEN--CAPS" title="CA_PROP_WINDOW_X11_SCREEN">CA_PROP_WINDOW_X11_SCREEN</a>
+#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-WINDOW-X11-MONITOR--CAPS" title="CA_PROP_WINDOW_X11_MONITOR">CA_PROP_WINDOW_X11_MONITOR</a>
+#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-WINDOW-X11-XID--CAPS" title="CA_PROP_WINDOW_X11_XID">CA_PROP_WINDOW_X11_XID</a>
+#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-APPLICATION-NAME--CAPS" title="CA_PROP_APPLICATION_NAME">CA_PROP_APPLICATION_NAME</a>
+#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-APPLICATION-ID--CAPS" title="CA_PROP_APPLICATION_ID">CA_PROP_APPLICATION_ID</a>
+#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-APPLICATION-VERSION--CAPS" title="CA_PROP_APPLICATION_VERSION">CA_PROP_APPLICATION_VERSION</a>
+#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-APPLICATION-ICON--CAPS" title="CA_PROP_APPLICATION_ICON">CA_PROP_APPLICATION_ICON</a>
+#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-APPLICATION-ICON-NAME--CAPS" title="CA_PROP_APPLICATION_ICON_NAME">CA_PROP_APPLICATION_ICON_NAME</a>
+#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-APPLICATION-LANGUAGE--CAPS" title="CA_PROP_APPLICATION_LANGUAGE">CA_PROP_APPLICATION_LANGUAGE</a>
+#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-APPLICATION-PROCESS-ID--CAPS" title="CA_PROP_APPLICATION_PROCESS_ID">CA_PROP_APPLICATION_PROCESS_ID</a>
+#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-APPLICATION-PROCESS-BINARY--CAPS" title="CA_PROP_APPLICATION_PROCESS_BINARY">CA_PROP_APPLICATION_PROCESS_BINARY</a>
+#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-APPLICATION-PROCESS-USER--CAPS" title="CA_PROP_APPLICATION_PROCESS_USER">CA_PROP_APPLICATION_PROCESS_USER</a>
+#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-APPLICATION-PROCESS-HOST--CAPS" title="CA_PROP_APPLICATION_PROCESS_HOST">CA_PROP_APPLICATION_PROCESS_HOST</a>
+#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-CANBERRA-CACHE-CONTROL--CAPS" title="CA_PROP_CANBERRA_CACHE_CONTROL">CA_PROP_CANBERRA_CACHE_CONTROL</a>
+#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-CANBERRA-VOLUME--CAPS" title="CA_PROP_CANBERRA_VOLUME">CA_PROP_CANBERRA_VOLUME</a>
+#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-CANBERRA-XDG-THEME-NAME--CAPS" title="CA_PROP_CANBERRA_XDG_THEME_NAME">CA_PROP_CANBERRA_XDG_THEME_NAME</a>
+#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-CANBERRA-XDG-THEME-OUTPUT-PROFILE--CAPS" title="CA_PROP_CANBERRA_XDG_THEME_OUTPUT_PROFILE">CA_PROP_CANBERRA_XDG_THEME_OUTPUT_PROFILE</a>
 
 typedef             <a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context">ca_context</a>;
 void                (<a class="link" href="libcanberra-canberra.html#ca-finish-callback-t" title="ca_finish_callback_t ()">*ca_finish_callback_t</a>)             (<a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context">ca_context</a> *c,
@@ -106,7 +108,7 @@ int                 <a class="link" href="libcanberra-canberra.html#ca-context-c
 int                 <a class="link" href="libcanberra-canberra.html#ca-context-cache-full" title="ca_context_cache_full ()">ca_context_cache_full</a>               (<a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context">ca_context</a> *c,
                                                          <a class="link" href="libcanberra-canberra.html#ca-proplist" title="ca_proplist">ca_proplist</a> *p);
 
-const char*         <a class="link" href="libcanberra-canberra.html#ca-strerror" title="ca_strerror ()">ca_strerror</a>                         (int code);
+const char *        <a class="link" href="libcanberra-canberra.html#ca-strerror" title="ca_strerror ()">ca_strerror</a>                         (int code);
 
 typedef             <a class="link" href="libcanberra-canberra.html#ca-proplist" title="ca_proplist">ca_proplist</a>;
 int                 <a class="link" href="libcanberra-canberra.html#ca-proplist-create" title="ca_proplist_create ()">ca_proplist_create</a>                  (<a class="link" href="libcanberra-canberra.html#ca-proplist" title="ca_proplist">ca_proplist</a> **p);
@@ -141,7 +143,7 @@ An event sound is triggered via libcanberra by calling the
 <a class="link" href="libcanberra-canberra.html#ca-context-play" title="ca_context_play ()"><code class="function">ca_context_play()</code></a> function on a previously created ca_context
 object. The <a class="link" href="libcanberra-canberra.html#ca-context-play" title="ca_context_play ()"><code class="function">ca_context_play()</code></a> takes a list of key-value pairs that
 describe the event sound to generate as closely as possible. The
-most important property is <a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-ID:CAPS" title="CA_PROP_EVENT_ID"><code class="literal">CA_PROP_EVENT_ID</code></a> which defines the XDG
+most important property is <a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-ID--CAPS" title="CA_PROP_EVENT_ID"><code class="literal">CA_PROP_EVENT_ID</code></a> which defines the XDG
 sound name for the sound to play.
 </p>
 <p>
@@ -169,7 +171,7 @@ back. (<a class="link" href="libcanberra-canberra.html#ca-context-change-props" 
 <p>
 Some of the properties can be filled in by libcanberra or one of
 its backends automatically and thus need not be be filled in by the
-application (such as <a class="link" href="libcanberra-canberra.html#CA-PROP-APPLICATION-PROCESS-ID:CAPS" title="CA_PROP_APPLICATION_PROCESS_ID"><code class="literal">CA_PROP_APPLICATION_PROCESS_ID</code></a> and
+application (such as <a class="link" href="libcanberra-canberra.html#CA-PROP-APPLICATION-PROCESS-ID--CAPS" title="CA_PROP_APPLICATION_PROCESS_ID"><code class="literal">CA_PROP_APPLICATION_PROCESS_ID</code></a> and
 friends). However the application can always overwrite any of these
 implicit properties.
 </p>
@@ -197,24 +199,24 @@ the respective functions will return an error code of
 </p>
 <p>
 It is highly recommended that the application sets the
-<a class="link" href="libcanberra-canberra.html#CA-PROP-APPLICATION-NAME:CAPS" title="CA_PROP_APPLICATION_NAME"><code class="literal">CA_PROP_APPLICATION_NAME</code></a>, <a class="link" href="libcanberra-canberra.html#CA-PROP-APPLICATION-ID:CAPS" title="CA_PROP_APPLICATION_ID"><code class="literal">CA_PROP_APPLICATION_ID</code></a>,
-<a class="link" href="libcanberra-canberra.html#CA-PROP-APPLICATION-ICON-NAME:CAPS" title="CA_PROP_APPLICATION_ICON_NAME"><code class="literal">CA_PROP_APPLICATION_ICON_NAME</code></a>/<a class="link" href="libcanberra-canberra.html#CA-PROP-APPLICATION-ICON:CAPS" title="CA_PROP_APPLICATION_ICON"><code class="literal">CA_PROP_APPLICATION_ICON</code></a> properties
+<a class="link" href="libcanberra-canberra.html#CA-PROP-APPLICATION-NAME--CAPS" title="CA_PROP_APPLICATION_NAME"><code class="literal">CA_PROP_APPLICATION_NAME</code></a>, <a class="link" href="libcanberra-canberra.html#CA-PROP-APPLICATION-ID--CAPS" title="CA_PROP_APPLICATION_ID"><code class="literal">CA_PROP_APPLICATION_ID</code></a>,
+<a class="link" href="libcanberra-canberra.html#CA-PROP-APPLICATION-ICON-NAME--CAPS" title="CA_PROP_APPLICATION_ICON_NAME"><code class="literal">CA_PROP_APPLICATION_ICON_NAME</code></a>/<a class="link" href="libcanberra-canberra.html#CA-PROP-APPLICATION-ICON--CAPS" title="CA_PROP_APPLICATION_ICON"><code class="literal">CA_PROP_APPLICATION_ICON</code></a> properties
 immediately after creating the ca_context, before calling
 <a class="link" href="libcanberra-canberra.html#ca-context-open" title="ca_context_open ()"><code class="function">ca_context_open()</code></a> or <a class="link" href="libcanberra-canberra.html#ca-context-play" title="ca_context_play ()"><code class="function">ca_context_play()</code></a>.
 </p>
 <p>
-Its is highly recommended to pass at least <a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-ID:CAPS" title="CA_PROP_EVENT_ID"><code class="literal">CA_PROP_EVENT_ID</code></a>,
-<a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-DESCRIPTION:CAPS" title="CA_PROP_EVENT_DESCRIPTION"><code class="literal">CA_PROP_EVENT_DESCRIPTION</code></a> to <a class="link" href="libcanberra-canberra.html#ca-context-play" title="ca_context_play ()"><code class="function">ca_context_play()</code></a> for each event
+Its is highly recommended to pass at least <a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-ID--CAPS" title="CA_PROP_EVENT_ID"><code class="literal">CA_PROP_EVENT_ID</code></a>,
+<a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-DESCRIPTION--CAPS" title="CA_PROP_EVENT_DESCRIPTION"><code class="literal">CA_PROP_EVENT_DESCRIPTION</code></a> to <a class="link" href="libcanberra-canberra.html#ca-context-play" title="ca_context_play ()"><code class="function">ca_context_play()</code></a> for each event
 sound generated. For sound events based on mouse inputs events
-<a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-MOUSE-X:CAPS" title="CA_PROP_EVENT_MOUSE_X"><code class="literal">CA_PROP_EVENT_MOUSE_X</code></a>, <a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-MOUSE-Y:CAPS" title="CA_PROP_EVENT_MOUSE_Y"><code class="literal">CA_PROP_EVENT_MOUSE_Y</code></a>, <a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-MOUSE-HPOS:CAPS" title="CA_PROP_EVENT_MOUSE_HPOS"><code class="literal">CA_PROP_EVENT_MOUSE_HPOS</code></a>,
-<a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-MOUSE-VPOS:CAPS" title="CA_PROP_EVENT_MOUSE_VPOS"><code class="literal">CA_PROP_EVENT_MOUSE_VPOS</code></a>, <a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-MOUSE-BUTTON:CAPS" title="CA_PROP_EVENT_MOUSE_BUTTON"><code class="literal">CA_PROP_EVENT_MOUSE_BUTTON</code></a> should be
+<a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-MOUSE-X--CAPS" title="CA_PROP_EVENT_MOUSE_X"><code class="literal">CA_PROP_EVENT_MOUSE_X</code></a>, <a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-MOUSE-Y--CAPS" title="CA_PROP_EVENT_MOUSE_Y"><code class="literal">CA_PROP_EVENT_MOUSE_Y</code></a>, <a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-MOUSE-HPOS--CAPS" title="CA_PROP_EVENT_MOUSE_HPOS"><code class="literal">CA_PROP_EVENT_MOUSE_HPOS</code></a>,
+<a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-MOUSE-VPOS--CAPS" title="CA_PROP_EVENT_MOUSE_VPOS"><code class="literal">CA_PROP_EVENT_MOUSE_VPOS</code></a>, <a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-MOUSE-BUTTON--CAPS" title="CA_PROP_EVENT_MOUSE_BUTTON"><code class="literal">CA_PROP_EVENT_MOUSE_BUTTON</code></a> should be
 passed. For sound events attached to a widget on the screen, the
 <code class="literal">CA_PROP_WINDOW_xxx</code> properties should be set.</p>
 </div>
 <div class="refsect1" lang="en">
 <a name="libcanberra-canberra.details"></a><h2>Details</h2>
 <div class="refsect2" lang="en">
-<a name="CA-PROP-MEDIA-NAME:CAPS"></a><h3>CA_PROP_MEDIA_NAME</h3>
+<a name="CA-PROP-MEDIA-NAME--CAPS"></a><h3>CA_PROP_MEDIA_NAME</h3>
 <pre class="programlisting">#define CA_PROP_MEDIA_NAME                         "media.name"
 </pre>
 <p>
@@ -222,7 +224,7 @@ A name describing the media being played. Localized if possible and applicable.<
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="CA-PROP-MEDIA-TITLE:CAPS"></a><h3>CA_PROP_MEDIA_TITLE</h3>
+<a name="CA-PROP-MEDIA-TITLE--CAPS"></a><h3>CA_PROP_MEDIA_TITLE</h3>
 <pre class="programlisting">#define CA_PROP_MEDIA_TITLE                        "media.title"
 </pre>
 <p>
@@ -230,7 +232,7 @@ A (song) title describing the media being played. Localized if possible and appl
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="CA-PROP-MEDIA-ARTIST:CAPS"></a><h3>CA_PROP_MEDIA_ARTIST</h3>
+<a name="CA-PROP-MEDIA-ARTIST--CAPS"></a><h3>CA_PROP_MEDIA_ARTIST</h3>
 <pre class="programlisting">#define CA_PROP_MEDIA_ARTIST                       "media.artist"
 </pre>
 <p>
@@ -238,7 +240,7 @@ The artist of this media. Localized if possible and applicable.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="CA-PROP-MEDIA-LANGUAGE:CAPS"></a><h3>CA_PROP_MEDIA_LANGUAGE</h3>
+<a name="CA-PROP-MEDIA-LANGUAGE--CAPS"></a><h3>CA_PROP_MEDIA_LANGUAGE</h3>
 <pre class="programlisting">#define CA_PROP_MEDIA_LANGUAGE                     "media.language"
 </pre>
 <p>
@@ -246,7 +248,7 @@ The language this media is in, in some standard POSIX locale string, such as "de
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="CA-PROP-MEDIA-FILENAME:CAPS"></a><h3>CA_PROP_MEDIA_FILENAME</h3>
+<a name="CA-PROP-MEDIA-FILENAME--CAPS"></a><h3>CA_PROP_MEDIA_FILENAME</h3>
 <pre class="programlisting">#define CA_PROP_MEDIA_FILENAME                     "media.filename"
 </pre>
 <p>
@@ -254,7 +256,7 @@ The file name this media was or can be loaded from.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="CA-PROP-MEDIA-ICON:CAPS"></a><h3>CA_PROP_MEDIA_ICON</h3>
+<a name="CA-PROP-MEDIA-ICON--CAPS"></a><h3>CA_PROP_MEDIA_ICON</h3>
 <pre class="programlisting">#define CA_PROP_MEDIA_ICON                         "media.icon"
 </pre>
 <p>
@@ -262,7 +264,7 @@ An icon for this media in binary PNG format.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="CA-PROP-MEDIA-ICON-NAME:CAPS"></a><h3>CA_PROP_MEDIA_ICON_NAME</h3>
+<a name="CA-PROP-MEDIA-ICON-NAME--CAPS"></a><h3>CA_PROP_MEDIA_ICON_NAME</h3>
 <pre class="programlisting">#define CA_PROP_MEDIA_ICON_NAME                    "media.icon_name"
 </pre>
 <p>
@@ -270,7 +272,7 @@ An icon name as defined in the XDG icon naming specifcation.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="CA-PROP-MEDIA-ROLE:CAPS"></a><h3>CA_PROP_MEDIA_ROLE</h3>
+<a name="CA-PROP-MEDIA-ROLE--CAPS"></a><h3>CA_PROP_MEDIA_ROLE</h3>
 <pre class="programlisting">#define CA_PROP_MEDIA_ROLE                         "media.role"
 </pre>
 <p>
@@ -279,7 +281,7 @@ The "role" this media is played in. For event sounds the string
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="CA-PROP-EVENT-ID:CAPS"></a><h3>CA_PROP_EVENT_ID</h3>
+<a name="CA-PROP-EVENT-ID--CAPS"></a><h3>CA_PROP_EVENT_ID</h3>
 <pre class="programlisting">#define CA_PROP_EVENT_ID                           "event.id"
 </pre>
 <p>
@@ -287,7 +289,7 @@ A textual id for an event sound, as mandated by the XDG sound naming specificati
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="CA-PROP-EVENT-DESCRIPTION:CAPS"></a><h3>CA_PROP_EVENT_DESCRIPTION</h3>
+<a name="CA-PROP-EVENT-DESCRIPTION--CAPS"></a><h3>CA_PROP_EVENT_DESCRIPTION</h3>
 <pre class="programlisting">#define CA_PROP_EVENT_DESCRIPTION                  "event.description"
 </pre>
 <p>
@@ -295,7 +297,7 @@ A descriptive string for the sound event. Localized if possible and applicable.<
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="CA-PROP-EVENT-MOUSE-X:CAPS"></a><h3>CA_PROP_EVENT_MOUSE_X</h3>
+<a name="CA-PROP-EVENT-MOUSE-X--CAPS"></a><h3>CA_PROP_EVENT_MOUSE_X</h3>
 <pre class="programlisting">#define CA_PROP_EVENT_MOUSE_X                      "event.mouse.x"
 </pre>
 <p>
@@ -304,7 +306,7 @@ position of the mouse cursor on the screen, formatted as string.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="CA-PROP-EVENT-MOUSE-Y:CAPS"></a><h3>CA_PROP_EVENT_MOUSE_Y</h3>
+<a name="CA-PROP-EVENT-MOUSE-Y--CAPS"></a><h3>CA_PROP_EVENT_MOUSE_Y</h3>
 <pre class="programlisting">#define CA_PROP_EVENT_MOUSE_Y                      "event.mouse.y"
 </pre>
 <p>
@@ -313,7 +315,7 @@ position of the mouse cursor on the screen, formatted as string.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="CA-PROP-EVENT-MOUSE-HPOS:CAPS"></a><h3>CA_PROP_EVENT_MOUSE_HPOS</h3>
+<a name="CA-PROP-EVENT-MOUSE-HPOS--CAPS"></a><h3>CA_PROP_EVENT_MOUSE_HPOS</h3>
 <pre class="programlisting">#define CA_PROP_EVENT_MOUSE_HPOS                   "event.mouse.hpos"
 </pre>
 <p>
@@ -324,7 +326,7 @@ the right side.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="CA-PROP-EVENT-MOUSE-VPOS:CAPS"></a><h3>CA_PROP_EVENT_MOUSE_VPOS</h3>
+<a name="CA-PROP-EVENT-MOUSE-VPOS--CAPS"></a><h3>CA_PROP_EVENT_MOUSE_VPOS</h3>
 <pre class="programlisting">#define CA_PROP_EVENT_MOUSE_VPOS                   "event.mouse.vpos"
 </pre>
 <p>
@@ -335,7 +337,7 @@ the bottom end.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="CA-PROP-EVENT-MOUSE-BUTTON:CAPS"></a><h3>CA_PROP_EVENT_MOUSE_BUTTON</h3>
+<a name="CA-PROP-EVENT-MOUSE-BUTTON--CAPS"></a><h3>CA_PROP_EVENT_MOUSE_BUTTON</h3>
 <pre class="programlisting">#define CA_PROP_EVENT_MOUSE_BUTTON                 "event.mouse.button"
 </pre>
 <p>
@@ -345,7 +347,7 @@ for left mouse button, 3 for right, 2 for middle.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="CA-PROP-WINDOW-NAME:CAPS"></a><h3>CA_PROP_WINDOW_NAME</h3>
+<a name="CA-PROP-WINDOW-NAME--CAPS"></a><h3>CA_PROP_WINDOW_NAME</h3>
 <pre class="programlisting">#define CA_PROP_WINDOW_NAME                        "window.name"
 </pre>
 <p>
@@ -354,7 +356,7 @@ name of this window as human readable string.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="CA-PROP-WINDOW-ID:CAPS"></a><h3>CA_PROP_WINDOW_ID</h3>
+<a name="CA-PROP-WINDOW-ID--CAPS"></a><h3>CA_PROP_WINDOW_ID</h3>
 <pre class="programlisting">#define CA_PROP_WINDOW_ID                          "window.id"
 </pre>
 <p>
@@ -364,7 +366,7 @@ recognize specific windows.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="CA-PROP-WINDOW-ICON:CAPS"></a><h3>CA_PROP_WINDOW_ICON</h3>
+<a name="CA-PROP-WINDOW-ICON--CAPS"></a><h3>CA_PROP_WINDOW_ICON</h3>
 <pre class="programlisting">#define CA_PROP_WINDOW_ICON                        "window.icon"
 </pre>
 <p>
@@ -373,7 +375,7 @@ icon data in PNG format for this window.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="CA-PROP-WINDOW-ICON-NAME:CAPS"></a><h3>CA_PROP_WINDOW_ICON_NAME</h3>
+<a name="CA-PROP-WINDOW-ICON-NAME--CAPS"></a><h3>CA_PROP_WINDOW_ICON_NAME</h3>
 <pre class="programlisting">#define CA_PROP_WINDOW_ICON_NAME                   "window.icon_name"
 </pre>
 <p>
@@ -383,7 +385,7 @@ specification.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="CA-PROP-WINDOW-X11-DISPLAY:CAPS"></a><h3>CA_PROP_WINDOW_X11_DISPLAY</h3>
+<a name="CA-PROP-WINDOW-X11-DISPLAY--CAPS"></a><h3>CA_PROP_WINDOW_X11_DISPLAY</h3>
 <pre class="programlisting">#define CA_PROP_WINDOW_X11_DISPLAY                 "window.x11.display"
 </pre>
 <p>
@@ -392,7 +394,7 @@ windowing system is X11, the X display name of the window (e.g. ":0").</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="CA-PROP-WINDOW-X11-SCREEN:CAPS"></a><h3>CA_PROP_WINDOW_X11_SCREEN</h3>
+<a name="CA-PROP-WINDOW-X11-SCREEN--CAPS"></a><h3>CA_PROP_WINDOW_X11_SCREEN</h3>
 <pre class="programlisting">#define CA_PROP_WINDOW_X11_SCREEN                  "window.x11.screen"
 </pre>
 <p>
@@ -402,7 +404,7 @@ string (e.g. "0").</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="CA-PROP-WINDOW-X11-MONITOR:CAPS"></a><h3>CA_PROP_WINDOW_X11_MONITOR</h3>
+<a name="CA-PROP-WINDOW-X11-MONITOR--CAPS"></a><h3>CA_PROP_WINDOW_X11_MONITOR</h3>
 <pre class="programlisting">#define CA_PROP_WINDOW_X11_MONITOR                 "window.x11.monitor"
 </pre>
 <p>
@@ -412,7 +414,7 @@ string (e.g. "0").</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="CA-PROP-WINDOW-X11-XID:CAPS"></a><h3>CA_PROP_WINDOW_X11_XID</h3>
+<a name="CA-PROP-WINDOW-X11-XID--CAPS"></a><h3>CA_PROP_WINDOW_X11_XID</h3>
 <pre class="programlisting">#define CA_PROP_WINDOW_X11_XID                     "window.x11.xid"
 </pre>
 <p>
@@ -421,7 +423,7 @@ windowing system is X11, the XID of the window formatted as string.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="CA-PROP-APPLICATION-NAME:CAPS"></a><h3>CA_PROP_APPLICATION_NAME</h3>
+<a name="CA-PROP-APPLICATION-NAME--CAPS"></a><h3>CA_PROP_APPLICATION_NAME</h3>
 <pre class="programlisting">#define CA_PROP_APPLICATION_NAME                   "application.name"
 </pre>
 <p>
@@ -431,7 +433,7 @@ applicable.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="CA-PROP-APPLICATION-ID:CAPS"></a><h3>CA_PROP_APPLICATION_ID</h3>
+<a name="CA-PROP-APPLICATION-ID--CAPS"></a><h3>CA_PROP_APPLICATION_ID</h3>
 <pre class="programlisting">#define CA_PROP_APPLICATION_ID                     "application.id"
 </pre>
 <p>
@@ -440,7 +442,7 @@ by. (e.g. "org.gnu.emacs").</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="CA-PROP-APPLICATION-VERSION:CAPS"></a><h3>CA_PROP_APPLICATION_VERSION</h3>
+<a name="CA-PROP-APPLICATION-VERSION--CAPS"></a><h3>CA_PROP_APPLICATION_VERSION</h3>
 <pre class="programlisting">#define CA_PROP_APPLICATION_VERSION                "application.version"
 </pre>
 <p>
@@ -449,7 +451,7 @@ by. (e.g. "22.2")</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="CA-PROP-APPLICATION-ICON:CAPS"></a><h3>CA_PROP_APPLICATION_ICON</h3>
+<a name="CA-PROP-APPLICATION-ICON--CAPS"></a><h3>CA_PROP_APPLICATION_ICON</h3>
 <pre class="programlisting">#define CA_PROP_APPLICATION_ICON                   "application.icon"
 </pre>
 <p>
@@ -458,7 +460,7 @@ is triggered by.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="CA-PROP-APPLICATION-ICON-NAME:CAPS"></a><h3>CA_PROP_APPLICATION_ICON_NAME</h3>
+<a name="CA-PROP-APPLICATION-ICON-NAME--CAPS"></a><h3>CA_PROP_APPLICATION_ICON_NAME</h3>
 <pre class="programlisting">#define CA_PROP_APPLICATION_ICON_NAME              "application.icon_name"
 </pre>
 <p>
@@ -467,7 +469,7 @@ as defined in the XDG icon naming specification.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="CA-PROP-APPLICATION-LANGUAGE:CAPS"></a><h3>CA_PROP_APPLICATION_LANGUAGE</h3>
+<a name="CA-PROP-APPLICATION-LANGUAGE--CAPS"></a><h3>CA_PROP_APPLICATION_LANGUAGE</h3>
 <pre class="programlisting">#define CA_PROP_APPLICATION_LANGUAGE               "application.language"
 </pre>
 <p>
@@ -476,7 +478,7 @@ event is running in. A POSIX locale string such as de_DE<em class="parameter"><c
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="CA-PROP-APPLICATION-PROCESS-ID:CAPS"></a><h3>CA_PROP_APPLICATION_PROCESS_ID</h3>
+<a name="CA-PROP-APPLICATION-PROCESS-ID--CAPS"></a><h3>CA_PROP_APPLICATION_PROCESS_ID</h3>
 <pre class="programlisting">#define CA_PROP_APPLICATION_PROCESS_ID             "application.process.id"
 </pre>
 <p>
@@ -484,7 +486,7 @@ The unix PID of the process that is triggering this sound event, formatted as st
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="CA-PROP-APPLICATION-PROCESS-BINARY:CAPS"></a><h3>CA_PROP_APPLICATION_PROCESS_BINARY</h3>
+<a name="CA-PROP-APPLICATION-PROCESS-BINARY--CAPS"></a><h3>CA_PROP_APPLICATION_PROCESS_BINARY</h3>
 <pre class="programlisting">#define CA_PROP_APPLICATION_PROCESS_BINARY         "application.process.binary"
 </pre>
 <p>
@@ -492,7 +494,7 @@ The path to the process binary of the process that is triggering this sound even
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="CA-PROP-APPLICATION-PROCESS-USER:CAPS"></a><h3>CA_PROP_APPLICATION_PROCESS_USER</h3>
+<a name="CA-PROP-APPLICATION-PROCESS-USER--CAPS"></a><h3>CA_PROP_APPLICATION_PROCESS_USER</h3>
 <pre class="programlisting">#define CA_PROP_APPLICATION_PROCESS_USER           "application.process.user"
 </pre>
 <p>
@@ -500,7 +502,7 @@ The user that owns the process that is triggering this sound event.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="CA-PROP-APPLICATION-PROCESS-HOST:CAPS"></a><h3>CA_PROP_APPLICATION_PROCESS_HOST</h3>
+<a name="CA-PROP-APPLICATION-PROCESS-HOST--CAPS"></a><h3>CA_PROP_APPLICATION_PROCESS_HOST</h3>
 <pre class="programlisting">#define CA_PROP_APPLICATION_PROCESS_HOST           "application.process.host"
 </pre>
 <p>
@@ -508,7 +510,7 @@ The host name of the host the process that is triggering this sound event runs o
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="CA-PROP-CANBERRA-CACHE-CONTROL:CAPS"></a><h3>CA_PROP_CANBERRA_CACHE_CONTROL</h3>
+<a name="CA-PROP-CANBERRA-CACHE-CONTROL--CAPS"></a><h3>CA_PROP_CANBERRA_CACHE_CONTROL</h3>
 <pre class="programlisting">#define CA_PROP_CANBERRA_CACHE_CONTROL             "canberra.cache-control"
 </pre>
 <p>
@@ -534,7 +536,7 @@ property is stripped from it.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="CA-PROP-CANBERRA-VOLUME:CAPS"></a><h3>CA_PROP_CANBERRA_VOLUME</h3>
+<a name="CA-PROP-CANBERRA-VOLUME--CAPS"></a><h3>CA_PROP_CANBERRA_VOLUME</h3>
 <pre class="programlisting">#define CA_PROP_CANBERRA_VOLUME                    "canberra.volume"
 </pre>
 <p>
@@ -549,7 +551,7 @@ property is stripped from it.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="CA-PROP-CANBERRA-XDG-THEME-NAME:CAPS"></a><h3>CA_PROP_CANBERRA_XDG_THEME_NAME</h3>
+<a name="CA-PROP-CANBERRA-XDG-THEME-NAME--CAPS"></a><h3>CA_PROP_CANBERRA_XDG_THEME_NAME</h3>
 <pre class="programlisting">#define CA_PROP_CANBERRA_XDG_THEME_NAME            "canberra.xdg-theme.name"
 </pre>
 <p>
@@ -562,7 +564,7 @@ property is stripped from it.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="CA-PROP-CANBERRA-XDG-THEME-OUTPUT-PROFILE:CAPS"></a><h3>CA_PROP_CANBERRA_XDG_THEME_OUTPUT_PROFILE</h3>
+<a name="CA-PROP-CANBERRA-XDG-THEME-OUTPUT-PROFILE--CAPS"></a><h3>CA_PROP_CANBERRA_XDG_THEME_OUTPUT_PROFILE</h3>
 <pre class="programlisting">#define CA_PROP_CANBERRA_XDG_THEME_OUTPUT_PROFILE  "canberra.xdg-theme.output-profile"
 </pre>
 <p>
@@ -804,7 +806,7 @@ already been set before will be overwritten.</p>
 <p>
 Similar to <a class="link" href="libcanberra-canberra.html#ca-context-change-props" title="ca_context_change_props ()"><code class="function">ca_context_change_props()</code></a>, but takes a ca_proplist
 instead of a variable list of properties. Can be used to set binary
-properties such as <a class="link" href="libcanberra-canberra.html#CA-PROP-APPLICATION-ICON:CAPS" title="CA_PROP_APPLICATION_ICON"><code class="literal">CA_PROP_APPLICATION_ICON</code></a>.</p>
+properties such as <a class="link" href="libcanberra-canberra.html#CA-PROP-APPLICATION-ICON--CAPS" title="CA_PROP_APPLICATION_ICON"><code class="literal">CA_PROP_APPLICATION_ICON</code></a>.</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
@@ -840,7 +842,7 @@ cancel multiple event sounds with a single <a class="link" href="libcanberra-can
 at once. It is recommended to pass 0 for the id if the event sound
 shall never be canceled. If the requested sound is not cached in
 the server yet this call might result in the sample being uploaded
-temporarily or permanently (this may be controlled with <a class="link" href="libcanberra-canberra.html#CA-PROP-CANBERRA-CACHE-CONTROL:CAPS" title="CA_PROP_CANBERRA_CACHE_CONTROL"><code class="literal">CA_PROP_CANBERRA_CACHE_CONTROL</code></a>). This function will start playback
+temporarily or permanently (this may be controlled with <a class="link" href="libcanberra-canberra.html#CA-PROP-CANBERRA-CACHE-CONTROL--CAPS" title="CA_PROP_CANBERRA_CACHE_CONTROL"><code class="literal">CA_PROP_CANBERRA_CACHE_CONTROL</code></a>). This function will start playback
 in the background. It will not wait until playback
 completed. Depending on the backend used a sound that is started
 shortly before your application terminates might or might not continue to
@@ -850,24 +852,24 @@ the callback function of <a class="link" href="libcanberra-canberra.html#ca-cont
 terminate your application.
 </p>
 <p>
-The sample to play is identified by the <a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-ID:CAPS" title="CA_PROP_EVENT_ID"><code class="literal">CA_PROP_EVENT_ID</code></a>
+The sample to play is identified by the <a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-ID--CAPS" title="CA_PROP_EVENT_ID"><code class="literal">CA_PROP_EVENT_ID</code></a>
 property. If it is already cached in the server the cached version
 is played. The properties passed in this call are merged with the
 properties supplied when the sample was cached (if applicable)
 and the context properties as set with <a class="link" href="libcanberra-canberra.html#ca-context-change-props" title="ca_context_change_props ()"><code class="function">ca_context_change_props()</code></a>.
 </p>
 <p>
-If <a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-ID:CAPS" title="CA_PROP_EVENT_ID"><code class="literal">CA_PROP_EVENT_ID</code></a> is not defined the sound file passed in the
-<a class="link" href="libcanberra-canberra.html#CA-PROP-MEDIA-FILENAME:CAPS" title="CA_PROP_MEDIA_FILENAME"><code class="literal">CA_PROP_MEDIA_FILENAME</code></a> is played.
+If <a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-ID--CAPS" title="CA_PROP_EVENT_ID"><code class="literal">CA_PROP_EVENT_ID</code></a> is not defined the sound file passed in the
+<a class="link" href="libcanberra-canberra.html#CA-PROP-MEDIA-FILENAME--CAPS" title="CA_PROP_MEDIA_FILENAME"><code class="literal">CA_PROP_MEDIA_FILENAME</code></a> is played.
 </p>
 <p>
 On Linux/Unix the right sound to play is determined according to
-<a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-ID:CAPS" title="CA_PROP_EVENT_ID"><code class="literal">CA_PROP_EVENT_ID</code></a>,
-<a class="link" href="libcanberra-canberra.html#CA-PROP-APPLICATION-LANGUAGE:CAPS" title="CA_PROP_APPLICATION_LANGUAGE"><code class="literal">CA_PROP_APPLICATION_LANGUAGE</code></a>/<a class="link" href="libcanberra-canberra.html#CA-PROP-MEDIA-LANGUAGE:CAPS" title="CA_PROP_MEDIA_LANGUAGE"><code class="literal">CA_PROP_MEDIA_LANGUAGE</code></a>, the system
-locale, <a class="link" href="libcanberra-canberra.html#CA-PROP-CANBERRA-XDG-THEME-NAME:CAPS" title="CA_PROP_CANBERRA_XDG_THEME_NAME"><code class="literal">CA_PROP_CANBERRA_XDG_THEME_NAME</code></a> and
-<a class="link" href="libcanberra-canberra.html#CA-PROP-CANBERRA-XDG-THEME-OUTPUT-PROFILE:CAPS" title="CA_PROP_CANBERRA_XDG_THEME_OUTPUT_PROFILE"><code class="literal">CA_PROP_CANBERRA_XDG_THEME_OUTPUT_PROFILE</code></a>, following the XDG Sound
+<a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-ID--CAPS" title="CA_PROP_EVENT_ID"><code class="literal">CA_PROP_EVENT_ID</code></a>,
+<a class="link" href="libcanberra-canberra.html#CA-PROP-APPLICATION-LANGUAGE--CAPS" title="CA_PROP_APPLICATION_LANGUAGE"><code class="literal">CA_PROP_APPLICATION_LANGUAGE</code></a>/<a class="link" href="libcanberra-canberra.html#CA-PROP-MEDIA-LANGUAGE--CAPS" title="CA_PROP_MEDIA_LANGUAGE"><code class="literal">CA_PROP_MEDIA_LANGUAGE</code></a>, the system
+locale, <a class="link" href="libcanberra-canberra.html#CA-PROP-CANBERRA-XDG-THEME-NAME--CAPS" title="CA_PROP_CANBERRA_XDG_THEME_NAME"><code class="literal">CA_PROP_CANBERRA_XDG_THEME_NAME</code></a> and
+<a class="link" href="libcanberra-canberra.html#CA-PROP-CANBERRA-XDG-THEME-OUTPUT-PROFILE--CAPS" title="CA_PROP_CANBERRA_XDG_THEME_OUTPUT_PROFILE"><code class="literal">CA_PROP_CANBERRA_XDG_THEME_OUTPUT_PROFILE</code></a>, following the XDG Sound
 Theming Specification. On non-Unix systems the native event sound
-that matches the XDG sound name in <a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-ID:CAPS" title="CA_PROP_EVENT_ID"><code class="literal">CA_PROP_EVENT_ID</code></a> is played.</p>
+that matches the XDG sound name in <a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-ID--CAPS" title="CA_PROP_EVENT_ID"><code class="literal">CA_PROP_EVENT_ID</code></a> is played.</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
@@ -1050,15 +1052,15 @@ will return CA_ERROR_NOTSUPPORTED.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="ca-strerror"></a><h3>ca_strerror ()</h3>
-<pre class="programlisting">const char*         ca_strerror                         (int code);</pre>
+<pre class="programlisting">const char *        ca_strerror                         (int code);</pre>
 <p>
-Converts a numerical error code as returned by most canberra API functions into a human readable error string.</p>
+Converts a numerical error code as returned by most libcanberra API functions into a human readable error string.</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>code</code></em> :</span></p></td>
-<td> Numerical error code as returned by a canberra API function
+<td> Numerical error code as returned by a libcanberra API function
 </td>
 </tr>
 <tr>
@@ -1241,6 +1243,6 @@ Add a new binary key/value pair to the property list.</p>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.10</div>
+          Generated by GTK-Doc V1.11</div>
 </body>
 </html>

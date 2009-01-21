@@ -7,7 +7,7 @@
 <link rel="home" href="index.html" title="libcanberra Reference Manual">
 <link rel="up" href="ch01.html" title="libcanberra">
 <link rel="prev" href="libcanberra-canberra.html" title="canberra">
-<meta name="generator" content="GTK-Doc V1.10 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 <link rel="chapter" href="ch01.html" title="libcanberra">
 </head>
@@ -20,9 +20,11 @@
 <th width="100%" align="center">libcanberra Reference Manual</th>
 <td> </td>
 </tr>
-<tr><td colspan="5" class="shortcuts"><nobr><a href="#libcanberra-canberra-gtk.synopsis" class="shortcut">Top</a>
-                   | 
-                  <a href="#libcanberra-canberra-gtk.description" class="shortcut">Description</a></nobr></td></tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libcanberra-canberra-gtk.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#libcanberra-canberra-gtk.description" class="shortcut">Description</a>
+</td></tr>
 </table>
 <div class="refentry" lang="en">
 <a name="libcanberra-canberra-gtk"></a><div class="titlepage"></div>
@@ -36,7 +38,7 @@
 <div class="refsynopsisdiv">
 <a name="libcanberra-canberra-gtk.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">
-<a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context">ca_context</a>*         <a class="link" href="libcanberra-canberra-gtk.html#ca-gtk-context-get" title="ca_gtk_context_get ()">ca_gtk_context_get</a>                  (void);
+<a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context">ca_context</a> *        <a class="link" href="libcanberra-canberra-gtk.html#ca-gtk-context-get" title="ca_gtk_context_get ()">ca_gtk_context_get</a>                  (void);
 int                 <a class="link" href="libcanberra-canberra-gtk.html#ca-gtk-proplist-set-for-widget" title="ca_gtk_proplist_set_for_widget ()">ca_gtk_proplist_set_for_widget</a>      (<a class="link" href="libcanberra-canberra.html#ca-proplist" title="ca_proplist">ca_proplist</a> *p,
                                                          <a
 href="/usr/share/gtk-doc/html/gtk/GtkWidget.html"
@@ -77,11 +79,11 @@ GdkEvent events.</p>
 <a name="libcanberra-canberra-gtk.details"></a><h2>Details</h2>
 <div class="refsect2" lang="en">
 <a name="ca-gtk-context-get"></a><h3>ca_gtk_context_get ()</h3>
-<pre class="programlisting"><a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context">ca_context</a>*         ca_gtk_context_get                  (void);</pre>
+<pre class="programlisting"><a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context">ca_context</a> *        ca_gtk_context_get                  (void);</pre>
 <p>
 libcanberra-gtk maintains a single application-global ca_context
 object. Use this function to access it. The
-<a class="link" href="libcanberra-canberra.html#CA-PROP-CANBERRA-XDG-THEME-NAME:CAPS" title="CA_PROP_CANBERRA_XDG_THEME_NAME"><code class="literal">CA_PROP_CANBERRA_XDG_THEME_NAME</code></a> of this context property is
+<a class="link" href="libcanberra-canberra.html#CA-PROP-CANBERRA-XDG-THEME-NAME--CAPS" title="CA_PROP_CANBERRA_XDG_THEME_NAME"><code class="literal">CA_PROP_CANBERRA_XDG_THEME_NAME</code></a> of this context property is
 dynamically bound to the XSETTINGS setting for the XDG theme
 name. CA_PROP_APPLICATION_NAME is bound to
 <a
@@ -106,7 +108,7 @@ href="/usr/share/gtk-doc/html/gtk/GtkWidget.html"
 <p>
 Fill in a ca_proplist object for a sound event that shall originate
 from the specified Gtk Widget. This will fill in properties like
-<a class="link" href="libcanberra-canberra.html#CA-PROP-WINDOW-NAME:CAPS" title="CA_PROP_WINDOW_NAME"><code class="literal">CA_PROP_WINDOW_NAME</code></a> or <a class="link" href="libcanberra-canberra.html#CA-PROP-WINDOW-X11-DISPLAY:CAPS" title="CA_PROP_WINDOW_X11_DISPLAY"><code class="literal">CA_PROP_WINDOW_X11_DISPLAY</code></a> for you.</p>
+<a class="link" href="libcanberra-canberra.html#CA-PROP-WINDOW-NAME--CAPS" title="CA_PROP_WINDOW_NAME"><code class="literal">CA_PROP_WINDOW_NAME</code></a> or <a class="link" href="libcanberra-canberra.html#CA-PROP-WINDOW-X11-DISPLAY--CAPS" title="CA_PROP_WINDOW_X11_DISPLAY"><code class="literal">CA_PROP_WINDOW_X11_DISPLAY</code></a> for you.</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
@@ -183,7 +185,7 @@ href="/usr/share/gtk-doc/html/gdk/gdk-Event-Structures.html#GdkEvent"
 <p>
 Fill in a ca_proplist object for a sound event that is being
 triggered by the specified Gdk Event. This will fill in properties
-like <a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-MOUSE-X:CAPS" title="CA_PROP_EVENT_MOUSE_X"><code class="literal">CA_PROP_EVENT_MOUSE_X</code></a> or <a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-MOUSE-BUTTON:CAPS" title="CA_PROP_EVENT_MOUSE_BUTTON"><code class="literal">CA_PROP_EVENT_MOUSE_BUTTON</code></a> for
+like <a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-MOUSE-X--CAPS" title="CA_PROP_EVENT_MOUSE_X"><code class="literal">CA_PROP_EVENT_MOUSE_X</code></a> or <a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-MOUSE-BUTTON--CAPS" title="CA_PROP_EVENT_MOUSE_BUTTON"><code class="literal">CA_PROP_EVENT_MOUSE_BUTTON</code></a> for
 you. This will internally also cal <a class="link" href="libcanberra-canberra-gtk.html#ca-gtk-proplist-set-for-widget" title="ca_gtk_proplist_set_for_widget ()"><code class="function">ca_gtk_proplist_set_for_widget()</code></a>
 on the widget this event belongs to.</p>
 <div class="variablelist"><table border="0">
@@ -286,6 +288,6 @@ events.</p>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.10</div>
+          Generated by GTK-Doc V1.11</div>
 </body>
 </html>
