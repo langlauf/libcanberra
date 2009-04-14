@@ -52,7 +52,8 @@ libcanberra_la_SOURCES = \
 	sound-theme-spec.c sound-theme-spec.h \
 	llist.h \
 	macro.h macro.c \
-	malloc.c malloc.h
+	malloc.c malloc.h \
+	fork-detect.c fork-detect.h
 libcanberra_la_CFLAGS = \
 	$(AM_CFLAGS) \
 	$(VORBIS_CFLAGS)
@@ -85,8 +86,6 @@ if BUILTIN_DSO
 libcanberra_la_SOURCES += \
 	dso.c \
 	driver-order.c driver-order.h
-libcanberra_la_CFLAGS += \
-	$(LTDLINCL)
 libcanberra_la_LIBADD += \
 	$(LIBLTDL)
 

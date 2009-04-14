@@ -21,7 +21,7 @@
 
 AC_PREREQ(2.63)
 
-AC_INIT([libcanberra], 0.11, [mzyvopnaoreen (at) 0pointer (dot) de])
+AC_INIT([libcanberra],[0.12],[mzyvopnaoreen (at) 0pointer (dot) de])
 AC_CONFIG_SRCDIR([src/common.c])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR(m4)
@@ -30,8 +30,8 @@ AM_INIT_AUTOMAKE([foreign 1.10 -Wall])
 
 AC_SUBST(PACKAGE_URL, [http://0pointer.de/lennart/projects/libcanberra/])
 
-AC_SUBST(LIBCANBERRA_VERSION_INFO, [1:4:1])
-AC_SUBST(LIBCANBERRA_GTK_VERSION_INFO, [0:4:0])
+AC_SUBST(LIBCANBERRA_VERSION_INFO, [1:5:1])
+AC_SUBST(LIBCANBERRA_GTK_VERSION_INFO, [0:5:0])
 
 AC_CANONICAL_HOST
 AC_DEFINE_UNQUOTED([CANONICAL_HOST], "$host", [Canonical host string.])
@@ -65,9 +65,32 @@ done
 
 #### libtool stuff ####
 LT_PREREQ(2.2)
-LT_CONFIG_LTDL_DIR([libltdl])
 LT_INIT([dlopen win32-dll disable-static])
-LTDL_INIT([convenience recursive])
+
+dnl Unfortunately, even up to libtool 2.2.6a there is no way to know
+dnl exactly which version of libltdl is present in the system, so we
+dnl just assume that it's a working version as long as we have the
+dnl library and the header files.
+dnl
+dnl As an extra safety device, check for lt_dladvise_init() which is
+dnl only implemented in libtool 2.x, and refine as we go if we have
+dnl refined requirements.
+dnl
+dnl Check the header files first since the system may have a
+dnl libltdl.so for runtime, but no headers, and we want to bail out as
+dnl soon as possible.
+dnl
+dnl We don't need any special variable for this though, since the user
+dnl can give the proper place to find libltdl through the standard
+dnl variables like LDFLAGS and CPPFLAGS.
+
+AC_CHECK_HEADER([ltdl.h],
+    [AC_CHECK_LIB([ltdl], [lt_dladvise_init], [LIBLTDL=-lltdl], [LIBLTDL=])],
+    [LIBLTDL=])
+
+AS_IF([test "x$LIBLTDL" = "x"],
+    [AC_MSG_ERROR([Unable to find libltdl.])])
+AC_SUBST([LIBLTDL])
 
 #### Determine build environment ####
 
@@ -109,7 +132,6 @@ AC_TYPE_SIZE_T
 AC_CHECK_TYPES(ssize_t, , [AC_DEFINE([ssize_t], [signed long],
     [Define ssize_t if it is not done by the standard libs.])])
 AC_TYPE_OFF_T
-AC_TYPE_SIGNAL
 AC_TYPE_UID_T
 
 #### Check for libs ####
@@ -158,20 +180,12 @@ AM_ICONV
 
 #### pkg-config ####
 
-# Check for pkg-config manually first, as if its not installed the
-# PKG_PROG_PKG_CONFIG macro won't be defined.
-AC_CHECK_PROG(have_pkg_config, pkg-config, yes, no)
-
-if test x"$have_pkg_config" = "xno"; then
-    AC_MSG_ERROR(pkg-config is required to install this program)
-fi
-
 PKG_PROG_PKG_CONFIG
 
 #### ALSA support (optional) ####
 
 AC_ARG_ENABLE([alsa],
-    AC_HELP_STRING([--disable-alsa], [Disable optional ALSA support]),
+    AS_HELP_STRING([--disable-alsa], [Disable optional ALSA support]),
         [
             case "${enableval}" in
                 yes) alsa=yes ;;
@@ -203,7 +217,7 @@ AC_SUBST(ALSA_LIBS)
 ### OSS support (optional) ###
 
 AC_ARG_ENABLE([oss],
-    AC_HELP_STRING([--disable-oss], [Disable optional OSS support]),
+    AS_HELP_STRING([--disable-oss], [Disable optional OSS support]),
         [
             case "${enableval}" in
                 yes) oss=yes ;;
@@ -233,7 +247,7 @@ fi
 ### PulseAudio (optional) ####
 
 AC_ARG_ENABLE([pulse],
-    AC_HELP_STRING([--disable-pulse], [Disable optional PulseAudio support]),
+    AS_HELP_STRING([--disable-pulse], [Disable optional PulseAudio support]),
         [
             case "${enableval}" in
                 yes) pulse=yes ;;
@@ -274,7 +288,7 @@ AC_SUBST(PULSE_LIBS)
 #### GStreamer support (optional) ####
 
 AC_ARG_ENABLE([gstreamer],
-    AC_HELP_STRING([--disable-gstreamer], [Disable optional GStreamer support]),
+    AS_HELP_STRING([--disable-gstreamer], [Disable optional GStreamer support]),
         [
             case "${enableval}" in
                 yes) gstreamer=yes ;;
@@ -306,7 +320,7 @@ AC_SUBST(GSTREAMER_LIBS)
 ### Null output (optional) ####
 
 AC_ARG_ENABLE([null],
-    AC_HELP_STRING([--disable-null], [Disable optional null output]),
+    AS_HELP_STRING([--disable-null], [Disable optional null output]),
         [
             case "${enableval}" in
                 yes) null=yes ;;
@@ -326,7 +340,7 @@ fi
 ### GTK (optional) ####
 
 AC_ARG_ENABLE([gtk],
-    AC_HELP_STRING([--disable-gtk], [Disable optional GTK+ support]),
+    AS_HELP_STRING([--disable-gtk], [Disable optional GTK+ support]),
         [
             case "${enableval}" in
                 yes) gtk=yes ;;
@@ -368,7 +382,7 @@ AM_CONDITIONAL([HAVE_GTK], [test "x$HAVE_GTK" = x1])
 #### TDB cache support (optional) ####
 
 AC_ARG_ENABLE([tdb],
-    AC_HELP_STRING([--disable-tdb], [Disable optional tdb support]),
+    AS_HELP_STRING([--disable-tdb], [Disable optional tdb support]),
         [
             case "${enableval}" in
                 yes) tdb=yes ;;
@@ -415,7 +429,7 @@ fi
 ### LYNX documentation generation ###
 
 AC_ARG_ENABLE([lynx],
-        AC_HELP_STRING([--disable-lynx], [Turn off lynx usage for documentation generation]),
+        AS_HELP_STRING([--disable-lynx], [Turn off lynx usage for documentation generation]),
                 [
                         case "${enableval}" in
                                 yes) lynx=yes ;;
@@ -561,7 +575,6 @@ GTK_DOC_CHECK(1.9)
 
 AC_CONFIG_FILES([
 Makefile
-libltdl/Makefile
 src/Makefile
 libcanberra.pc
 libcanberra-gtk.pc

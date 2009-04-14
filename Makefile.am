@@ -19,7 +19,7 @@
 dist_doc_DATA = README
 
 EXTRA_DIST = bootstrap.sh autogen.sh LGPL libcanberra.schemas
-SUBDIRS = libltdl src gtkdoc doc
+SUBDIRS = src gtkdoc doc
 
 MAINTAINERCLEANFILES = README
 noinst_DATA = README
@@ -51,7 +51,7 @@ ACLOCAL_AMFLAGS = -I m4
 README:
 	rm -f README
 	$(MAKE) -C doc README
-	cd $(srcdir) && ln -s doc/README README
+	ln -s doc/README README
 
 homepage: all dist
 	test -d $$HOME/homepage/private

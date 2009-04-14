@@ -166,12 +166,27 @@ static int translate_error(int error) {
         [PA_ERR_BADSTATE]             = CA_ERROR_STATE,
         [PA_ERR_NODATA]               = CA_ERROR_IO,
         [PA_ERR_VERSION]              = CA_ERROR_NOTSUPPORTED,
-        [PA_ERR_TOOLARGE]             = CA_ERROR_TOOBIG
+        [PA_ERR_TOOLARGE]             = CA_ERROR_TOOBIG,
+#ifdef PA_ERR_NOTSUPPORTED
+        [PA_ERR_NOTSUPPORTED]         = CA_ERROR_NOTSUPPORTED,
+#endif
+#ifdef PA_ERR_UNKNOWN
+        [PA_ERR_UNKNOWN]              = CA_ERROR_IO,
+#endif
+#ifdef PA_ERR_NOEXTENSION
+        [PA_ERR_NOEXTENSION]          = CA_ERROR_NOTSUPPORTED,
+#endif
+#ifdef PA_ERR_OBSOLETE
+        [PA_ERR_OBSOLETE]             = CA_ERROR_NOTSUPPORTED,
+#endif
+#ifdef PA_ERR_NOTIMPLEMENTED
+        [PA_ERR_NOTIMPLEMENTED]       = CA_ERROR_NOTSUPPORTED
+#endif
     };
 
     ca_assert(error >= 0);
 
-    if (error >= PA_ERR_MAX)
+    if (error >= PA_ERR_MAX || !table[error])
         return CA_ERROR_IO;
 
     return table[error];
@@ -572,7 +587,7 @@ static void stream_write_cb(pa_stream *s, size_t bytes, void *userdata) {
             goto finish;
         }
 
-	data = NULL;
+        data = NULL;
 
         bytes -= rbytes;
     }
@@ -641,7 +656,11 @@ int driver_play(ca_context *c, uint32_t id, ca_proplist *proplist, ca_finish_cal
     pa_proplist *l = NULL;
     const char *n, *vol, *ct;
     char *name = NULL;
+#if defined(PA_MAJOR) && ((PA_MAJOR > 0) || (PA_MAJOR == 0 && PA_MINOR > 9) || (PA_MAJOR == 0 && PA_MINOR == 9 && PA_MICRO >= 15))
+    pa_volume_t v = (pa_volume_t) -1;
+#else
     pa_volume_t v = PA_VOLUME_NORM;
+#endif
     pa_sample_spec ss;
     ca_cache_control_t cache_control = CA_CACHE_CONTROL_NEVER;
     struct outstanding *out = NULL;
@@ -781,7 +800,13 @@ int driver_play(ca_context *c, uint32_t id, ca_proplist *proplist, ca_finish_cal
     pa_stream_set_state_callback(out->stream, stream_state_cb, out);
     pa_stream_set_write_callback(out->stream, stream_write_cb, out);
 
-    if (pa_stream_connect_playback(out->stream, NULL, NULL, 0, NULL, NULL) < 0) {
+    if (pa_stream_connect_playback(out->stream, NULL, NULL,
+#ifdef PA_STREAM_FAIL_ON_SUSPEND
+                                   PA_STREAM_FAIL_ON_SUSPEND
+#else
+                                   0
+#endif
+                                   , NULL, NULL) < 0) {
         ret = translate_error(pa_context_errno(p->context));
         pa_threaded_mainloop_unlock(p->mainloop);
         goto finish;
