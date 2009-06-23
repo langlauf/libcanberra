@@ -76,6 +76,9 @@ struct private {
 
 #define PRIVATE(c) ((struct private *) ((c)->private))
 
+static void context_state_cb(pa_context *pc, void *userdata);
+static void context_subscribe_cb(pa_context *pc, pa_subscription_event_type_t t, uint32_t idx, void *userdata);
+
 static void outstanding_free(struct outstanding *o) {
     ca_assert(o);
 
@@ -192,6 +195,43 @@ static int translate_error(int error) {
     return table[error];
 }
 
+static int context_connect(ca_context *c) {
+    pa_proplist *l;
+    struct private *p;
+    int ret;
+
+    ca_return_val_if_fail(c, CA_ERROR_INVALID);
+    ca_return_val_if_fail(p = c->private, CA_ERROR_STATE);
+    ca_return_val_if_fail(p->mainloop, CA_ERROR_STATE);
+    ca_return_val_if_fail(!p->context, CA_ERROR_STATE);
+
+    if ((ret = convert_proplist(&l, c->props)) < 0) {
+        driver_destroy(c);
+        return ret;
+    }
+
+    strip_prefix(l, "canberra.");
+
+    if (!(p->context = pa_context_new_with_proplist(pa_threaded_mainloop_get_api(p->mainloop), "libcanberra", l))) {
+        pa_proplist_free(l);
+        driver_destroy(c);
+        return CA_ERROR_OOM;
+    }
+
+    pa_proplist_free(l);
+
+    pa_context_set_state_callback(p->context, context_state_cb, c);
+    pa_context_set_subscribe_callback(p->context, context_subscribe_cb, c);
+
+    if (pa_context_connect(p->context, NULL, PA_CONTEXT_NOFAIL, NULL) < 0) {
+        ret = translate_error(pa_context_errno(p->context));
+        driver_destroy(c);
+        return ret;
+    }
+
+    return CA_SUCCESS;
+}
+
 static void context_state_cb(pa_context *pc, void *userdata) {
     ca_context *c = userdata;
     pa_context_state_t state;
@@ -229,6 +269,17 @@ static void context_state_cb(pa_context *pc, void *userdata) {
         }
 
         ca_mutex_unlock(p->outstanding_mutex);
+
+        if (p->context) {
+            pa_context_disconnect(p->context);
+            pa_context_unref(p->context);
+            p->subscribed = FALSE;
+            p->context = NULL;
+        }
+
+        /* FIXME: recycle previous pa_context_proplist and restore state as much as possible? */
+        if (context_connect(c) != CA_SUCCESS)
+            return;
     }
 
     pa_threaded_mainloop_signal(p->mainloop, FALSE);
@@ -277,7 +328,6 @@ static void context_subscribe_cb(pa_context *pc, pa_subscription_event_type_t t,
 }
 
 int driver_open(ca_context *c) {
-    pa_proplist *l;
     struct private *p;
     int ret;
 
@@ -299,29 +349,8 @@ int driver_open(ca_context *c) {
         return CA_ERROR_OOM;
     }
 
-    if ((ret = convert_proplist(&l, c->props)) < 0) {
-        driver_destroy(c);
+    if ((ret = context_connect(c)) != CA_SUCCESS)
         return ret;
-    }
-
-    strip_prefix(l, "canberra.");
-
-    if (!(p->context = pa_context_new_with_proplist(pa_threaded_mainloop_get_api(p->mainloop), "libcanberra", l))) {
-        pa_proplist_free(l);
-        driver_destroy(c);
-        return CA_ERROR_OOM;
-    }
-
-    pa_proplist_free(l);
-
-    pa_context_set_state_callback(p->context, context_state_cb, c);
-    pa_context_set_subscribe_callback(p->context, context_subscribe_cb, c);
-
-    if (pa_context_connect(p->context, NULL, 0, NULL) < 0) {
-        ret = translate_error(pa_context_errno(p->context));
-        driver_destroy(c);
-        return ret;
-    }
 
     pa_threaded_mainloop_lock(p->mainloop);
 
@@ -421,14 +450,18 @@ int driver_change_props(ca_context *c, ca_proplist *changed, ca_proplist *merged
     p = PRIVATE(c);
 
     ca_return_val_if_fail(p->mainloop, CA_ERROR_STATE);
-    ca_return_val_if_fail(p->context, CA_ERROR_STATE);
+
+    pa_threaded_mainloop_lock(p->mainloop);
+
+    if (!p->context) {
+        pa_threaded_mainloop_unlock(p->mainloop);
+        return CA_ERROR_STATE; /* can be silently ignored */
+    }
 
     if ((ret = convert_proplist(&l, changed)) < 0)
         return ret;
 
     strip_prefix(l, "canberra.");
-
-    pa_threaded_mainloop_lock(p->mainloop);
 
     /* We start these asynchronously and don't care about the return
      * value */
@@ -455,12 +488,16 @@ static int subscribe(ca_context *c) {
     p = PRIVATE(c);
 
     ca_return_val_if_fail(p->mainloop, CA_ERROR_STATE);
-    ca_return_val_if_fail(p->context, CA_ERROR_STATE);
 
     if (p->subscribed)
         return CA_SUCCESS;
 
     pa_threaded_mainloop_lock(p->mainloop);
+
+    if (!p->context) {
+        pa_threaded_mainloop_unlock(p->mainloop);
+        return CA_ERROR_STATE;
+    }
 
     /* We start these asynchronously and don't care about the return
      * value */
@@ -651,17 +688,61 @@ static const pa_sample_format_t sample_type_table[] = {
     [CA_SAMPLE_U8] = PA_SAMPLE_U8
 };
 
+static const pa_channel_position_t channel_table[_CA_CHANNEL_POSITION_MAX] = {
+    [CA_CHANNEL_MONO] = PA_CHANNEL_POSITION_MONO,
+    [CA_CHANNEL_FRONT_LEFT] = PA_CHANNEL_POSITION_FRONT_LEFT,
+    [CA_CHANNEL_FRONT_RIGHT] = PA_CHANNEL_POSITION_FRONT_RIGHT,
+    [CA_CHANNEL_FRONT_CENTER] = PA_CHANNEL_POSITION_FRONT_CENTER,
+    [CA_CHANNEL_REAR_LEFT] = PA_CHANNEL_POSITION_REAR_LEFT,
+    [CA_CHANNEL_REAR_RIGHT] = PA_CHANNEL_POSITION_REAR_RIGHT,
+    [CA_CHANNEL_REAR_CENTER] = PA_CHANNEL_POSITION_REAR_CENTER,
+    [CA_CHANNEL_LFE] = PA_CHANNEL_POSITION_LFE,
+    [CA_CHANNEL_FRONT_LEFT_OF_CENTER] = PA_CHANNEL_POSITION_FRONT_LEFT_OF_CENTER,
+    [CA_CHANNEL_FRONT_RIGHT_OF_CENTER] = PA_CHANNEL_POSITION_FRONT_RIGHT_OF_CENTER,
+    [CA_CHANNEL_SIDE_LEFT] = PA_CHANNEL_POSITION_SIDE_LEFT,
+    [CA_CHANNEL_SIDE_RIGHT] = PA_CHANNEL_POSITION_SIDE_RIGHT,
+    [CA_CHANNEL_TOP_CENTER] = PA_CHANNEL_POSITION_TOP_CENTER,
+    [CA_CHANNEL_TOP_FRONT_LEFT] = PA_CHANNEL_POSITION_FRONT_LEFT,
+    [CA_CHANNEL_TOP_FRONT_RIGHT] = PA_CHANNEL_POSITION_FRONT_RIGHT,
+    [CA_CHANNEL_TOP_FRONT_CENTER] = PA_CHANNEL_POSITION_FRONT_CENTER,
+    [CA_CHANNEL_TOP_REAR_LEFT] = PA_CHANNEL_POSITION_REAR_LEFT,
+    [CA_CHANNEL_TOP_REAR_RIGHT] = PA_CHANNEL_POSITION_REAR_RIGHT,
+    [CA_CHANNEL_TOP_REAR_CENTER] = PA_CHANNEL_POSITION_TOP_REAR_CENTER
+};
+
+static ca_bool_t convert_channel_map(ca_sound_file *f, pa_channel_map *cm) {
+    const ca_channel_position_t *positions;
+    unsigned c;
+
+    ca_assert(f);
+    ca_assert(cm);
+
+    if (!(positions = ca_sound_file_get_channel_map(f)))
+        return FALSE;
+
+    cm->channels = ca_sound_file_get_nchannels(f);
+    for (c = 0; c < cm->channels; c++)
+        cm->map[c] = channel_table[positions[c]];
+
+    return TRUE;
+}
+
 int driver_play(ca_context *c, uint32_t id, ca_proplist *proplist, ca_finish_callback_t cb, void *userdata) {
     struct private *p;
     pa_proplist *l = NULL;
-    const char *n, *vol, *ct;
+    const char *n, *vol, *ct, *channel;
     char *name = NULL;
 #if defined(PA_MAJOR) && ((PA_MAJOR > 0) || (PA_MAJOR == 0 && PA_MINOR > 9) || (PA_MAJOR == 0 && PA_MINOR == 9 && PA_MICRO >= 15))
     pa_volume_t v = (pa_volume_t) -1;
 #else
     pa_volume_t v = PA_VOLUME_NORM;
 #endif
+    ca_bool_t volume_set = FALSE;
+    pa_cvolume cvol;
     pa_sample_spec ss;
+    pa_channel_map cm;
+    pa_channel_position_t position = PA_CHANNEL_POSITION_INVALID;
+    ca_bool_t cm_good;
     ca_cache_control_t cache_control = CA_CACHE_CONTROL_NEVER;
     struct outstanding *out = NULL;
     int try = 3;
@@ -677,7 +758,6 @@ int driver_play(ca_context *c, uint32_t id, ca_proplist *proplist, ca_finish_cal
     p = PRIVATE(c);
 
     ca_return_val_if_fail(p->mainloop, CA_ERROR_STATE);
-    ca_return_val_if_fail(p->context, CA_ERROR_STATE);
 
     if (!(out = ca_new0(struct outstanding, 1))) {
         ret = CA_ERROR_OOM;
@@ -712,6 +792,7 @@ int driver_play(ca_context *c, uint32_t id, ca_proplist *proplist, ca_finish_cal
         }
 
         v = pa_sw_volume_from_dB(dvol);
+        volume_set = TRUE;
     }
 
     if ((ct = pa_proplist_gets(l, CA_PROP_CANBERRA_CACHE_CONTROL)))
@@ -720,17 +801,38 @@ int driver_play(ca_context *c, uint32_t id, ca_proplist *proplist, ca_finish_cal
             goto finish;
         }
 
+    if ((channel = pa_proplist_gets(l, CA_PROP_CANBERRA_FORCE_CHANNEL))) {
+        pa_channel_map t;
+
+        if (!pa_channel_map_parse(&t, channel) ||
+            t.channels != 1) {
+            ret = CA_ERROR_INVALID;
+            goto finish;
+        }
+
+        position = t.map[0];
+
+        /* We cannot remap cached samples, so let's fail when cacheing
+         * shall be used */
+        if (cache_control != CA_CACHE_CONTROL_NEVER) {
+            ret = CA_ERROR_NOTSUPPORTED;
+            goto finish;
+        }
+    }
+
     strip_prefix(l, "canberra.");
     add_common(l);
 
     if ((ret = subscribe(c)) < 0)
         goto finish;
 
-    if (name) {
+    if (name && cache_control != CA_CACHE_CONTROL_NEVER) {
 
         /* Ok, this sample has an event id, let's try to play it from the cache */
 
         for (;;) {
+            ca_bool_t canceled;
+
             pa_threaded_mainloop_lock(p->mainloop);
 
             /* Let's try to play the sample */
@@ -740,16 +842,35 @@ int driver_play(ca_context *c, uint32_t id, ca_proplist *proplist, ca_finish_cal
                 goto finish;
             }
 
-            while (pa_operation_get_state(o) != PA_OPERATION_DONE)
+            for (;;) {
+                pa_operation_state_t state = pa_operation_get_state(o);
+
+                if (state == PA_OPERATION_DONE) {
+                    canceled = FALSE;
+                    break;
+                } else if (state == PA_OPERATION_CANCELED) {
+                    canceled = TRUE;
+                    break;
+                }
+
                 pa_threaded_mainloop_wait(p->mainloop);
+            }
 
             pa_operation_unref(o);
 
             pa_threaded_mainloop_unlock(p->mainloop);
 
-            /* Did we manage to play the sample or did some other error occur? */
-            if (out->error != CA_ERROR_NOTFOUND)
+            /* The operation might have been canceled due to connection termination */
+            if (canceled) {
+                ret = CA_ERROR_DISCONNECTED;
                 goto finish;
+            }
+
+            /* Did we manage to play the sample or did some other error occur? */
+            if (out->error != CA_ERROR_NOTFOUND) {
+                ret = out->error;
+                goto finish;
+            }
 
             /* Hmm, we need to play it directly */
             if (cache_control != CA_CACHE_CONTROL_PERMANENT)
@@ -781,6 +902,18 @@ int driver_play(ca_context *c, uint32_t id, ca_proplist *proplist, ca_finish_cal
     ss.channels = (uint8_t) ca_sound_file_get_nchannels(out->file);
     ss.rate = ca_sound_file_get_rate(out->file);
 
+    if (position != PA_CHANNEL_POSITION_INVALID) {
+        unsigned u;
+        /* Apply canberra.force_channel */
+
+        cm.channels = ss.channels;
+        for (u = 0; u < cm.channels; u++)
+            cm.map[u] = position;
+
+        cm_good = TRUE;
+    } else
+        cm_good = convert_channel_map(out->file, &cm);
+
     if (!name) {
         if (!(n = pa_proplist_gets(l, CA_PROP_MEDIA_NAME)))
             if (!(n = pa_proplist_gets(l, CA_PROP_MEDIA_NAME)))
@@ -791,7 +924,7 @@ int driver_play(ca_context *c, uint32_t id, ca_proplist *proplist, ca_finish_cal
 
     pa_threaded_mainloop_lock(p->mainloop);
 
-    if (!(out->stream = pa_stream_new_with_proplist(p->context, name, &ss, NULL, l))) {
+    if (!(out->stream = pa_stream_new_with_proplist(p->context, name, &ss, cm_good ? &cm : NULL, l))) {
         ret = translate_error(pa_context_errno(p->context));
         pa_threaded_mainloop_unlock(p->mainloop);
         goto finish;
@@ -800,13 +933,17 @@ int driver_play(ca_context *c, uint32_t id, ca_proplist *proplist, ca_finish_cal
     pa_stream_set_state_callback(out->stream, stream_state_cb, out);
     pa_stream_set_write_callback(out->stream, stream_write_cb, out);
 
+    if (volume_set)
+        pa_cvolume_set(&cvol, ss.channels, v);
+
     if (pa_stream_connect_playback(out->stream, NULL, NULL,
 #ifdef PA_STREAM_FAIL_ON_SUSPEND
                                    PA_STREAM_FAIL_ON_SUSPEND
 #else
                                    0
 #endif
-                                   , NULL, NULL) < 0) {
+                                   | (position != PA_CHANNEL_POSITION_INVALID ? PA_STREAM_NO_REMIX_CHANNELS : 0)
+                                   , volume_set ? &cvol : NULL, NULL) < 0) {
         ret = translate_error(pa_context_errno(p->context));
         pa_threaded_mainloop_unlock(p->mainloop);
         goto finish;
@@ -820,8 +957,11 @@ int driver_play(ca_context *c, uint32_t id, ca_proplist *proplist, ca_finish_cal
             break;
 
         /* Check for failure */
-        if (state == PA_STREAM_FAILED) {
-            ret = translate_error(pa_context_errno(p->context));
+        if (state == PA_STREAM_FAILED) { /* it means it was disconnected */
+            if (pa_context_errno(p->context) == PA_OK) /* and context reconnected immediately */
+                ret = CA_ERROR_STATE;
+            else
+                ret = translate_error(pa_context_errno(p->context));
             pa_threaded_mainloop_unlock(p->mainloop);
             goto finish;
         }
@@ -877,9 +1017,13 @@ int driver_cancel(ca_context *c, uint32_t id) {
     p = PRIVATE(c);
 
     ca_return_val_if_fail(p->mainloop, CA_ERROR_STATE);
-    ca_return_val_if_fail(p->context, CA_ERROR_STATE);
 
     pa_threaded_mainloop_lock(p->mainloop);
+
+    if (!p->context) {
+        pa_threaded_mainloop_unlock(p->mainloop);
+        return CA_ERROR_STATE;
+    }
 
     ca_mutex_lock(p->outstanding_mutex);
 
@@ -927,6 +1071,8 @@ int driver_cache(ca_context *c, ca_proplist *proplist) {
     const char *n, *ct;
     char *name = NULL;
     pa_sample_spec ss;
+    pa_channel_map cm;
+    ca_bool_t cm_good;
     ca_cache_control_t cache_control = CA_CACHE_CONTROL_PERMANENT;
     struct outstanding *out;
     int ret;
@@ -939,7 +1085,6 @@ int driver_cache(ca_context *c, ca_proplist *proplist) {
     p = PRIVATE(c);
 
     ca_return_val_if_fail(p->mainloop, CA_ERROR_STATE);
-    ca_return_val_if_fail(p->context, CA_ERROR_STATE);
 
     if (!(out = ca_new0(struct outstanding, 1))) {
         ret = CA_ERROR_OOM;
@@ -974,6 +1119,11 @@ int driver_cache(ca_context *c, ca_proplist *proplist) {
         goto finish;
     }
 
+    if ((ct = pa_proplist_gets(l, CA_PROP_CANBERRA_FORCE_CHANNEL))) {
+        ret = CA_ERROR_NOTSUPPORTED;
+        goto finish;
+    }
+
     strip_prefix(l, "canberra.");
     strip_prefix(l, "event.mouse.");
     strip_prefix(l, "window.");
@@ -993,10 +1143,19 @@ int driver_cache(ca_context *c, ca_proplist *proplist) {
     ss.channels = (uint8_t) ca_sound_file_get_nchannels(out->file);
     ss.rate = ca_sound_file_get_rate(out->file);
 
+    cm_good = convert_channel_map(out->file, &cm);
+
     pa_threaded_mainloop_lock(p->mainloop);
 
-    if (!(out->stream = pa_stream_new_with_proplist(p->context, name, &ss, NULL, l))) {
+    if (!p->context) {
+        pa_threaded_mainloop_unlock(p->mainloop);
+        ret = CA_ERROR_STATE;
+        goto finish;
+    }
+
+    if (!(out->stream = pa_stream_new_with_proplist(p->context, name, &ss, cm_good ? &cm : NULL, l))) {
         ret = translate_error(pa_context_errno(p->context));
+
         pa_threaded_mainloop_unlock(p->mainloop);
         goto finish;
     }

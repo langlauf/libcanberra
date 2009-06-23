@@ -234,6 +234,9 @@ static int open_oss(ca_context *c, struct outstanding *out) {
     ca_return_val_if_fail(c, CA_ERROR_INVALID);
     ca_return_val_if_fail(c->private, CA_ERROR_STATE);
     ca_return_val_if_fail(out, CA_ERROR_INVALID);
+
+    /* In OSS we have no way to configure a channel mapping for
+     * multichannel streams. We cannot support those files hence */
     ca_return_val_if_fail(ca_sound_file_get_nchannels(out->file) <= 2, CA_ERROR_NOTSUPPORTED);
 
     p = PRIVATE(c);
@@ -422,6 +425,7 @@ int driver_play(ca_context *c, uint32_t id, ca_proplist *proplist, ca_finish_cal
     out->callback = cb;
     out->userdata = userdata;
     out->pipe_fd[0] = out->pipe_fd[1] = -1;
+    out->pcm = -1;
 
     if (pipe(out->pipe_fd) < 0) {
         ret = CA_ERROR_SYSTEM;

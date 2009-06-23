@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>canberra</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.74.3">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.1">
 <link rel="home" href="index.html" title="libcanberra Reference Manual">
 <link rel="up" href="ch01.html" title="libcanberra">
 <link rel="prev" href="ch01.html" title="libcanberra">
@@ -27,7 +27,7 @@
                 <a href="#libcanberra-canberra.description" class="shortcut">Description</a>
 </td></tr>
 </table>
-<div class="refentry" lang="en">
+<div class="refentry" title="canberra">
 <a name="libcanberra-canberra"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
@@ -36,7 +36,7 @@
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsynopsisdiv">
+<div class="refsynopsisdiv" title="Synopsis">
 <a name="libcanberra-canberra.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">
 #define             <a class="link" href="libcanberra-canberra.html#CA-PROP-MEDIA-NAME--CAPS" title="CA_PROP_MEDIA_NAME">CA_PROP_MEDIA_NAME</a>
@@ -126,7 +126,7 @@ int                 <a class="link" href="libcanberra-canberra.html#ca-proplist-
                                                          size_t nbytes);
 </pre>
 </div>
-<div class="refsect1" lang="en">
+<div class="refsect1" title="Description">
 <a name="libcanberra-canberra.description"></a><h2>Description</h2>
 <p>
 libcanberra defines a simple abstract interface for playing event sounds.
@@ -213,9 +213,9 @@ sound generated. For sound events based on mouse inputs events
 passed. For sound events attached to a widget on the screen, the
 <code class="literal">CA_PROP_WINDOW_xxx</code> properties should be set.</p>
 </div>
-<div class="refsect1" lang="en">
+<div class="refsect1" title="Details">
 <a name="libcanberra-canberra.details"></a><h2>Details</h2>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="CA_PROP_MEDIA_NAME">
 <a name="CA-PROP-MEDIA-NAME--CAPS"></a><h3>CA_PROP_MEDIA_NAME</h3>
 <pre class="programlisting">#define CA_PROP_MEDIA_NAME                         "media.name"
 </pre>
@@ -223,7 +223,7 @@ passed. For sound events attached to a widget on the screen, the
 A name describing the media being played. Localized if possible and applicable.</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="CA_PROP_MEDIA_TITLE">
 <a name="CA-PROP-MEDIA-TITLE--CAPS"></a><h3>CA_PROP_MEDIA_TITLE</h3>
 <pre class="programlisting">#define CA_PROP_MEDIA_TITLE                        "media.title"
 </pre>
@@ -231,7 +231,7 @@ A name describing the media being played. Localized if possible and applicable.<
 A (song) title describing the media being played. Localized if possible and applicable.</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="CA_PROP_MEDIA_ARTIST">
 <a name="CA-PROP-MEDIA-ARTIST--CAPS"></a><h3>CA_PROP_MEDIA_ARTIST</h3>
 <pre class="programlisting">#define CA_PROP_MEDIA_ARTIST                       "media.artist"
 </pre>
@@ -239,7 +239,7 @@ A (song) title describing the media being played. Localized if possible and appl
 The artist of this media. Localized if possible and applicable.</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="CA_PROP_MEDIA_LANGUAGE">
 <a name="CA-PROP-MEDIA-LANGUAGE--CAPS"></a><h3>CA_PROP_MEDIA_LANGUAGE</h3>
 <pre class="programlisting">#define CA_PROP_MEDIA_LANGUAGE                     "media.language"
 </pre>
@@ -247,7 +247,7 @@ The artist of this media. Localized if possible and applicable.</p>
 The language this media is in, in some standard POSIX locale string, such as "de_DE".</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="CA_PROP_MEDIA_FILENAME">
 <a name="CA-PROP-MEDIA-FILENAME--CAPS"></a><h3>CA_PROP_MEDIA_FILENAME</h3>
 <pre class="programlisting">#define CA_PROP_MEDIA_FILENAME                     "media.filename"
 </pre>
@@ -255,7 +255,7 @@ The language this media is in, in some standard POSIX locale string, such as "de
 The file name this media was or can be loaded from.</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="CA_PROP_MEDIA_ICON">
 <a name="CA-PROP-MEDIA-ICON--CAPS"></a><h3>CA_PROP_MEDIA_ICON</h3>
 <pre class="programlisting">#define CA_PROP_MEDIA_ICON                         "media.icon"
 </pre>
@@ -263,7 +263,7 @@ The file name this media was or can be loaded from.</p>
 An icon for this media in binary PNG format.</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="CA_PROP_MEDIA_ICON_NAME">
 <a name="CA-PROP-MEDIA-ICON-NAME--CAPS"></a><h3>CA_PROP_MEDIA_ICON_NAME</h3>
 <pre class="programlisting">#define CA_PROP_MEDIA_ICON_NAME                    "media.icon_name"
 </pre>
@@ -271,7 +271,7 @@ An icon for this media in binary PNG format.</p>
 An icon name as defined in the XDG icon naming specifcation.</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="CA_PROP_MEDIA_ROLE">
 <a name="CA-PROP-MEDIA-ROLE--CAPS"></a><h3>CA_PROP_MEDIA_ROLE</h3>
 <pre class="programlisting">#define CA_PROP_MEDIA_ROLE                         "media.role"
 </pre>
@@ -280,7 +280,7 @@ The "role" this media is played in. For event sounds the string
 "event". For other cases strings like "music", "video", "game", ...</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="CA_PROP_EVENT_ID">
 <a name="CA-PROP-EVENT-ID--CAPS"></a><h3>CA_PROP_EVENT_ID</h3>
 <pre class="programlisting">#define CA_PROP_EVENT_ID                           "event.id"
 </pre>
@@ -288,7 +288,7 @@ The "role" this media is played in. For event sounds the string
 A textual id for an event sound, as mandated by the XDG sound naming specification.</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="CA_PROP_EVENT_DESCRIPTION">
 <a name="CA-PROP-EVENT-DESCRIPTION--CAPS"></a><h3>CA_PROP_EVENT_DESCRIPTION</h3>
 <pre class="programlisting">#define CA_PROP_EVENT_DESCRIPTION                  "event.description"
 </pre>
@@ -296,7 +296,7 @@ A textual id for an event sound, as mandated by the XDG sound naming specificati
 A descriptive string for the sound event. Localized if possible and applicable.</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="CA_PROP_EVENT_MOUSE_X">
 <a name="CA-PROP-EVENT-MOUSE-X--CAPS"></a><h3>CA_PROP_EVENT_MOUSE_X</h3>
 <pre class="programlisting">#define CA_PROP_EVENT_MOUSE_X                      "event.mouse.x"
 </pre>
@@ -305,7 +305,7 @@ If this sound event was triggered by a mouse input event, the X
 position of the mouse cursor on the screen, formatted as string.</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="CA_PROP_EVENT_MOUSE_Y">
 <a name="CA-PROP-EVENT-MOUSE-Y--CAPS"></a><h3>CA_PROP_EVENT_MOUSE_Y</h3>
 <pre class="programlisting">#define CA_PROP_EVENT_MOUSE_Y                      "event.mouse.y"
 </pre>
@@ -314,7 +314,7 @@ If this sound event was triggered by a mouse input event, the Y
 position of the mouse cursor on the screen, formatted as string.</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="CA_PROP_EVENT_MOUSE_HPOS">
 <a name="CA-PROP-EVENT-MOUSE-HPOS--CAPS"></a><h3>CA_PROP_EVENT_MOUSE_HPOS</h3>
 <pre class="programlisting">#define CA_PROP_EVENT_MOUSE_HPOS                   "event.mouse.hpos"
 </pre>
@@ -325,7 +325,7 @@ formatted as string, 0 reflecting the left side of the screen, 1
 the right side.</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="CA_PROP_EVENT_MOUSE_VPOS">
 <a name="CA-PROP-EVENT-MOUSE-VPOS--CAPS"></a><h3>CA_PROP_EVENT_MOUSE_VPOS</h3>
 <pre class="programlisting">#define CA_PROP_EVENT_MOUSE_VPOS                   "event.mouse.vpos"
 </pre>
@@ -336,7 +336,7 @@ formatted as string, 0 reflecting the top end of the screen, 1
 the bottom end.</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="CA_PROP_EVENT_MOUSE_BUTTON">
 <a name="CA-PROP-EVENT-MOUSE-BUTTON--CAPS"></a><h3>CA_PROP_EVENT_MOUSE_BUTTON</h3>
 <pre class="programlisting">#define CA_PROP_EVENT_MOUSE_BUTTON                 "event.mouse.button"
 </pre>
@@ -346,7 +346,7 @@ number of the mouse button that triggered it, formatted as string. 1
 for left mouse button, 3 for right, 2 for middle.</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="CA_PROP_WINDOW_NAME">
 <a name="CA-PROP-WINDOW-NAME--CAPS"></a><h3>CA_PROP_WINDOW_NAME</h3>
 <pre class="programlisting">#define CA_PROP_WINDOW_NAME                        "window.name"
 </pre>
@@ -355,7 +355,7 @@ If this sound event was triggered by a window on the screen, the
 name of this window as human readable string.</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="CA_PROP_WINDOW_ID">
 <a name="CA-PROP-WINDOW-ID--CAPS"></a><h3>CA_PROP_WINDOW_ID</h3>
 <pre class="programlisting">#define CA_PROP_WINDOW_ID                          "window.id"
 </pre>
@@ -365,7 +365,7 @@ identification string for this window, so that the sound system can
 recognize specific windows.</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="CA_PROP_WINDOW_ICON">
 <a name="CA-PROP-WINDOW-ICON--CAPS"></a><h3>CA_PROP_WINDOW_ICON</h3>
 <pre class="programlisting">#define CA_PROP_WINDOW_ICON                        "window.icon"
 </pre>
@@ -374,7 +374,7 @@ If this sound event was triggered by a window on the screen, binary
 icon data in PNG format for this window.</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="CA_PROP_WINDOW_ICON_NAME">
 <a name="CA-PROP-WINDOW-ICON-NAME--CAPS"></a><h3>CA_PROP_WINDOW_ICON_NAME</h3>
 <pre class="programlisting">#define CA_PROP_WINDOW_ICON_NAME                   "window.icon_name"
 </pre>
@@ -384,7 +384,7 @@ icon name for this window, as defined in the XDG icon naming
 specification.</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="CA_PROP_WINDOW_X11_DISPLAY">
 <a name="CA-PROP-WINDOW-X11-DISPLAY--CAPS"></a><h3>CA_PROP_WINDOW_X11_DISPLAY</h3>
 <pre class="programlisting">#define CA_PROP_WINDOW_X11_DISPLAY                 "window.x11.display"
 </pre>
@@ -393,7 +393,7 @@ If this sound event was triggered by a window on the screen and the
 windowing system is X11, the X display name of the window (e.g. ":0").</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="CA_PROP_WINDOW_X11_SCREEN">
 <a name="CA-PROP-WINDOW-X11-SCREEN--CAPS"></a><h3>CA_PROP_WINDOW_X11_SCREEN</h3>
 <pre class="programlisting">#define CA_PROP_WINDOW_X11_SCREEN                  "window.x11.screen"
 </pre>
@@ -403,7 +403,7 @@ windowing system is X11, the X screen id of the window formatted as
 string (e.g. "0").</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="CA_PROP_WINDOW_X11_MONITOR">
 <a name="CA-PROP-WINDOW-X11-MONITOR--CAPS"></a><h3>CA_PROP_WINDOW_X11_MONITOR</h3>
 <pre class="programlisting">#define CA_PROP_WINDOW_X11_MONITOR                 "window.x11.monitor"
 </pre>
@@ -413,7 +413,7 @@ windowing system is X11, the X monitor id of the window formatted as
 string (e.g. "0").</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="CA_PROP_WINDOW_X11_XID">
 <a name="CA-PROP-WINDOW-X11-XID--CAPS"></a><h3>CA_PROP_WINDOW_X11_XID</h3>
 <pre class="programlisting">#define CA_PROP_WINDOW_X11_XID                     "window.x11.xid"
 </pre>
@@ -422,7 +422,7 @@ If this sound event was triggered by a window on the screen and the
 windowing system is X11, the XID of the window formatted as string.</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="CA_PROP_APPLICATION_NAME">
 <a name="CA-PROP-APPLICATION-NAME--CAPS"></a><h3>CA_PROP_APPLICATION_NAME</h3>
 <pre class="programlisting">#define CA_PROP_APPLICATION_NAME                   "application.name"
 </pre>
@@ -432,7 +432,7 @@ human readable string. (e.g. "GNU Emacs") Localized if possible and
 applicable.</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="CA_PROP_APPLICATION_ID">
 <a name="CA-PROP-APPLICATION-ID--CAPS"></a><h3>CA_PROP_APPLICATION_ID</h3>
 <pre class="programlisting">#define CA_PROP_APPLICATION_ID                     "application.id"
 </pre>
@@ -441,7 +441,7 @@ An identifier for the program this sound event was triggered
 by. (e.g. "org.gnu.emacs").</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="CA_PROP_APPLICATION_VERSION">
 <a name="CA-PROP-APPLICATION-VERSION--CAPS"></a><h3>CA_PROP_APPLICATION_VERSION</h3>
 <pre class="programlisting">#define CA_PROP_APPLICATION_VERSION                "application.version"
 </pre>
@@ -450,7 +450,7 @@ A version number for the program this sound event was triggered
 by. (e.g. "22.2")</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="CA_PROP_APPLICATION_ICON">
 <a name="CA-PROP-APPLICATION-ICON--CAPS"></a><h3>CA_PROP_APPLICATION_ICON</h3>
 <pre class="programlisting">#define CA_PROP_APPLICATION_ICON                   "application.icon"
 </pre>
@@ -459,7 +459,7 @@ Binary icon data in PNG format for the application this sound event
 is triggered by.</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="CA_PROP_APPLICATION_ICON_NAME">
 <a name="CA-PROP-APPLICATION-ICON-NAME--CAPS"></a><h3>CA_PROP_APPLICATION_ICON_NAME</h3>
 <pre class="programlisting">#define CA_PROP_APPLICATION_ICON_NAME              "application.icon_name"
 </pre>
@@ -468,7 +468,7 @@ An icon name for the application this sound event is triggered by,
 as defined in the XDG icon naming specification.</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="CA_PROP_APPLICATION_LANGUAGE">
 <a name="CA-PROP-APPLICATION-LANGUAGE--CAPS"></a><h3>CA_PROP_APPLICATION_LANGUAGE</h3>
 <pre class="programlisting">#define CA_PROP_APPLICATION_LANGUAGE               "application.language"
 </pre>
@@ -477,7 +477,7 @@ The locale string the application that is triggering this sound
 event is running in. A POSIX locale string such as de_DE<em class="parameter"><code>euro</code></em>.</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="CA_PROP_APPLICATION_PROCESS_ID">
 <a name="CA-PROP-APPLICATION-PROCESS-ID--CAPS"></a><h3>CA_PROP_APPLICATION_PROCESS_ID</h3>
 <pre class="programlisting">#define CA_PROP_APPLICATION_PROCESS_ID             "application.process.id"
 </pre>
@@ -485,7 +485,7 @@ event is running in. A POSIX locale string such as de_DE<em class="parameter"><c
 The unix PID of the process that is triggering this sound event, formatted as string.</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="CA_PROP_APPLICATION_PROCESS_BINARY">
 <a name="CA-PROP-APPLICATION-PROCESS-BINARY--CAPS"></a><h3>CA_PROP_APPLICATION_PROCESS_BINARY</h3>
 <pre class="programlisting">#define CA_PROP_APPLICATION_PROCESS_BINARY         "application.process.binary"
 </pre>
@@ -493,7 +493,7 @@ The unix PID of the process that is triggering this sound event, formatted as st
 The path to the process binary of the process that is triggering this sound event.</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="CA_PROP_APPLICATION_PROCESS_USER">
 <a name="CA-PROP-APPLICATION-PROCESS-USER--CAPS"></a><h3>CA_PROP_APPLICATION_PROCESS_USER</h3>
 <pre class="programlisting">#define CA_PROP_APPLICATION_PROCESS_USER           "application.process.user"
 </pre>
@@ -501,7 +501,7 @@ The path to the process binary of the process that is triggering this sound even
 The user that owns the process that is triggering this sound event.</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="CA_PROP_APPLICATION_PROCESS_HOST">
 <a name="CA-PROP-APPLICATION-PROCESS-HOST--CAPS"></a><h3>CA_PROP_APPLICATION_PROCESS_HOST</h3>
 <pre class="programlisting">#define CA_PROP_APPLICATION_PROCESS_HOST           "application.process.host"
 </pre>
@@ -509,7 +509,7 @@ The user that owns the process that is triggering this sound event.</p>
 The host name of the host the process that is triggering this sound event runs on.</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="CA_PROP_CANBERRA_CACHE_CONTROL">
 <a name="CA-PROP-CANBERRA-CACHE-CONTROL--CAPS"></a><h3>CA_PROP_CANBERRA_CACHE_CONTROL</h3>
 <pre class="programlisting">#define CA_PROP_CANBERRA_CACHE_CONTROL             "canberra.cache-control"
 </pre>
@@ -535,7 +535,7 @@ If the list of properties is handed on to the sound server this
 property is stripped from it.</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="CA_PROP_CANBERRA_VOLUME">
 <a name="CA-PROP-CANBERRA-VOLUME--CAPS"></a><h3>CA_PROP_CANBERRA_VOLUME</h3>
 <pre class="programlisting">#define CA_PROP_CANBERRA_VOLUME                    "canberra.volume"
 </pre>
@@ -550,7 +550,7 @@ If the list of properties is handed on to the sound server this
 property is stripped from it.</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="CA_PROP_CANBERRA_XDG_THEME_NAME">
 <a name="CA-PROP-CANBERRA-XDG-THEME-NAME--CAPS"></a><h3>CA_PROP_CANBERRA_XDG_THEME_NAME</h3>
 <pre class="programlisting">#define CA_PROP_CANBERRA_XDG_THEME_NAME            "canberra.xdg-theme.name"
 </pre>
@@ -563,7 +563,7 @@ If the list of properties is handed on to the sound server this
 property is stripped from it.</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="CA_PROP_CANBERRA_XDG_THEME_OUTPUT_PROFILE">
 <a name="CA-PROP-CANBERRA-XDG-THEME-OUTPUT-PROFILE--CAPS"></a><h3>CA_PROP_CANBERRA_XDG_THEME_OUTPUT_PROFILE</h3>
 <pre class="programlisting">#define CA_PROP_CANBERRA_XDG_THEME_OUTPUT_PROFILE  "canberra.xdg-theme.output-profile"
 </pre>
@@ -576,7 +576,7 @@ If the list of properties is handed on to the sound server this
 property is stripped from it.</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="ca_context">
 <a name="ca-context"></a><h3>ca_context</h3>
 <pre class="programlisting">typedef struct ca_context ca_context;
 </pre>
@@ -584,7 +584,7 @@ property is stripped from it.</p>
 A libcanberra context object.</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="ca_finish_callback_t ()">
 <a name="ca-finish-callback-t"></a><h3>ca_finish_callback_t ()</h3>
 <pre class="programlisting">void                (*ca_finish_callback_t)             (<a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context">ca_context</a> *c,
                                                          uint32_t id,
@@ -625,7 +625,7 @@ used to asynchronously signal some kind of notification object
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="ca_context_create ()">
 <a name="ca-context-create"></a><h3>ca_context_create ()</h3>
 <pre class="programlisting">int                 ca_context_create                   (<a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context">ca_context</a> **c);</pre>
 <p>
@@ -650,7 +650,7 @@ available call <a class="link" href="libcanberra-canberra.html#ca-context-open" 
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="ca_context_destroy ()">
 <a name="ca-context-destroy"></a><h3>ca_context_destroy ()</h3>
 <pre class="programlisting">int                 ca_context_destroy                  (<a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context">ca_context</a> *c);</pre>
 <p>
@@ -672,7 +672,7 @@ Destroy a (connected or unconnected) context object.</p>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="ca_context_open ()">
 <a name="ca-context-open"></a><h3>ca_context_open ()</h3>
 <pre class="programlisting">int                 ca_context_open                     (<a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context">ca_context</a> *c);</pre>
 <p>
@@ -697,7 +697,7 @@ with <a class="link" href="libcanberra-canberra.html#ca-context-change-props" ti
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="ca_context_set_driver ()">
 <a name="ca-context-set-driver"></a><h3>ca_context_set_driver ()</h3>
 <pre class="programlisting">int                 ca_context_set_driver               (<a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context">ca_context</a> *c,
                                                          const char *driver);</pre>
@@ -728,7 +728,7 @@ the specified driver backend is not available. Use
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="ca_context_change_device ()">
 <a name="ca-context-change-device"></a><h3>ca_context_change_device ()</h3>
 <pre class="programlisting">int                 ca_context_change_device            (<a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context">ca_context</a> *c,
                                                          const char *device);</pre>
@@ -763,7 +763,7 @@ currently playing event sounds to be moved to the new device..</p>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="ca_context_change_props ()">
 <a name="ca-context-change-props"></a><h3>ca_context_change_props ()</h3>
 <pre class="programlisting">int                 ca_context_change_props             (<a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context">ca_context</a> *c,
                                                          ...);</pre>
@@ -799,7 +799,7 @@ already been set before will be overwritten.</p>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="ca_context_change_props_full ()">
 <a name="ca-context-change-props-full"></a><h3>ca_context_change_props_full ()</h3>
 <pre class="programlisting">int                 ca_context_change_props_full        (<a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context">ca_context</a> *c,
                                                          <a class="link" href="libcanberra-canberra.html#ca-proplist" title="ca_proplist">ca_proplist</a> *p);</pre>
@@ -829,7 +829,7 @@ properties such as <a class="link" href="libcanberra-canberra.html#CA-PROP-APPLI
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="ca_context_play ()">
 <a name="ca-context-play"></a><h3>ca_context_play ()</h3>
 <pre class="programlisting">int                 ca_context_play                     (<a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context">ca_context</a> *c,
                                                          uint32_t id,
@@ -897,7 +897,7 @@ that matches the XDG sound name in <a class="link" href="libcanberra-canberra.ht
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="ca_context_play_full ()">
 <a name="ca-context-play-full"></a><h3>ca_context_play_full ()</h3>
 <pre class="programlisting">int                 ca_context_play_full                (<a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context">ca_context</a> *c,
                                                          uint32_t id,
@@ -946,7 +946,7 @@ properly.</p>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="ca_context_cancel ()">
 <a name="ca-context-cancel"></a><h3>ca_context_cancel ()</h3>
 <pre class="programlisting">int                 ca_context_cancel                   (<a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context">ca_context</a> *c,
                                                          uint32_t id);</pre>
@@ -978,7 +978,7 @@ error code.</p>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="ca_context_cache ()">
 <a name="ca-context-cache"></a><h3>ca_context_cache ()</h3>
 <pre class="programlisting">int                 ca_context_cache                    (<a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context">ca_context</a> *c,
                                                          ...);</pre>
@@ -1016,7 +1016,7 @@ will return <code class="literal">CA_ERROR_NOTSUPPORTED</code>.</p>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="ca_context_cache_full ()">
 <a name="ca-context-cache-full"></a><h3>ca_context_cache_full ()</h3>
 <pre class="programlisting">int                 ca_context_cache_full               (<a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context">ca_context</a> *c,
                                                          <a class="link" href="libcanberra-canberra.html#ca-proplist" title="ca_proplist">ca_proplist</a> *p);</pre>
@@ -1050,7 +1050,7 @@ will return CA_ERROR_NOTSUPPORTED.</p>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="ca_strerror ()">
 <a name="ca-strerror"></a><h3>ca_strerror ()</h3>
 <pre class="programlisting">const char *        ca_strerror                         (int code);</pre>
 <p>
@@ -1072,7 +1072,7 @@ Converts a numerical error code as returned by most libcanberra API functions in
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="ca_proplist">
 <a name="ca-proplist"></a><h3>ca_proplist</h3>
 <pre class="programlisting">typedef struct ca_proplist ca_proplist;
 </pre>
@@ -1080,7 +1080,7 @@ Converts a numerical error code as returned by most libcanberra API functions in
 A canberra property list object. Basically a hashtable.</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="ca_proplist_create ()">
 <a name="ca-proplist-create"></a><h3>ca_proplist_create ()</h3>
 <pre class="programlisting">int                 ca_proplist_create                  (<a class="link" href="libcanberra-canberra.html#ca-proplist" title="ca_proplist">ca_proplist</a> **p);</pre>
 <p>
@@ -1102,7 +1102,7 @@ Allocate a new empty property list.</p>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="ca_proplist_destroy ()">
 <a name="ca-proplist-destroy"></a><h3>ca_proplist_destroy ()</h3>
 <pre class="programlisting">int                 ca_proplist_destroy                 (<a class="link" href="libcanberra-canberra.html#ca-proplist" title="ca_proplist">ca_proplist</a> *p);</pre>
 <p>
@@ -1124,7 +1124,7 @@ Destroys a property list that was created with <a class="link" href="libcanberra
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="ca_proplist_sets ()">
 <a name="ca-proplist-sets"></a><h3>ca_proplist_sets ()</h3>
 <pre class="programlisting">int                 ca_proplist_sets                    (<a class="link" href="libcanberra-canberra.html#ca-proplist" title="ca_proplist">ca_proplist</a> *p,
                                                          const char *key,
@@ -1158,7 +1158,7 @@ Add a new string key/value pair to the property list.</p>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="ca_proplist_setf ()">
 <a name="ca-proplist-setf"></a><h3>ca_proplist_setf ()</h3>
 <pre class="programlisting">int                 ca_proplist_setf                    (<a class="link" href="libcanberra-canberra.html#ca-proplist" title="ca_proplist">ca_proplist</a> *p,
                                                          const char *key,
@@ -1200,7 +1200,7 @@ and formats a string of it.</p>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="ca_proplist_set ()">
 <a name="ca-proplist-set"></a><h3>ca_proplist_set ()</h3>
 <pre class="programlisting">int                 ca_proplist_set                     (<a class="link" href="libcanberra-canberra.html#ca-proplist" title="ca_proplist">ca_proplist</a> *p,
                                                          const char *key,

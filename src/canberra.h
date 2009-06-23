@@ -35,6 +35,30 @@ extern "C" {
 #endif
 
 /**
+ * CA_MAJOR:
+ *
+ * Evaluates to the major version number of libcanberra.
+ */
+#define CA_MAJOR (0)
+
+/**
+ * CA_MINOR:
+ *
+ * Evaluates to the minor version number of libcanberra.
+ */
+#define CA_MINOR (13)
+
+/**
+ * CA_CHECK_VERSION:
+ *
+ * Evaluates to TRUE when the library version is newer than the
+ * specified parameters.
+ */
+#define CA_CHECK_VERSION(major,minor)                           \
+    ((CA_MAJOR > (major)) ||                                    \
+     (CA_MAJOR == (major) && CA_MINOR >= (minor)))
+
+/**
  * CA_PROP_MEDIA_NAME:
  *
  * A name describing the media being played. Localized if possible and applicable.
@@ -367,6 +391,23 @@ extern "C" {
 #define CA_PROP_CANBERRA_ENABLE                    "canberra.enable"
 
 /**
+ * CA_PROP_CANBERRA_FORCE_CHANNEL:
+ *
+ * A special property that can be used to control on which channel a
+ * sound is played. The value should be one of mono, front-left,
+ * front-right, front-center, rear-left, rear-right, rear-center, lfe,
+ * front-left-of-center, front-right-of-center, side-left, side-right,
+ * top-center, top-front-left, top-front-right, top-front-center,
+ * top-rear-left, top-rear-right, top-rear-center. This property is
+ * only honoured by some backends, other backends may choose to ignore
+ * it completely.
+ *
+ * If the list of properties is handed on to the sound server this
+ * property is stripped from it.
+ */
+#define CA_PROP_CANBERRA_FORCE_CHANNEL             "canberra.force_channel"
+
+/**
  * ca_context:
  *
  * A libcanberra context object.
@@ -415,7 +456,8 @@ enum {
     CA_ERROR_INTERNAL = -15,
     CA_ERROR_DISABLED = -16,
     CA_ERROR_FORKED = -17,
-    _CA_ERROR_MAX = -18
+    CA_ERROR_DISCONNECTED = -18,
+    _CA_ERROR_MAX = -19
 };
 
 /**
