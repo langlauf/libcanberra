@@ -107,6 +107,9 @@ int                 <a class="link" href="libcanberra-canberra.html#ca-context-c
                                                          ...);
 int                 <a class="link" href="libcanberra-canberra.html#ca-context-cache-full" title="ca_context_cache_full ()">ca_context_cache_full</a>               (<a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context">ca_context</a> *c,
                                                          <a class="link" href="libcanberra-canberra.html#ca-proplist" title="ca_proplist">ca_proplist</a> *p);
+int                 <a class="link" href="libcanberra-canberra.html#ca-context-playing" title="ca_context_playing ()">ca_context_playing</a>                  (<a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context">ca_context</a> *c,
+                                                         uint32_t id,
+                                                         int *playing);
 
 const char *        <a class="link" href="libcanberra-canberra.html#ca-strerror" title="ca_strerror ()">ca_strerror</a>                         (int code);
 
@@ -1048,6 +1051,43 @@ will return CA_ERROR_NOTSUPPORTED.</p>
 </tr>
 </tbody>
 </table></div>
+</div>
+<hr>
+<div class="refsect2" title="ca_context_playing ()">
+<a name="ca-context-playing"></a><h3>ca_context_playing ()</h3>
+<pre class="programlisting">int                 ca_context_playing                  (<a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context">ca_context</a> *c,
+                                                         uint32_t id,
+                                                         int *playing);</pre>
+<p>
+Check if at least one sound with the specified id is still
+playing. Returns 0 in *playing if no sound with this id is playing
+anymore or non-zero if there is at least one playing.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>c</code></em> :</span></p></td>
+<td> the context to check if sound is still playing
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>id</code></em> :</span></p></td>
+<td> the id that identify the sounds to check
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>playing</code></em> :</span></p></td>
+<td> a pointer to a boolean that will be updated with the play status
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> 0 on success, negative error code on error.
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 0.16</p>
 </div>
 <hr>
 <div class="refsect2" title="ca_strerror ()">

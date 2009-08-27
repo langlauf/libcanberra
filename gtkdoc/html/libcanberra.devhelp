@@ -59,6 +59,7 @@
     <function name="ca_context_cancel ()" link="libcanberra-canberra.html#ca-context-cancel"/>
     <function name="ca_context_cache ()" link="libcanberra-canberra.html#ca-context-cache"/>
     <function name="ca_context_cache_full ()" link="libcanberra-canberra.html#ca-context-cache-full"/>
+    <function name="ca_context_playing ()" link="libcanberra-canberra.html#ca-context-playing"/>
     <function name="ca_strerror ()" link="libcanberra-canberra.html#ca-strerror"/>
     <function name="ca_proplist" link="libcanberra-canberra.html#ca-proplist"/>
     <function name="ca_proplist_create ()" link="libcanberra-canberra.html#ca-proplist-create"/>

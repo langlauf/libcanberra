@@ -59,6 +59,7 @@
     <keyword type="function" name="ca_context_cancel ()" link="libcanberra-canberra.html#ca-context-cancel"/>
     <keyword type="function" name="ca_context_cache ()" link="libcanberra-canberra.html#ca-context-cache"/>
     <keyword type="function" name="ca_context_cache_full ()" link="libcanberra-canberra.html#ca-context-cache-full"/>
+    <keyword type="function" name="ca_context_playing ()" link="libcanberra-canberra.html#ca-context-playing" since="0.16"/>
     <keyword type="function" name="ca_strerror ()" link="libcanberra-canberra.html#ca-strerror"/>
     <keyword type="typedef" name="ca_proplist" link="libcanberra-canberra.html#ca-proplist"/>
     <keyword type="function" name="ca_proplist_create ()" link="libcanberra-canberra.html#ca-proplist-create"/>
