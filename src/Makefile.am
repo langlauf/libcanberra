@@ -24,6 +24,8 @@ gnomeshutdowndir = $(datadir)/gnome/shutdown
 
 gnomeautostartdir = $(datadir)/gnome/autostart
 
+gdmautostartdir = $(datadir)/gdm/autostart/LoginWindow/
+
 AM_CFLAGS = $(PTHREAD_CFLAGS) -DCA_PLUGIN_PATH=\"$(plugindir)\"
 AM_CXXFLAGS = $(PTHREAD_CFLAGS)
 AM_LDADD = $(PTHREAD_LIBS)
@@ -316,16 +318,21 @@ canberra_gtk_play_CFLAGS = \
 
 EXTRA_DIST += \
 	libcanberra-login-sound.desktop.in \
+	libcanberra-ready-sound.desktop.in \
 	libcanberra-logout-sound.sh.in
 
 gnomeautostart_DATA = \
 	libcanberra-login-sound.desktop
+
+gdmautostart_DATA = \
+	libcanberra-ready-sound.desktop
 
 gnomeshutdown_SCRIPTS = \
 	libcanberra-logout-sound.sh
 
 CLEANFILES = \
 	libcanberra-login-sound.desktop \
+	libcanberra-ready-sound.desktop \
 	libcanberra-logout-sound.sh
 
 libcanberra-logout-sound.sh: libcanberra-logout-sound.sh.in Makefile
@@ -333,6 +340,9 @@ libcanberra-logout-sound.sh: libcanberra-logout-sound.sh.in Makefile
 	chmod +x $@
 
 libcanberra-login-sound.desktop: libcanberra-login-sound.desktop.in Makefile
+	sed -e 's,@bindir\@,$(bindir),g' < $< > $@
+
+libcanberra-ready-sound.desktop: libcanberra-ready-sound.desktop.in Makefile
 	sed -e 's,@bindir\@,$(bindir),g' < $< > $@
 
 endif

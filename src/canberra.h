@@ -46,7 +46,7 @@ extern "C" {
  *
  * Evaluates to the minor version number of libcanberra.
  */
-#define CA_MINOR (16)
+#define CA_MINOR (17)
 
 /**
  * CA_CHECK_VERSION:
@@ -207,6 +207,72 @@ extern "C" {
  * specification.
  */
 #define CA_PROP_WINDOW_ICON_NAME                   "window.icon_name"
+
+/**
+ * CA_PROP_WINDOW_X:
+ *
+ * If this sound event was triggered by a window on the screen, the X
+ * position of the window measured from the top left corner of the
+ * screen to the top left corner of the window.
+ *
+ * Since: 0.17
+ */
+#define CA_PROP_WINDOW_X                           "window.x"
+
+/**
+ * CA_PROP_WINDOW_Y:
+ *
+ * If this sound event was triggered by a window on the screen, the y
+ * position of the window measured from the top left corner of the
+ * screen to the top left corner of the window.
+ *
+ * Since: 0.17
+ */
+#define CA_PROP_WINDOW_Y                           "window.y"
+
+/**
+ * CA_PROP_WINDOW_WIDTH:
+ *
+ * If this sound event was triggered by a window on the screen, the
+ * pixel width of the window.
+ *
+ * Since: 0.17
+ */
+#define CA_PROP_WINDOW_WIDTH                       "window.width"
+
+/**
+ * CA_PROP_WINDOW_HEIGHT:
+ *
+ * If this sound event was triggered by a window on the screen, the
+ * pixel height of the window.
+ *
+ * Since: 0.17
+ */
+#define CA_PROP_WINDOW_HEIGHT                      "window.height"
+
+/**
+ * CA_PROP_WINDOW_HPOS:
+ *
+ * If this sound event was triggered by a window on the screen, the X
+ * position of the center of the window as fractional value between 0
+ * and 1, formatted as string, 0 reflecting the left side of the
+ * screen, 1 the right side.
+ *
+ * Since: 0.17
+ */
+#define CA_PROP_WINDOW_HPOS                        "window.hpos"
+
+/**
+ * CA_PROP_WINDOW_VPOS:
+ *
+ * If this sound event was triggered by a window on the screen, the Y
+ * position of the center of the window as fractional value between 0
+ * and 1, formatted as string, 0 reflecting the top side of the
+ * screen, 1 the bottom side.
+ *
+ * Since: 0.17
+ */
+#define CA_PROP_WINDOW_VPOS                        "window.vpos"
 
 /**
  * CA_PROP_WINDOW_X11_DISPLAY:

@@ -53,6 +53,7 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 @HAVE_GTK_TRUE@am__append_1 = libcanberra-gtk.pc
+@HAVE_GTK_TRUE@am__append_2 = vala/libcanberra-gtk.vapi
 subdir = .
 DIST_COMMON = README $(am__configure_deps) $(dist_doc_DATA) \
 	$(srcdir)/Makefile.am $(srcdir)/Makefile.in \
@@ -111,9 +112,9 @@ am__base_list = \
   sed '$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;s/\n/ /g' | \
   sed '$$!N;$$!N;$$!N;$$!N;s/\n/ /g'
 am__installdirs = "$(DESTDIR)$(docdir)" "$(DESTDIR)$(pkgconfigdir)" \
-	"$(DESTDIR)$(schemasdir)"
+	"$(DESTDIR)$(schemasdir)" "$(DESTDIR)$(vapidir)"
 DATA = $(dist_doc_DATA) $(noinst_DATA) $(pkgconfig_DATA) \
-	$(schemas_DATA)
+	$(schemas_DATA) $(vapi_DATA)
 RECURSIVE_CLEAN_TARGETS = mostlyclean-recursive clean-recursive	\
   distclean-recursive maintainer-clean-recursive
 AM_RECURSIVE_TARGETS = $(RECURSIVE_TARGETS:-recursive=) \
@@ -324,12 +325,21 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 dist_doc_DATA = README
-EXTRA_DIST = bootstrap.sh autogen.sh LGPL libcanberra.schemas
+EXTRA_DIST = \
+	bootstrap.sh \
+	autogen.sh \
+	LGPL \
+	libcanberra.schemas \
+	vala/libcanberra.vapi \
+	vala/libcanberra-gtk.vapi
+
 SUBDIRS = src gtkdoc doc
 MAINTAINERCLEANFILES = README
 noinst_DATA = README
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libcanberra.pc $(am__append_1)
+vapidir = $(datadir)/vala/vapi
+vapi_DATA = vala/libcanberra.vapi $(am__append_2)
 @HAVE_GTK_TRUE@schemasdir = $(GCONF_SCHEMA_FILE_DIR)
 @HAVE_GTK_TRUE@schemas_DATA = libcanberra.schemas
 DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc
@@ -462,6 +472,26 @@ uninstall-schemasDATA:
 	test -n "$$files" || exit 0; \
 	echo " ( cd '$(DESTDIR)$(schemasdir)' && rm -f" $$files ")"; \
 	cd "$(DESTDIR)$(schemasdir)" && rm -f $$files
+install-vapiDATA: $(vapi_DATA)
+	@$(NORMAL_INSTALL)
+	test -z "$(vapidir)" || $(MKDIR_P) "$(DESTDIR)$(vapidir)"
+	@list='$(vapi_DATA)'; test -n "$(vapidir)" || list=; \
+	for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  echo "$$d$$p"; \
+	done | $(am__base_list) | \
+	while read files; do \
+	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(vapidir)'"; \
+	  $(INSTALL_DATA) $$files "$(DESTDIR)$(vapidir)" || exit $$?; \
+	done
+
+uninstall-vapiDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(vapi_DATA)'; test -n "$(vapidir)" || list=; \
+	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
+	test -n "$$files" || exit 0; \
+	echo " ( cd '$(DESTDIR)$(vapidir)' && rm -f" $$files ")"; \
+	cd "$(DESTDIR)$(vapidir)" && rm -f $$files
 
 # This directory's subdirectories are mostly independent; you can cd
 # into them and run `make' without going through this Makefile.
@@ -777,7 +807,7 @@ check: check-recursive
 all-am: Makefile $(DATA) config.h
 installdirs: installdirs-recursive
 installdirs-am:
-	for dir in "$(DESTDIR)$(docdir)" "$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(schemasdir)"; do \
+	for dir in "$(DESTDIR)$(docdir)" "$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(schemasdir)" "$(DESTDIR)$(vapidir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-recursive
@@ -829,7 +859,7 @@ info: info-recursive
 info-am:
 
 install-data-am: install-data-local install-dist_docDATA \
-	install-pkgconfigDATA install-schemasDATA
+	install-pkgconfigDATA install-schemasDATA install-vapiDATA
 
 install-dvi: install-dvi-recursive
 
@@ -876,7 +906,7 @@ ps: ps-recursive
 ps-am:
 
 uninstall-am: uninstall-dist_docDATA uninstall-pkgconfigDATA \
-	uninstall-schemasDATA
+	uninstall-schemasDATA uninstall-vapiDATA
 
 .MAKE: $(RECURSIVE_CLEAN_TARGETS) $(RECURSIVE_TARGETS) all \
 	ctags-recursive install-am install-strip tags-recursive
@@ -893,12 +923,13 @@ uninstall-am: uninstall-dist_docDATA uninstall-pkgconfigDATA \
 	install-dvi-am install-exec install-exec-am install-html \
 	install-html-am install-info install-info-am install-man \
 	install-pdf install-pdf-am install-pkgconfigDATA install-ps \
-	install-ps-am install-schemasDATA install-strip installcheck \
-	installcheck-am installdirs installdirs-am maintainer-clean \
-	maintainer-clean-generic mostlyclean mostlyclean-generic \
-	mostlyclean-libtool pdf pdf-am ps ps-am tags tags-recursive \
-	uninstall uninstall-am uninstall-dist_docDATA \
-	uninstall-pkgconfigDATA uninstall-schemasDATA
+	install-ps-am install-schemasDATA install-strip \
+	install-vapiDATA installcheck installcheck-am installdirs \
+	installdirs-am maintainer-clean maintainer-clean-generic \
+	mostlyclean mostlyclean-generic mostlyclean-libtool pdf pdf-am \
+	ps ps-am tags tags-recursive uninstall uninstall-am \
+	uninstall-dist_docDATA uninstall-pkgconfigDATA \
+	uninstall-schemasDATA uninstall-vapiDATA
 
 
 @GCONF_SCHEMAS_INSTALL_TRUE@@HAVE_GTK_TRUE@install-data-local:

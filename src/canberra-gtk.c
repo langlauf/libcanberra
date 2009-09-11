@@ -61,7 +61,8 @@ static void read_sound_theme_name(ca_context *c, GtkSettings *s) {
 static void read_enable_event_sounds(ca_context *c, GtkSettings *s) {
     gboolean enable_event_sounds = TRUE;
 
-    g_object_get(G_OBJECT(s), "gtk-enable-event-sounds", &enable_event_sounds, NULL);
+    if (!g_getenv("CANBERRA_FORCE_EVENT_SOUNDS"))
+        g_object_get(G_OBJECT(s), "gtk-enable-event-sounds", &enable_event_sounds, NULL);
 
     ca_context_change_props(c, CA_PROP_CANBERRA_ENABLE, enable_event_sounds ? "1" : "0", NULL);
 }
@@ -184,6 +185,7 @@ int ca_gtk_proplist_set_for_widget(ca_proplist *p, GtkWidget *widget) {
     const char *t, *role;
     GdkWindow *dw;
     GdkScreen *screen;
+    gint x = 0, y = 0, width = 0, height = 0, screen_width = 0, screen_height = 0;
 
     ca_return_val_if_fail(p, CA_ERROR_INVALID);
     ca_return_val_if_fail(widget, CA_ERROR_INVALID);
@@ -231,6 +233,50 @@ int ca_gtk_proplist_set_for_widget(ca_proplist *p, GtkWidget *widget) {
         if (dw)
             if ((ret = ca_proplist_setf(p, CA_PROP_WINDOW_X11_MONITOR, "%i", gdk_screen_get_monitor_at_window(screen, dw))) < 0)
                 return ret;
+    }
+
+    /* FIXME, this might cause a round trip */
+
+    if (dw) {
+        gdk_window_get_origin(dw, &x, &y);
+
+        if (x >= 0)
+            if ((ret = ca_proplist_setf(p, CA_PROP_WINDOW_X, "%i", x)) < 0)
+                return ret;
+        if (y >= 0)
+            if ((ret = ca_proplist_setf(p, CA_PROP_WINDOW_Y, "%i", y)) < 0)
+                return ret;
+    }
+
+    gtk_window_get_size(w, &width, &height);
+
+    if (width > 0)
+        if ((ret = ca_proplist_setf(p, CA_PROP_WINDOW_WIDTH, "%i", width)) < 0)
+            return ret;
+    if (height > 0)
+        if ((ret = ca_proplist_setf(p, CA_PROP_WINDOW_HEIGHT, "%i", height)) < 0)
+            return ret;
+
+    if (x > 0 && width > 0) {
+        x += width/2;
+
+        screen_width = gdk_screen_get_width(gtk_widget_get_screen(GTK_WIDGET(w)));
+
+        /* We use these strange format strings here to avoid that libc
+         * applies locale information on the formatting of floating
+         * numbers. */
+
+        if ((ret = ca_proplist_setf(p, CA_PROP_WINDOW_HPOS, "%i.%03i", (int) (x/screen_width), (int) (1000.0*x/screen_width) % 1000)) < 0)
+            return ret;
+    }
+
+    if (y > 0 && height > 0) {
+        y += height/2;
+
+        screen_height = gdk_screen_get_height(gtk_widget_get_screen(GTK_WIDGET(w)));
+
+        if ((ret = ca_proplist_setf(p, CA_PROP_WINDOW_VPOS, "%i.%03i", (int) (y/screen_height), (int) (1000.0*y/screen_height) % 1000)) < 0)
+            return ret;
     }
 
     return CA_SUCCESS;

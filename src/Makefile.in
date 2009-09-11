@@ -135,6 +135,7 @@ noinst_PROGRAMS = test-canberra$(EXEEXT)
 @HAVE_GTK_TRUE@bin_PROGRAMS = canberra-gtk-play$(EXEEXT)
 @HAVE_GTK_TRUE@am__append_26 = \
 @HAVE_GTK_TRUE@	libcanberra-login-sound.desktop.in \
+@HAVE_GTK_TRUE@	libcanberra-ready-sound.desktop.in \
 @HAVE_GTK_TRUE@	libcanberra-logout-sound.sh.in
 
 subdir = src
@@ -175,7 +176,7 @@ am__base_list = \
   sed '$$!N;$$!N;$$!N;$$!N;s/\n/ /g'
 am__installdirs = "$(DESTDIR)$(gtkmoduledir)" "$(DESTDIR)$(libdir)" \
 	"$(DESTDIR)$(plugindir)" "$(DESTDIR)$(bindir)" \
-	"$(DESTDIR)$(gnomeshutdowndir)" \
+	"$(DESTDIR)$(gnomeshutdowndir)" "$(DESTDIR)$(gdmautostartdir)" \
 	"$(DESTDIR)$(gnomeautostartdir)" "$(DESTDIR)$(includedir)"
 LTLIBRARIES = $(gtkmodule_LTLIBRARIES) $(lib_LTLIBRARIES) \
 	$(plugin_LTLIBRARIES)
@@ -381,7 +382,7 @@ DIST_SOURCES = $(am__libcanberra_alsa_la_SOURCES_DIST) \
 	$(am__libcanberra_pulse_la_SOURCES_DIST) \
 	$(am__libcanberra_la_SOURCES_DIST) \
 	$(am__canberra_gtk_play_SOURCES_DIST) $(test_canberra_SOURCES)
-DATA = $(gnomeautostart_DATA)
+DATA = $(gdmautostart_DATA) $(gnomeautostart_DATA)
 am__include_HEADERS_DIST = canberra.h canberra-gtk.h
 HEADERS = $(include_HEADERS)
 ETAGS = etags
@@ -556,6 +557,7 @@ gtkmoduledir = @GTK_MODULES_DIR@
 plugindir = $(libdir)/libcanberra-@PACKAGE_VERSION@
 gnomeshutdowndir = $(datadir)/gnome/shutdown
 gnomeautostartdir = $(datadir)/gnome/autostart
+gdmautostartdir = $(datadir)/gdm/autostart/LoginWindow/
 AM_CFLAGS = $(PTHREAD_CFLAGS) -DCA_PLUGIN_PATH=\"$(plugindir)\"
 AM_CXXFLAGS = $(PTHREAD_CFLAGS)
 AM_LDADD = $(PTHREAD_LIBS)
@@ -737,11 +739,15 @@ plugin_LTLIBRARIES = $(am__append_7) $(am__append_11) $(am__append_15) \
 @HAVE_GTK_TRUE@gnomeautostart_DATA = \
 @HAVE_GTK_TRUE@	libcanberra-login-sound.desktop
 
+@HAVE_GTK_TRUE@gdmautostart_DATA = \
+@HAVE_GTK_TRUE@	libcanberra-ready-sound.desktop
+
 @HAVE_GTK_TRUE@gnomeshutdown_SCRIPTS = \
 @HAVE_GTK_TRUE@	libcanberra-logout-sound.sh
 
 @HAVE_GTK_TRUE@CLEANFILES = \
 @HAVE_GTK_TRUE@	libcanberra-login-sound.desktop \
+@HAVE_GTK_TRUE@	libcanberra-ready-sound.desktop \
 @HAVE_GTK_TRUE@	libcanberra-logout-sound.sh
 
 test_canberra_SOURCES = \
@@ -1279,6 +1285,26 @@ mostlyclean-libtool:
 
 clean-libtool:
 	-rm -rf .libs _libs
+install-gdmautostartDATA: $(gdmautostart_DATA)
+	@$(NORMAL_INSTALL)
+	test -z "$(gdmautostartdir)" || $(MKDIR_P) "$(DESTDIR)$(gdmautostartdir)"
+	@list='$(gdmautostart_DATA)'; test -n "$(gdmautostartdir)" || list=; \
+	for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  echo "$$d$$p"; \
+	done | $(am__base_list) | \
+	while read files; do \
+	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(gdmautostartdir)'"; \
+	  $(INSTALL_DATA) $$files "$(DESTDIR)$(gdmautostartdir)" || exit $$?; \
+	done
+
+uninstall-gdmautostartDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(gdmautostart_DATA)'; test -n "$(gdmautostartdir)" || list=; \
+	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
+	test -n "$$files" || exit 0; \
+	echo " ( cd '$(DESTDIR)$(gdmautostartdir)' && rm -f" $$files ")"; \
+	cd "$(DESTDIR)$(gdmautostartdir)" && rm -f $$files
 install-gnomeautostartDATA: $(gnomeautostart_DATA)
 	@$(NORMAL_INSTALL)
 	test -z "$(gnomeautostartdir)" || $(MKDIR_P) "$(DESTDIR)$(gnomeautostartdir)"
@@ -1409,7 +1435,7 @@ all-am: Makefile $(LTLIBRARIES) $(PROGRAMS) $(SCRIPTS) $(DATA) \
 install-binPROGRAMS: install-libLTLIBRARIES
 
 installdirs:
-	for dir in "$(DESTDIR)$(gtkmoduledir)" "$(DESTDIR)$(libdir)" "$(DESTDIR)$(plugindir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(gnomeshutdowndir)" "$(DESTDIR)$(gnomeautostartdir)" "$(DESTDIR)$(includedir)"; do \
+	for dir in "$(DESTDIR)$(gtkmoduledir)" "$(DESTDIR)$(libdir)" "$(DESTDIR)$(plugindir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(gnomeshutdowndir)" "$(DESTDIR)$(gdmautostartdir)" "$(DESTDIR)$(gnomeautostartdir)" "$(DESTDIR)$(includedir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-am
@@ -1462,7 +1488,7 @@ info: info-am
 
 info-am:
 
-install-data-am: install-gnomeautostartDATA \
+install-data-am: install-gdmautostartDATA install-gnomeautostartDATA \
 	install-gnomeshutdownSCRIPTS install-gtkmoduleLTLIBRARIES \
 	install-includeHEADERS install-pluginLTLIBRARIES
 
@@ -1510,10 +1536,10 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-binPROGRAMS uninstall-gnomeautostartDATA \
-	uninstall-gnomeshutdownSCRIPTS uninstall-gtkmoduleLTLIBRARIES \
-	uninstall-includeHEADERS uninstall-libLTLIBRARIES \
-	uninstall-pluginLTLIBRARIES
+uninstall-am: uninstall-binPROGRAMS uninstall-gdmautostartDATA \
+	uninstall-gnomeautostartDATA uninstall-gnomeshutdownSCRIPTS \
+	uninstall-gtkmoduleLTLIBRARIES uninstall-includeHEADERS \
+	uninstall-libLTLIBRARIES uninstall-pluginLTLIBRARIES
 
 .MAKE: install-am install-strip
 
@@ -1524,20 +1550,20 @@ uninstall-am: uninstall-binPROGRAMS uninstall-gnomeautostartDATA \
 	distclean-libtool distclean-tags distdir dvi dvi-am html \
 	html-am info info-am install install-am install-binPROGRAMS \
 	install-data install-data-am install-dvi install-dvi-am \
-	install-exec install-exec-am install-gnomeautostartDATA \
-	install-gnomeshutdownSCRIPTS install-gtkmoduleLTLIBRARIES \
-	install-html install-html-am install-includeHEADERS \
-	install-info install-info-am install-libLTLIBRARIES \
-	install-man install-pdf install-pdf-am \
+	install-exec install-exec-am install-gdmautostartDATA \
+	install-gnomeautostartDATA install-gnomeshutdownSCRIPTS \
+	install-gtkmoduleLTLIBRARIES install-html install-html-am \
+	install-includeHEADERS install-info install-info-am \
+	install-libLTLIBRARIES install-man install-pdf install-pdf-am \
 	install-pluginLTLIBRARIES install-ps install-ps-am \
 	install-strip installcheck installcheck-am installdirs \
 	maintainer-clean maintainer-clean-generic mostlyclean \
 	mostlyclean-compile mostlyclean-generic mostlyclean-libtool \
 	pdf pdf-am ps ps-am tags uninstall uninstall-am \
-	uninstall-binPROGRAMS uninstall-gnomeautostartDATA \
-	uninstall-gnomeshutdownSCRIPTS uninstall-gtkmoduleLTLIBRARIES \
-	uninstall-includeHEADERS uninstall-libLTLIBRARIES \
-	uninstall-pluginLTLIBRARIES
+	uninstall-binPROGRAMS uninstall-gdmautostartDATA \
+	uninstall-gnomeautostartDATA uninstall-gnomeshutdownSCRIPTS \
+	uninstall-gtkmoduleLTLIBRARIES uninstall-includeHEADERS \
+	uninstall-libLTLIBRARIES uninstall-pluginLTLIBRARIES
 
 
 @HAVE_GTK_TRUE@libcanberra-logout-sound.sh: libcanberra-logout-sound.sh.in Makefile
@@ -1545,6 +1571,9 @@ uninstall-am: uninstall-binPROGRAMS uninstall-gnomeautostartDATA \
 @HAVE_GTK_TRUE@	chmod +x $@
 
 @HAVE_GTK_TRUE@libcanberra-login-sound.desktop: libcanberra-login-sound.desktop.in Makefile
+@HAVE_GTK_TRUE@	sed -e 's,@bindir\@,$(bindir),g' < $< > $@
+
+@HAVE_GTK_TRUE@libcanberra-ready-sound.desktop: libcanberra-ready-sound.desktop.in Makefile
 @HAVE_GTK_TRUE@	sed -e 's,@bindir\@,$(bindir),g' < $< > $@
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
