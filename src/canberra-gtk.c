@@ -137,21 +137,20 @@ ca_context *ca_gtk_context_get_for_screen(GdkScreen *screen) {
     ca_context_change_props_full(c, p);
     ca_proplist_destroy(p);
 
-    s = gtk_settings_get_for_screen(screen);
+    if ((s = gtk_settings_get_for_screen(screen))) {
 
-    ca_return_val_if_fail(s, NULL);
+        if (g_object_class_find_property(G_OBJECT_GET_CLASS(s), "gtk-sound-theme-name")) {
+            g_signal_connect(G_OBJECT(s), "notify::gtk-sound-theme-name", G_CALLBACK(sound_theme_name_changed), c);
+            read_sound_theme_name(c, s);
+        } else
+            g_debug("This Gtk+ version doesn't have the GtkSettings::gtk-sound-theme-name property.");
 
-    if (g_object_class_find_property(G_OBJECT_GET_CLASS(s), "gtk-sound-theme-name")) {
-        g_signal_connect(G_OBJECT(s), "notify::gtk-sound-theme-name", G_CALLBACK(sound_theme_name_changed), c);
-        read_sound_theme_name(c, s);
-    } else
-        g_debug("This Gtk+ version doesn't have the GtkSettings::gtk-sound-theme-name property.");
-
-    if (g_object_class_find_property(G_OBJECT_GET_CLASS(s), "gtk-enable-event-sounds")) {
-        g_signal_connect(G_OBJECT(s), "notify::gtk-enable-event-sounds", G_CALLBACK(enable_event_sounds_changed), c);
-        read_enable_event_sounds(c, s);
-    } else
-        g_debug("This Gtk+ version doesn't have the GtkSettings::gtk-enable-event-sounds property.");
+        if (g_object_class_find_property(G_OBJECT_GET_CLASS(s), "gtk-enable-event-sounds")) {
+            g_signal_connect(G_OBJECT(s), "notify::gtk-enable-event-sounds", G_CALLBACK(enable_event_sounds_changed), c);
+            read_enable_event_sounds(c, s);
+        } else
+            g_debug("This Gtk+ version doesn't have the GtkSettings::gtk-enable-event-sounds property.");
+    }
 
     g_object_set_data_full(G_OBJECT(screen), "canberra::gtk::context", c, (GDestroyNotify) ca_context_destroy);
 
@@ -377,10 +376,10 @@ int ca_gtk_proplist_set_for_event(ca_proplist *p, GdkEvent *e) {
              * libc applies locale information on the formatting of
              * floating numbers. */
 
-            if ((ret = ca_proplist_setf(p, CA_PROP_EVENT_MOUSE_HPOS, "%i.%03i", (int) (x/width), (int) (1000.0*x/width) % 1000)) < 0)
+            if ((ret = ca_proplist_setf(p, CA_PROP_EVENT_MOUSE_HPOS, "%i.%03i", (int) (x/(width-1)), (int) (1000.0*x/(width-1)) % 1000)) < 0)
                 return ret;
 
-            if ((ret = ca_proplist_setf(p, CA_PROP_EVENT_MOUSE_VPOS, "%i.%03i", (int) (y/height), (int) (1000.0*y/height) % 1000)) < 0)
+            if ((ret = ca_proplist_setf(p, CA_PROP_EVENT_MOUSE_VPOS, "%i.%03i", (int) (y/(height-1)), (int) (1000.0*y/(height-1)) % 1000)) < 0)
                 return ret;
         }
     }

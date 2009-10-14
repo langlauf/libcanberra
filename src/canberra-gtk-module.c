@@ -392,6 +392,14 @@ static void dispatch_sound_event(SoundEventData *d) {
     if (g_object_get_qdata(d->object, disable_sound_quark))
         return;
 
+    /* The GdkWindow of the the widget might have changed while this
+     * event was queued for us. Make sure to update it from the
+     * current one if necessary. */
+    if (d->event && d->event->any.window) {
+        g_object_unref(d->event->any.window);
+        d->event->any.window = g_object_ref(GTK_OBJECT(gtk_widget_get_window(GTK_WIDGET(d->object))));
+    }
+
     if (d->signal_id == signal_id_widget_show) {
         GdkWindowTypeHint hint;
 
@@ -433,9 +441,11 @@ static void dispatch_sound_event(SoundEventData *d) {
             gboolean played_sound = FALSE;
             gboolean is_xembed;
 
-            is_xembed = window_is_xembed(
-                    gtk_widget_get_display(GTK_WIDGET(d->object)),
-                    gtk_widget_get_window(GTK_WIDGET(d->object)));
+            is_xembed =
+                GTK_WIDGET_REALIZED(GTK_WIDGET(d->object)) &&
+                window_is_xembed(
+                        gtk_widget_get_display(GTK_WIDGET(d->object)),
+                        gtk_widget_get_window(GTK_WIDGET(d->object)));
 
             g_object_set_qdata(d->object, is_xembed_quark, GINT_TO_POINTER(is_xembed));
 
@@ -538,8 +548,7 @@ static void dispatch_sound_event(SoundEventData *d) {
 
     if (GTK_IS_WINDOW(d->object) && d->signal_id == signal_id_widget_window_state_event) {
         GdkEventWindowState *e;
-        gint w_desktop, c_desktop;
-        GdkDisplay *display;
+        gint w_desktop = -1, c_desktop = -1;
 
         e = (GdkEventWindowState*) d->event;
 
@@ -551,9 +560,13 @@ static void dispatch_sound_event(SoundEventData *d) {
          * minimized. We then store this information, so that we know
          * later on when the window is unminimized again. */
 
-        display = gdk_screen_get_display(gdk_event_get_screen(d->event));
-        w_desktop = window_get_desktop(display, e->window);
-        c_desktop = display_get_desktop(display);
+        if (GTK_WIDGET_REALIZED(GTK_WIDGET(d->object))) {
+            GdkDisplay *display;
+
+            display = gtk_widget_get_display(GTK_WIDGET(d->object));
+            w_desktop = window_get_desktop(display, gtk_widget_get_window(GTK_WIDGET(d->object)));
+            c_desktop = display_get_desktop(display);
+        }
 
         if ((e->changed_mask & GDK_WINDOW_STATE_ICONIFIED) &&
             (e->new_window_state & GDK_WINDOW_STATE_ICONIFIED) &&
