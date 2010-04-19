@@ -20,7 +20,7 @@
 # <http://www.gnu.org/licenses/>.
 
 m4_define([ca_major],[0])
-m4_define([ca_minor],[23])
+m4_define([ca_minor],[24])
 m4_define([ca_version],[ca_major.ca_minor])
 
 AC_PREREQ(2.63)
@@ -33,9 +33,8 @@ AC_CONFIG_MACRO_DIR(m4)
 AM_INIT_AUTOMAKE([foreign 1.10 -Wall])
 
 AC_SUBST(PACKAGE_URL, [http://0pointer.de/lennart/projects/libcanberra/])
-
-AC_SUBST(LIBCANBERRA_VERSION_INFO, [2:2:2])
-AC_SUBST(LIBCANBERRA_GTK_VERSION_INFO, [1:5:1])
+AC_SUBST(LIBCANBERRA_VERSION_INFO, [2:3:2])
+AC_SUBST(LIBCANBERRA_GTK_VERSION_INFO, [1:6:1])
 
 AC_CANONICAL_HOST
 AC_DEFINE_UNQUOTED([CANONICAL_HOST], "$host", [Canonical host string.])
@@ -354,7 +353,7 @@ AC_ARG_ENABLE([gtk],
 
 AM_CONDITIONAL([GCONF_SCHEMAS_INSTALL], [false])
 if test "x${gtk}" != xno ; then
-    PKG_CHECK_MODULES(GTK, [ gtk+-2.0 >= 2.13.4 gthread-2.0 ],
+    PKG_CHECK_MODULES(GTK, [ gtk+-2.0 >= 2.20.0 gthread-2.0 ],
         [
             HAVE_GTK=1
             AC_DEFINE([HAVE_GTK], 1, [Have GTK?])

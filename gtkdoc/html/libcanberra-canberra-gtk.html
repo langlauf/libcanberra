@@ -7,9 +7,8 @@
 <link rel="home" href="index.html" title="libcanberra Reference Manual">
 <link rel="up" href="ch01.html" title="libcanberra">
 <link rel="prev" href="libcanberra-canberra.html" title="canberra">
-<meta name="generator" content="GTK-Doc V1.13 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="chapter" href="ch01.html" title="libcanberra">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
@@ -37,19 +36,19 @@
 </tr></table></div>
 <div class="refsynopsisdiv" title="Synopsis">
 <a name="libcanberra-canberra-gtk.synopsis"></a><h2>Synopsis</h2>
-<pre class="synopsis"><a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context"><span class="returnvalue">ca_context</span></a> *        <a class="link" href="libcanberra-canberra-gtk.html#ca-gtk-context-get" title="ca_gtk_context_get ()">ca_gtk_context_get</a>                  (void);
-<span class="returnvalue">int</span>                 <a class="link" href="libcanberra-canberra-gtk.html#ca-gtk-proplist-set-for-widget" title="ca_gtk_proplist_set_for_widget ()">ca_gtk_proplist_set_for_widget</a>      (<a class="link" href="libcanberra-canberra.html#ca-proplist" title="ca_proplist"><span class="returnvalue">ca_proplist</span></a> *p,
-                                                         <a href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"><span class="returnvalue">GtkWidget</span></a> *w);
-<span class="returnvalue">int</span>                 <a class="link" href="libcanberra-canberra-gtk.html#ca-gtk-play-for-widget" title="ca_gtk_play_for_widget ()">ca_gtk_play_for_widget</a>              (<a href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"><span class="returnvalue">GtkWidget</span></a> *w,
-                                                         <span class="returnvalue">uint32_t</span> id,
-                                                         ...);
-<span class="returnvalue">int</span>                 <a class="link" href="libcanberra-canberra-gtk.html#ca-gtk-proplist-set-for-event" title="ca_gtk_proplist_set_for_event ()">ca_gtk_proplist_set_for_event</a>       (<a class="link" href="libcanberra-canberra.html#ca-proplist" title="ca_proplist"><span class="returnvalue">ca_proplist</span></a> *p,
-                                                         <a href="http://library.gnome.org/devel/gdk/unstable/gdk-Event-Structures.html#GdkEvent"><span class="returnvalue">GdkEvent</span></a> *e);
-<span class="returnvalue">int</span>                 <a class="link" href="libcanberra-canberra-gtk.html#ca-gtk-play-for-event" title="ca_gtk_play_for_event ()">ca_gtk_play_for_event</a>               (<a href="http://library.gnome.org/devel/gdk/unstable/gdk-Event-Structures.html#GdkEvent"><span class="returnvalue">GdkEvent</span></a> *e,
-                                                         <span class="returnvalue">uint32_t</span> id,
-                                                         ...);
-<span class="returnvalue">void</span>                <a class="link" href="libcanberra-canberra-gtk.html#ca-gtk-widget-disable-sounds" title="ca_gtk_widget_disable_sounds ()">ca_gtk_widget_disable_sounds</a>        (<a href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"><span class="returnvalue">GtkWidget</span></a> *w,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a> enable);
+<pre class="synopsis"><a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context"><span class="returnvalue">ca_context</span></a> *        <a class="link" href="libcanberra-canberra-gtk.html#ca-gtk-context-get" title="ca_gtk_context_get ()">ca_gtk_context_get</a>                  (<em class="parameter"><code><span class="type">void</span></code></em>);
+<span class="returnvalue">int</span>                 <a class="link" href="libcanberra-canberra-gtk.html#ca-gtk-proplist-set-for-widget" title="ca_gtk_proplist_set_for_widget ()">ca_gtk_proplist_set_for_widget</a>      (<em class="parameter"><code><a class="link" href="libcanberra-canberra.html#ca-proplist" title="ca_proplist"><span class="type">ca_proplist</span></a> *p</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"><span class="type">GtkWidget</span></a> *w</code></em>);
+<span class="returnvalue">int</span>                 <a class="link" href="libcanberra-canberra-gtk.html#ca-gtk-play-for-widget" title="ca_gtk_play_for_widget ()">ca_gtk_play_for_widget</a>              (<em class="parameter"><code><a href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"><span class="type">GtkWidget</span></a> *w</code></em>,
+                                                         <em class="parameter"><code><span class="type">uint32_t</span> id</code></em>,
+                                                         <em class="parameter"><code>...</code></em>);
+<span class="returnvalue">int</span>                 <a class="link" href="libcanberra-canberra-gtk.html#ca-gtk-proplist-set-for-event" title="ca_gtk_proplist_set_for_event ()">ca_gtk_proplist_set_for_event</a>       (<em class="parameter"><code><a class="link" href="libcanberra-canberra.html#ca-proplist" title="ca_proplist"><span class="type">ca_proplist</span></a> *p</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/gdk/unstable/gdk-Event-Structures.html#GdkEvent"><span class="type">GdkEvent</span></a> *e</code></em>);
+<span class="returnvalue">int</span>                 <a class="link" href="libcanberra-canberra-gtk.html#ca-gtk-play-for-event" title="ca_gtk_play_for_event ()">ca_gtk_play_for_event</a>               (<em class="parameter"><code><a href="http://library.gnome.org/devel/gdk/unstable/gdk-Event-Structures.html#GdkEvent"><span class="type">GdkEvent</span></a> *e</code></em>,
+                                                         <em class="parameter"><code><span class="type">uint32_t</span> id</code></em>,
+                                                         <em class="parameter"><code>...</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libcanberra-canberra-gtk.html#ca-gtk-widget-disable-sounds" title="ca_gtk_widget_disable_sounds ()">ca_gtk_widget_disable_sounds</a>        (<em class="parameter"><code><a href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"><span class="type">GtkWidget</span></a> *w</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> enable</code></em>);
 </pre>
 </div>
 <div class="refsect1" title="Description">
@@ -62,16 +61,18 @@ per <a href="http://library.gnome.org/devel/gdk/unstable/GdkScreen.html"><span c
 to get the context for the default screen. More importantly, it provides
 a few functions
 to compile event sound property lists based on GtkWidget objects or
-GdkEvent events.</p>
+GdkEvent events.
+</p>
 </div>
 <div class="refsect1" title="Details">
 <a name="libcanberra-canberra-gtk.details"></a><h2>Details</h2>
 <div class="refsect2" title="ca_gtk_context_get ()">
 <a name="ca-gtk-context-get"></a><h3>ca_gtk_context_get ()</h3>
-<pre class="programlisting"><a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context"><span class="returnvalue">ca_context</span></a> *        ca_gtk_context_get                  (void);</pre>
+<pre class="programlisting"><a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context"><span class="returnvalue">ca_context</span></a> *        ca_gtk_context_get                  (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
 Gets the single ca_context object for the default screen. See
-<code class="function">ca_gtk_context_get_for_screen()</code>.</p>
+<code class="function">ca_gtk_context_get_for_screen()</code>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
@@ -85,23 +86,24 @@ Gets the single ca_context object for the default screen. See
 <hr>
 <div class="refsect2" title="ca_gtk_proplist_set_for_widget ()">
 <a name="ca-gtk-proplist-set-for-widget"></a><h3>ca_gtk_proplist_set_for_widget ()</h3>
-<pre class="programlisting"><span class="returnvalue">int</span>                 ca_gtk_proplist_set_for_widget      (<a class="link" href="libcanberra-canberra.html#ca-proplist" title="ca_proplist"><span class="returnvalue">ca_proplist</span></a> *p,
-                                                         <a href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"><span class="returnvalue">GtkWidget</span></a> *w);</pre>
+<pre class="programlisting"><span class="returnvalue">int</span>                 ca_gtk_proplist_set_for_widget      (<em class="parameter"><code><a class="link" href="libcanberra-canberra.html#ca-proplist" title="ca_proplist"><span class="type">ca_proplist</span></a> *p</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"><span class="type">GtkWidget</span></a> *w</code></em>);</pre>
 <p>
 Fill in a ca_proplist object for a sound event that shall originate
 from the specified Gtk Widget. This will fill in properties like
-<a class="link" href="libcanberra-canberra.html#CA-PROP-WINDOW-NAME:CAPS" title="CA_PROP_WINDOW_NAME"><code class="literal">CA_PROP_WINDOW_NAME</code></a> or <a class="link" href="libcanberra-canberra.html#CA-PROP-WINDOW-X11-DISPLAY:CAPS" title="CA_PROP_WINDOW_X11_DISPLAY"><code class="literal">CA_PROP_WINDOW_X11_DISPLAY</code></a> for you.</p>
+<a class="link" href="libcanberra-canberra.html#CA-PROP-WINDOW-NAME:CAPS" title="CA_PROP_WINDOW_NAME"><code class="literal">CA_PROP_WINDOW_NAME</code></a> or <a class="link" href="libcanberra-canberra.html#CA-PROP-WINDOW-X11-DISPLAY:CAPS" title="CA_PROP_WINDOW_X11_DISPLAY"><code class="literal">CA_PROP_WINDOW_X11_DISPLAY</code></a> for you.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>p</code></em> :</span></p></td>
-<td> The proplist to store these sound event properties in
+<td>The proplist to store these sound event properties in
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>w</code></em> :</span></p></td>
-<td> The Gtk widget to base these sound event properties on
+<td>The Gtk widget to base these sound event properties on
 </td>
 </tr>
 <tr>
@@ -115,26 +117,27 @@ from the specified Gtk Widget. This will fill in properties like
 <hr>
 <div class="refsect2" title="ca_gtk_play_for_widget ()">
 <a name="ca-gtk-play-for-widget"></a><h3>ca_gtk_play_for_widget ()</h3>
-<pre class="programlisting"><span class="returnvalue">int</span>                 ca_gtk_play_for_widget              (<a href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"><span class="returnvalue">GtkWidget</span></a> *w,
-                                                         <span class="returnvalue">uint32_t</span> id,
-                                                         ...);</pre>
+<pre class="programlisting"><span class="returnvalue">int</span>                 ca_gtk_play_for_widget              (<em class="parameter"><code><a href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"><span class="type">GtkWidget</span></a> *w</code></em>,
+                                                         <em class="parameter"><code><span class="type">uint32_t</span> id</code></em>,
+                                                         <em class="parameter"><code>...</code></em>);</pre>
 <p>
 Play a sound event for the specified widget. This will internally
 call <a class="link" href="libcanberra-canberra-gtk.html#ca-gtk-proplist-set-for-widget" title="ca_gtk_proplist_set_for_widget ()"><code class="function">ca_gtk_proplist_set_for_widget()</code></a> and then merge them with the
 properties passed in via the NULL terminated argument
 list. Finally, it will call <a class="link" href="libcanberra-canberra.html#ca-context-play-full" title="ca_context_play_full ()"><code class="function">ca_context_play_full()</code></a> to actually play
-the event sound.</p>
+the event sound.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>w</code></em> :</span></p></td>
-<td> The Gtk widget to base these sound event properties on
+<td>The Gtk widget to base these sound event properties on
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>id</code></em> :</span></p></td>
-<td> The event id that can later be used to cancel this event sound
+<td>The event id that can later be used to cancel this event sound
 using <a class="link" href="libcanberra-canberra.html#ca-context-cancel" title="ca_context_cancel ()"><code class="function">ca_context_cancel()</code></a>. This can be any integer and shall be
 chosen be the client program. It is a good idea to pass 0 here if
 cancelling the sound later is not needed. If the same id is passed
@@ -144,7 +147,7 @@ to multiple sounds they can be canceled with a single
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
-<td> additional event properties as pairs of strings, terminated by NULL.
+<td>additional event properties as pairs of strings, terminated by NULL.
 </td>
 </tr>
 <tr>
@@ -158,25 +161,26 @@ to multiple sounds they can be canceled with a single
 <hr>
 <div class="refsect2" title="ca_gtk_proplist_set_for_event ()">
 <a name="ca-gtk-proplist-set-for-event"></a><h3>ca_gtk_proplist_set_for_event ()</h3>
-<pre class="programlisting"><span class="returnvalue">int</span>                 ca_gtk_proplist_set_for_event       (<a class="link" href="libcanberra-canberra.html#ca-proplist" title="ca_proplist"><span class="returnvalue">ca_proplist</span></a> *p,
-                                                         <a href="http://library.gnome.org/devel/gdk/unstable/gdk-Event-Structures.html#GdkEvent"><span class="returnvalue">GdkEvent</span></a> *e);</pre>
+<pre class="programlisting"><span class="returnvalue">int</span>                 ca_gtk_proplist_set_for_event       (<em class="parameter"><code><a class="link" href="libcanberra-canberra.html#ca-proplist" title="ca_proplist"><span class="type">ca_proplist</span></a> *p</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/gdk/unstable/gdk-Event-Structures.html#GdkEvent"><span class="type">GdkEvent</span></a> *e</code></em>);</pre>
 <p>
 Fill in a ca_proplist object for a sound event that is being
 triggered by the specified Gdk Event. This will fill in properties
 like <a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-MOUSE-X:CAPS" title="CA_PROP_EVENT_MOUSE_X"><code class="literal">CA_PROP_EVENT_MOUSE_X</code></a> or <a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-MOUSE-BUTTON:CAPS" title="CA_PROP_EVENT_MOUSE_BUTTON"><code class="literal">CA_PROP_EVENT_MOUSE_BUTTON</code></a> for
 you. This will internally also cal <a class="link" href="libcanberra-canberra-gtk.html#ca-gtk-proplist-set-for-widget" title="ca_gtk_proplist_set_for_widget ()"><code class="function">ca_gtk_proplist_set_for_widget()</code></a>
-on the widget this event belongs to.</p>
+on the widget this event belongs to.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>p</code></em> :</span></p></td>
-<td> The proplist to store these sound event properties in
+<td>The proplist to store these sound event properties in
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>e</code></em> :</span></p></td>
-<td> The Gdk event to base these sound event properties on
+<td>The Gdk event to base these sound event properties on
 </td>
 </tr>
 <tr>
@@ -190,26 +194,27 @@ on the widget this event belongs to.</p>
 <hr>
 <div class="refsect2" title="ca_gtk_play_for_event ()">
 <a name="ca-gtk-play-for-event"></a><h3>ca_gtk_play_for_event ()</h3>
-<pre class="programlisting"><span class="returnvalue">int</span>                 ca_gtk_play_for_event               (<a href="http://library.gnome.org/devel/gdk/unstable/gdk-Event-Structures.html#GdkEvent"><span class="returnvalue">GdkEvent</span></a> *e,
-                                                         <span class="returnvalue">uint32_t</span> id,
-                                                         ...);</pre>
+<pre class="programlisting"><span class="returnvalue">int</span>                 ca_gtk_play_for_event               (<em class="parameter"><code><a href="http://library.gnome.org/devel/gdk/unstable/gdk-Event-Structures.html#GdkEvent"><span class="type">GdkEvent</span></a> *e</code></em>,
+                                                         <em class="parameter"><code><span class="type">uint32_t</span> id</code></em>,
+                                                         <em class="parameter"><code>...</code></em>);</pre>
 <p>
 Play a sound event for the specified event. This will internally
 call <a class="link" href="libcanberra-canberra-gtk.html#ca-gtk-proplist-set-for-event" title="ca_gtk_proplist_set_for_event ()"><code class="function">ca_gtk_proplist_set_for_event()</code></a> and then merge them with the
 properties passed in via the NULL terminated argument
 list. Finally, it will call <a class="link" href="libcanberra-canberra.html#ca-context-play-full" title="ca_context_play_full ()"><code class="function">ca_context_play_full()</code></a> to actually play
-the event sound.</p>
+the event sound.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>e</code></em> :</span></p></td>
-<td> The Gdk event to base these sound event properties on
+<td>The Gdk event to base these sound event properties on
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>id</code></em> :</span></p></td>
-<td> The event id that can later be used to cancel this event sound
+<td>The event id that can later be used to cancel this event sound
 using <a class="link" href="libcanberra-canberra.html#ca-context-cancel" title="ca_context_cancel ()"><code class="function">ca_context_cancel()</code></a>. This can be any integer and shall be
 chosen be the client program. It is a good idea to pass 0 here if
 cancelling the sound later is not needed. If the same id is passed
@@ -219,7 +224,7 @@ to multiple sounds they can be canceled with a single
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
-<td> additional event properties as pairs of strings, terminated by NULL.
+<td>additional event properties as pairs of strings, terminated by NULL.
 </td>
 </tr>
 <tr>
@@ -233,24 +238,25 @@ to multiple sounds they can be canceled with a single
 <hr>
 <div class="refsect2" title="ca_gtk_widget_disable_sounds ()">
 <a name="ca-gtk-widget-disable-sounds"></a><h3>ca_gtk_widget_disable_sounds ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                ca_gtk_widget_disable_sounds        (<a href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"><span class="returnvalue">GtkWidget</span></a> *w,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a> enable);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                ca_gtk_widget_disable_sounds        (<em class="parameter"><code><a href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"><span class="type">GtkWidget</span></a> *w</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> enable</code></em>);</pre>
 <p>
 By default sound events are automatically generated for all kinds
 of input events. Use this function to disable this. This is
 intended to be used for widgets which directly generate sound
-events.</p>
+events.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>w</code></em> :</span></p></td>
-<td> The Gtk widget to disable automatic event sounds for.
+<td>The Gtk widget to disable automatic event sounds for.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>enable</code></em> :</span></p></td>
-<td> Boolean specifying whether sound events shall be enabled or disabled for this widget.
+<td>Boolean specifying whether sound events shall be enabled or disabled for this widget.
 </td>
 </tr>
 </tbody>
@@ -260,6 +266,6 @@ events.</p>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.13</div>
+          Generated by GTK-Doc V1.14</div>
 </body>
 </html>

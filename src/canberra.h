@@ -48,7 +48,7 @@ extern "C" {
  *
  * Evaluates to the minor version number of libcanberra.
  */
-#define CA_MINOR (23)
+#define CA_MINOR (24)
 
 /**
  * CA_CHECK_VERSION:
