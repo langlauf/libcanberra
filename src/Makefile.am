@@ -17,6 +17,7 @@
 # <http://www.gnu.org/licenses/>.
 
 gtkmoduledir = @GTK_MODULES_DIR@
+gtk3moduledir = @GTK3_MODULES_DIR@
 
 plugindir = $(libdir)/libcanberra-@PACKAGE_VERSION@
 
@@ -272,19 +273,61 @@ libcanberra_null_la_LDFLAGS = \
 endif
 endif
 
+if HAVE_GTK_ANY
+
+bin_PROGRAMS = \
+	canberra-gtk-play
+
+include_HEADERS += \
+	canberra-gtk.h
+
+endif
+
+if HAVE_GTK3
+
+lib_LTLIBRARIES += \
+	libcanberra-gtk3.la
+
+gtk3module_LTLIBRARIES = \
+	libcanberra-gtk3-module.la
+
+libcanberra_gtk3_la_SOURCES = \
+	canberra-gtk.h \
+	canberra-gtk.c
+libcanberra_gtk3_la_CFLAGS = \
+	$(GTK3_CFLAGS)
+libcanberra_gtk3_la_LIBADD = \
+	$(GTK3_LIBS) \
+	libcanberra.la
+libcanberra_gtk3_la_LDFLAGS = \
+	-export-dynamic -version-info $(LIBCANBERRA_GTK_VERSION_INFO)
+
+libcanberra_gtk3_module_la_SOURCES = \
+	canberra-gtk-module.c
+libcanberra_gtk3_module_la_CFLAGS = \
+	$(GTK3_CFLAGS)
+libcanberra_gtk3_module_la_LIBADD = \
+	$(GTK3_LIBS) \
+	libcanberra.la \
+	libcanberra-gtk3.la
+libcanberra_gtk3_module_la_LDFLAGS = \
+	-avoid-version -module -export-dynamic
+
+install-exec-hook:
+	$(MKDIR_P) -m 755 $(DESTDIR)$(gtk3moduledir)
+	( cd $(DESTDIR)$(gtk3moduledir) && \
+		rm -f libcanberra-gtk-module.so && \
+	        $(LN_S) libcanberra-gtk3-module.so libcanberra-gtk-module.so )
+
+endif
+
 if HAVE_GTK
 
 lib_LTLIBRARIES += \
 	libcanberra-gtk.la
 
-include_HEADERS += \
-	canberra-gtk.h
-
 gtkmodule_LTLIBRARIES = \
 	libcanberra-gtk-module.la
-
-bin_PROGRAMS = \
-	canberra-gtk-play
 
 libcanberra_gtk_la_SOURCES = \
 	canberra-gtk.h \
@@ -308,14 +351,34 @@ libcanberra_gtk_module_la_LIBADD = \
 libcanberra_gtk_module_la_LDFLAGS = \
 	-avoid-version -module -export-dynamic
 
-canberra_gtk_play_SOURCES = \
-	canberra-gtk-play.c
+endif
+
+if HAVE_GTK3
+
+canberra_gtk_play_LDADD = \
+	$(GTK3_LIBS) \
+	libcanberra.la \
+	libcanberra-gtk3.la
+canberra_gtk_play_CFLAGS = \
+	$(GTK3_CFLAGS)
+
+else
+if HAVE_GTK
+
 canberra_gtk_play_LDADD = \
 	$(GTK_LIBS) \
 	libcanberra.la \
 	libcanberra-gtk.la
 canberra_gtk_play_CFLAGS = \
 	$(GTK_CFLAGS)
+
+endif
+endif
+
+if HAVE_GTK_ANY
+
+canberra_gtk_play_SOURCES = \
+	canberra-gtk-play.c
 
 EXTRA_DIST += \
 	libcanberra-login-sound.desktop.in \
@@ -337,14 +400,14 @@ CLEANFILES = \
 	libcanberra-logout-sound.sh
 
 libcanberra-logout-sound.sh: libcanberra-logout-sound.sh.in Makefile
-	sed -e 's,@bindir\@,$(bindir),g' < $< > $@
-	chmod +x $@
+	$(AM_V_GEN)sed -e 's,@bindir\@,$(bindir),g' < $< > $@ && \
+		chmod +x $@
 
 libcanberra-login-sound.desktop: libcanberra-login-sound.desktop.in Makefile
-	sed -e 's,@bindir\@,$(bindir),g' < $< > $@
+	$(AM_V_GEN)sed -e 's,@bindir\@,$(bindir),g' < $< > $@
 
 libcanberra-ready-sound.desktop: libcanberra-ready-sound.desktop.in Makefile
-	sed -e 's,@bindir\@,$(bindir),g' < $< > $@
+	$(AM_V_GEN)sed -e 's,@bindir\@,$(bindir),g' < $< > $@
 
 endif
 

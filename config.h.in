@@ -30,6 +30,9 @@
 /* Have GTK? */
 #undef HAVE_GTK
 
+/* Have GTK3? */
+#undef HAVE_GTK3
+
 /* Define to 1 if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
 

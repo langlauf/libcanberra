@@ -37,20 +37,28 @@ pkgconfig_DATA = libcanberra.pc
 vapidir = $(datadir)/vala/vapi
 vapi_DATA = vala/libcanberra.vapi
 
+if HAVE_GTK_ANY
+
 if HAVE_GTK
 pkgconfig_DATA += libcanberra-gtk.pc
+endif
+
+if HAVE_GTK3
+pkgconfig_DATA += libcanberra-gtk3.pc
+endif
+
 vapi_DATA += vala/libcanberra-gtk.vapi
 
-schemasdir       = $(GCONF_SCHEMA_FILE_DIR)
-schemas_DATA     = libcanberra.schemas
+schemasdir = $(GCONF_SCHEMA_FILE_DIR)
+schemas_DATA = libcanberra.schemas
 
 if GCONF_SCHEMAS_INSTALL
 install-data-local:
-                if test -z "$(DESTDIR)" ; then \
-                        for p in $(schemas_DATA) ; do \
-                                GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(top_builddir)/data/$$p ; \
-                        done \
-                fi
+	if test -z "$(DESTDIR)" ; then \
+		for p in $(schemas_DATA) ; do \
+			GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(top_srcdir)/$$p ; \
+                done ; \
+	fi
 else
 install-data-local:
 endif

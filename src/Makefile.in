@@ -126,17 +126,20 @@ noinst_PROGRAMS = test-canberra$(EXEEXT)
 @BUILTIN_NULL_FALSE@@HAVE_NULL_TRUE@am__append_23 = \
 @BUILTIN_NULL_FALSE@@HAVE_NULL_TRUE@	libcanberra-null.la
 
-@HAVE_GTK_TRUE@am__append_24 = \
+@HAVE_GTK_ANY_TRUE@bin_PROGRAMS = canberra-gtk-play$(EXEEXT)
+@HAVE_GTK_ANY_TRUE@am__append_24 = \
+@HAVE_GTK_ANY_TRUE@	canberra-gtk.h
+
+@HAVE_GTK3_TRUE@am__append_25 = \
+@HAVE_GTK3_TRUE@	libcanberra-gtk3.la
+
+@HAVE_GTK_TRUE@am__append_26 = \
 @HAVE_GTK_TRUE@	libcanberra-gtk.la
 
-@HAVE_GTK_TRUE@am__append_25 = \
-@HAVE_GTK_TRUE@	canberra-gtk.h
-
-@HAVE_GTK_TRUE@bin_PROGRAMS = canberra-gtk-play$(EXEEXT)
-@HAVE_GTK_TRUE@am__append_26 = \
-@HAVE_GTK_TRUE@	libcanberra-login-sound.desktop.in \
-@HAVE_GTK_TRUE@	libcanberra-ready-sound.desktop.in \
-@HAVE_GTK_TRUE@	libcanberra-logout-sound.sh.in
+@HAVE_GTK_ANY_TRUE@am__append_27 = \
+@HAVE_GTK_ANY_TRUE@	libcanberra-login-sound.desktop.in \
+@HAVE_GTK_ANY_TRUE@	libcanberra-ready-sound.desktop.in \
+@HAVE_GTK_ANY_TRUE@	libcanberra-logout-sound.sh.in
 
 subdir = src
 DIST_COMMON = $(am__include_HEADERS_DIST) $(srcdir)/Makefile.am \
@@ -174,12 +177,13 @@ am__nobase_list = $(am__nobase_strip_setup); \
 am__base_list = \
   sed '$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;s/\n/ /g' | \
   sed '$$!N;$$!N;$$!N;$$!N;s/\n/ /g'
-am__installdirs = "$(DESTDIR)$(gtkmoduledir)" "$(DESTDIR)$(libdir)" \
+am__installdirs = "$(DESTDIR)$(gtk3moduledir)" \
+	"$(DESTDIR)$(gtkmoduledir)" "$(DESTDIR)$(libdir)" \
 	"$(DESTDIR)$(plugindir)" "$(DESTDIR)$(bindir)" \
 	"$(DESTDIR)$(gnomeshutdowndir)" "$(DESTDIR)$(gdmautostartdir)" \
 	"$(DESTDIR)$(gnomeautostartdir)" "$(DESTDIR)$(includedir)"
-LTLIBRARIES = $(gtkmodule_LTLIBRARIES) $(lib_LTLIBRARIES) \
-	$(plugin_LTLIBRARIES)
+LTLIBRARIES = $(gtk3module_LTLIBRARIES) $(gtkmodule_LTLIBRARIES) \
+	$(lib_LTLIBRARIES) $(plugin_LTLIBRARIES)
 am__DEPENDENCIES_1 =
 @BUILTIN_ALSA_FALSE@@HAVE_ALSA_TRUE@libcanberra_alsa_la_DEPENDENCIES =  \
 @BUILTIN_ALSA_FALSE@@HAVE_ALSA_TRUE@	$(am__DEPENDENCIES_1) \
@@ -233,6 +237,30 @@ libcanberra_gtk_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
 	$(libcanberra_gtk_la_CFLAGS) $(CFLAGS) \
 	$(libcanberra_gtk_la_LDFLAGS) $(LDFLAGS) -o $@
 @HAVE_GTK_TRUE@am_libcanberra_gtk_la_rpath = -rpath $(libdir)
+@HAVE_GTK3_TRUE@libcanberra_gtk3_module_la_DEPENDENCIES =  \
+@HAVE_GTK3_TRUE@	$(am__DEPENDENCIES_1) libcanberra.la \
+@HAVE_GTK3_TRUE@	libcanberra-gtk3.la
+am__libcanberra_gtk3_module_la_SOURCES_DIST = canberra-gtk-module.c
+@HAVE_GTK3_TRUE@am_libcanberra_gtk3_module_la_OBJECTS = libcanberra_gtk3_module_la-canberra-gtk-module.lo
+libcanberra_gtk3_module_la_OBJECTS =  \
+	$(am_libcanberra_gtk3_module_la_OBJECTS)
+libcanberra_gtk3_module_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
+	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CCLD) \
+	$(libcanberra_gtk3_module_la_CFLAGS) $(CFLAGS) \
+	$(libcanberra_gtk3_module_la_LDFLAGS) $(LDFLAGS) -o $@
+@HAVE_GTK3_TRUE@am_libcanberra_gtk3_module_la_rpath = -rpath \
+@HAVE_GTK3_TRUE@	$(gtk3moduledir)
+@HAVE_GTK3_TRUE@libcanberra_gtk3_la_DEPENDENCIES =  \
+@HAVE_GTK3_TRUE@	$(am__DEPENDENCIES_1) libcanberra.la
+am__libcanberra_gtk3_la_SOURCES_DIST = canberra-gtk.h canberra-gtk.c
+@HAVE_GTK3_TRUE@am_libcanberra_gtk3_la_OBJECTS =  \
+@HAVE_GTK3_TRUE@	libcanberra_gtk3_la-canberra-gtk.lo
+libcanberra_gtk3_la_OBJECTS = $(am_libcanberra_gtk3_la_OBJECTS)
+libcanberra_gtk3_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
+	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CCLD) \
+	$(libcanberra_gtk3_la_CFLAGS) $(CFLAGS) \
+	$(libcanberra_gtk3_la_LDFLAGS) $(LDFLAGS) -o $@
+@HAVE_GTK3_TRUE@am_libcanberra_gtk3_la_rpath = -rpath $(libdir)
 @BUILTIN_DSO_TRUE@libcanberra_multi_la_DEPENDENCIES = libcanberra.la
 am__libcanberra_multi_la_SOURCES_DIST = multi.c
 @BUILTIN_DSO_TRUE@am_libcanberra_multi_la_OBJECTS =  \
@@ -325,11 +353,15 @@ libcanberra_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
 	$(LDFLAGS) -o $@
 PROGRAMS = $(bin_PROGRAMS) $(noinst_PROGRAMS)
 am__canberra_gtk_play_SOURCES_DIST = canberra-gtk-play.c
-@HAVE_GTK_TRUE@am_canberra_gtk_play_OBJECTS =  \
-@HAVE_GTK_TRUE@	canberra_gtk_play-canberra-gtk-play.$(OBJEXT)
+@HAVE_GTK_ANY_TRUE@am_canberra_gtk_play_OBJECTS = canberra_gtk_play-canberra-gtk-play.$(OBJEXT)
 canberra_gtk_play_OBJECTS = $(am_canberra_gtk_play_OBJECTS)
-@HAVE_GTK_TRUE@canberra_gtk_play_DEPENDENCIES = $(am__DEPENDENCIES_1) \
-@HAVE_GTK_TRUE@	libcanberra.la libcanberra-gtk.la
+@HAVE_GTK3_FALSE@@HAVE_GTK_TRUE@canberra_gtk_play_DEPENDENCIES =  \
+@HAVE_GTK3_FALSE@@HAVE_GTK_TRUE@	$(am__DEPENDENCIES_1) \
+@HAVE_GTK3_FALSE@@HAVE_GTK_TRUE@	libcanberra.la \
+@HAVE_GTK3_FALSE@@HAVE_GTK_TRUE@	libcanberra-gtk.la
+@HAVE_GTK3_TRUE@canberra_gtk_play_DEPENDENCIES =  \
+@HAVE_GTK3_TRUE@	$(am__DEPENDENCIES_1) libcanberra.la \
+@HAVE_GTK3_TRUE@	libcanberra-gtk3.la
 canberra_gtk_play_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
 	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CCLD) \
 	$(canberra_gtk_play_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \
@@ -368,7 +400,9 @@ am__v_GEN_0 = @echo "  GEN   " $@;
 SOURCES = $(libcanberra_alsa_la_SOURCES) \
 	$(libcanberra_gstreamer_la_SOURCES) \
 	$(libcanberra_gtk_module_la_SOURCES) \
-	$(libcanberra_gtk_la_SOURCES) $(libcanberra_multi_la_SOURCES) \
+	$(libcanberra_gtk_la_SOURCES) \
+	$(libcanberra_gtk3_module_la_SOURCES) \
+	$(libcanberra_gtk3_la_SOURCES) $(libcanberra_multi_la_SOURCES) \
 	$(libcanberra_null_la_SOURCES) $(libcanberra_oss_la_SOURCES) \
 	$(libcanberra_pulse_la_SOURCES) $(libcanberra_la_SOURCES) \
 	$(canberra_gtk_play_SOURCES) $(test_canberra_SOURCES)
@@ -376,6 +410,8 @@ DIST_SOURCES = $(am__libcanberra_alsa_la_SOURCES_DIST) \
 	$(am__libcanberra_gstreamer_la_SOURCES_DIST) \
 	$(am__libcanberra_gtk_module_la_SOURCES_DIST) \
 	$(am__libcanberra_gtk_la_SOURCES_DIST) \
+	$(am__libcanberra_gtk3_module_la_SOURCES_DIST) \
+	$(am__libcanberra_gtk3_la_SOURCES_DIST) \
 	$(am__libcanberra_multi_la_SOURCES_DIST) \
 	$(am__libcanberra_null_la_SOURCES_DIST) \
 	$(am__libcanberra_oss_la_SOURCES_DIST) \
@@ -436,6 +472,9 @@ GSTREAMER_CFLAGS = @GSTREAMER_CFLAGS@
 GSTREAMER_LIBS = @GSTREAMER_LIBS@
 GST_CFLAGS = @GST_CFLAGS@
 GST_LIBS = @GST_LIBS@
+GTK3_CFLAGS = @GTK3_CFLAGS@
+GTK3_LIBS = @GTK3_LIBS@
+GTK3_MODULES_DIR = @GTK3_MODULES_DIR@
 GTKDOC_CHECK = @GTKDOC_CHECK@
 GTKDOC_MKPDF = @GTKDOC_MKPDF@
 GTKDOC_REBASE = @GTKDOC_REBASE@
@@ -447,6 +486,7 @@ HAVE_CACHE = @HAVE_CACHE@
 HAVE_DSO = @HAVE_DSO@
 HAVE_GSTREAMER = @HAVE_GSTREAMER@
 HAVE_GTK = @HAVE_GTK@
+HAVE_GTK3 = @HAVE_GTK3@
 HAVE_NULL = @HAVE_NULL@
 HAVE_OSS = @HAVE_OSS@
 HAVE_PULSE = @HAVE_PULSE@
@@ -556,6 +596,7 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 gtkmoduledir = @GTK_MODULES_DIR@
+gtk3moduledir = @GTK3_MODULES_DIR@
 plugindir = $(libdir)/libcanberra-@PACKAGE_VERSION@
 gnomeshutdowndir = $(datadir)/gnome/shutdown
 gnomeautostartdir = $(datadir)/gnome/autostart
@@ -564,9 +605,9 @@ AM_CFLAGS = $(PTHREAD_CFLAGS) -DCA_PLUGIN_PATH=\"$(plugindir)\"
 #AM_CFLAGS = $(PTHREAD_CFLAGS) -DCA_PLUGIN_PATH=\"/home/lennart/projects/libcanberra/src/.libs\"
 AM_CXXFLAGS = $(PTHREAD_CFLAGS)
 AM_LDADD = $(PTHREAD_LIBS)
-EXTRA_DIST = map-file $(am__append_26)
-lib_LTLIBRARIES = libcanberra.la $(am__append_24)
-include_HEADERS = canberra.h $(am__append_25)
+EXTRA_DIST = map-file $(am__append_27)
+lib_LTLIBRARIES = libcanberra.la $(am__append_25) $(am__append_26)
+include_HEADERS = canberra.h $(am__append_24)
 libcanberra_la_SOURCES = canberra.h common.c common.h mutex-posix.c \
 	mutex.h proplist.c proplist.h driver.h read-sound-file.c \
 	read-sound-file.h read-vorbis.c read-vorbis.h read-wav.c \
@@ -697,6 +738,37 @@ plugin_LTLIBRARIES = $(am__append_7) $(am__append_11) $(am__append_15) \
 @BUILTIN_NULL_FALSE@@HAVE_NULL_TRUE@libcanberra_null_la_LDFLAGS = \
 @BUILTIN_NULL_FALSE@@HAVE_NULL_TRUE@	-avoid-version -module -export-dynamic
 
+@HAVE_GTK3_TRUE@gtk3module_LTLIBRARIES = \
+@HAVE_GTK3_TRUE@	libcanberra-gtk3-module.la
+
+@HAVE_GTK3_TRUE@libcanberra_gtk3_la_SOURCES = \
+@HAVE_GTK3_TRUE@	canberra-gtk.h \
+@HAVE_GTK3_TRUE@	canberra-gtk.c
+
+@HAVE_GTK3_TRUE@libcanberra_gtk3_la_CFLAGS = \
+@HAVE_GTK3_TRUE@	$(GTK3_CFLAGS)
+
+@HAVE_GTK3_TRUE@libcanberra_gtk3_la_LIBADD = \
+@HAVE_GTK3_TRUE@	$(GTK3_LIBS) \
+@HAVE_GTK3_TRUE@	libcanberra.la
+
+@HAVE_GTK3_TRUE@libcanberra_gtk3_la_LDFLAGS = \
+@HAVE_GTK3_TRUE@	-export-dynamic -version-info $(LIBCANBERRA_GTK_VERSION_INFO)
+
+@HAVE_GTK3_TRUE@libcanberra_gtk3_module_la_SOURCES = \
+@HAVE_GTK3_TRUE@	canberra-gtk-module.c
+
+@HAVE_GTK3_TRUE@libcanberra_gtk3_module_la_CFLAGS = \
+@HAVE_GTK3_TRUE@	$(GTK3_CFLAGS)
+
+@HAVE_GTK3_TRUE@libcanberra_gtk3_module_la_LIBADD = \
+@HAVE_GTK3_TRUE@	$(GTK3_LIBS) \
+@HAVE_GTK3_TRUE@	libcanberra.la \
+@HAVE_GTK3_TRUE@	libcanberra-gtk3.la
+
+@HAVE_GTK3_TRUE@libcanberra_gtk3_module_la_LDFLAGS = \
+@HAVE_GTK3_TRUE@	-avoid-version -module -export-dynamic
+
 @HAVE_GTK_TRUE@gtkmodule_LTLIBRARIES = \
 @HAVE_GTK_TRUE@	libcanberra-gtk-module.la
 
@@ -728,30 +800,38 @@ plugin_LTLIBRARIES = $(am__append_7) $(am__append_11) $(am__append_15) \
 @HAVE_GTK_TRUE@libcanberra_gtk_module_la_LDFLAGS = \
 @HAVE_GTK_TRUE@	-avoid-version -module -export-dynamic
 
-@HAVE_GTK_TRUE@canberra_gtk_play_SOURCES = \
-@HAVE_GTK_TRUE@	canberra-gtk-play.c
+@HAVE_GTK3_FALSE@@HAVE_GTK_TRUE@canberra_gtk_play_LDADD = \
+@HAVE_GTK3_FALSE@@HAVE_GTK_TRUE@	$(GTK_LIBS) \
+@HAVE_GTK3_FALSE@@HAVE_GTK_TRUE@	libcanberra.la \
+@HAVE_GTK3_FALSE@@HAVE_GTK_TRUE@	libcanberra-gtk.la
 
-@HAVE_GTK_TRUE@canberra_gtk_play_LDADD = \
-@HAVE_GTK_TRUE@	$(GTK_LIBS) \
-@HAVE_GTK_TRUE@	libcanberra.la \
-@HAVE_GTK_TRUE@	libcanberra-gtk.la
+@HAVE_GTK3_TRUE@canberra_gtk_play_LDADD = \
+@HAVE_GTK3_TRUE@	$(GTK3_LIBS) \
+@HAVE_GTK3_TRUE@	libcanberra.la \
+@HAVE_GTK3_TRUE@	libcanberra-gtk3.la
 
-@HAVE_GTK_TRUE@canberra_gtk_play_CFLAGS = \
-@HAVE_GTK_TRUE@	$(GTK_CFLAGS)
+@HAVE_GTK3_FALSE@@HAVE_GTK_TRUE@canberra_gtk_play_CFLAGS = \
+@HAVE_GTK3_FALSE@@HAVE_GTK_TRUE@	$(GTK_CFLAGS)
 
-@HAVE_GTK_TRUE@gnomeautostart_DATA = \
-@HAVE_GTK_TRUE@	libcanberra-login-sound.desktop
+@HAVE_GTK3_TRUE@canberra_gtk_play_CFLAGS = \
+@HAVE_GTK3_TRUE@	$(GTK3_CFLAGS)
 
-@HAVE_GTK_TRUE@gdmautostart_DATA = \
-@HAVE_GTK_TRUE@	libcanberra-ready-sound.desktop
+@HAVE_GTK_ANY_TRUE@canberra_gtk_play_SOURCES = \
+@HAVE_GTK_ANY_TRUE@	canberra-gtk-play.c
 
-@HAVE_GTK_TRUE@gnomeshutdown_SCRIPTS = \
-@HAVE_GTK_TRUE@	libcanberra-logout-sound.sh
+@HAVE_GTK_ANY_TRUE@gnomeautostart_DATA = \
+@HAVE_GTK_ANY_TRUE@	libcanberra-login-sound.desktop
 
-@HAVE_GTK_TRUE@CLEANFILES = \
-@HAVE_GTK_TRUE@	libcanberra-login-sound.desktop \
-@HAVE_GTK_TRUE@	libcanberra-ready-sound.desktop \
-@HAVE_GTK_TRUE@	libcanberra-logout-sound.sh
+@HAVE_GTK_ANY_TRUE@gdmautostart_DATA = \
+@HAVE_GTK_ANY_TRUE@	libcanberra-ready-sound.desktop
+
+@HAVE_GTK_ANY_TRUE@gnomeshutdown_SCRIPTS = \
+@HAVE_GTK_ANY_TRUE@	libcanberra-logout-sound.sh
+
+@HAVE_GTK_ANY_TRUE@CLEANFILES = \
+@HAVE_GTK_ANY_TRUE@	libcanberra-login-sound.desktop \
+@HAVE_GTK_ANY_TRUE@	libcanberra-ready-sound.desktop \
+@HAVE_GTK_ANY_TRUE@	libcanberra-logout-sound.sh
 
 test_canberra_SOURCES = \
         test-canberra.c
@@ -796,6 +876,37 @@ $(ACLOCAL_M4):  $(am__aclocal_m4_deps)
 $(am__aclocal_m4_deps):
 canberra.h: $(top_builddir)/config.status $(srcdir)/canberra.h.in
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
+install-gtk3moduleLTLIBRARIES: $(gtk3module_LTLIBRARIES)
+	@$(NORMAL_INSTALL)
+	test -z "$(gtk3moduledir)" || $(MKDIR_P) "$(DESTDIR)$(gtk3moduledir)"
+	@list='$(gtk3module_LTLIBRARIES)'; test -n "$(gtk3moduledir)" || list=; \
+	list2=; for p in $$list; do \
+	  if test -f $$p; then \
+	    list2="$$list2 $$p"; \
+	  else :; fi; \
+	done; \
+	test -z "$$list2" || { \
+	  echo " $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=install $(INSTALL) $(INSTALL_STRIP_FLAG) $$list2 '$(DESTDIR)$(gtk3moduledir)'"; \
+	  $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=install $(INSTALL) $(INSTALL_STRIP_FLAG) $$list2 "$(DESTDIR)$(gtk3moduledir)"; \
+	}
+
+uninstall-gtk3moduleLTLIBRARIES:
+	@$(NORMAL_UNINSTALL)
+	@list='$(gtk3module_LTLIBRARIES)'; test -n "$(gtk3moduledir)" || list=; \
+	for p in $$list; do \
+	  $(am__strip_dir) \
+	  echo " $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=uninstall rm -f '$(DESTDIR)$(gtk3moduledir)/$$f'"; \
+	  $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=uninstall rm -f "$(DESTDIR)$(gtk3moduledir)/$$f"; \
+	done
+
+clean-gtk3moduleLTLIBRARIES:
+	-test -z "$(gtk3module_LTLIBRARIES)" || rm -f $(gtk3module_LTLIBRARIES)
+	@list='$(gtk3module_LTLIBRARIES)'; for p in $$list; do \
+	  dir="`echo $$p | sed -e 's|/[^/]*$$||'`"; \
+	  test "$$dir" != "$$p" || dir=.; \
+	  echo "rm -f \"$${dir}/so_locations\""; \
+	  rm -f "$${dir}/so_locations"; \
+	done
 install-gtkmoduleLTLIBRARIES: $(gtkmodule_LTLIBRARIES)
 	@$(NORMAL_INSTALL)
 	test -z "$(gtkmoduledir)" || $(MKDIR_P) "$(DESTDIR)$(gtkmoduledir)"
@@ -897,6 +1008,10 @@ libcanberra-gtk-module.la: $(libcanberra_gtk_module_la_OBJECTS) $(libcanberra_gt
 	$(AM_V_CCLD)$(libcanberra_gtk_module_la_LINK) $(am_libcanberra_gtk_module_la_rpath) $(libcanberra_gtk_module_la_OBJECTS) $(libcanberra_gtk_module_la_LIBADD) $(LIBS)
 libcanberra-gtk.la: $(libcanberra_gtk_la_OBJECTS) $(libcanberra_gtk_la_DEPENDENCIES) 
 	$(AM_V_CCLD)$(libcanberra_gtk_la_LINK) $(am_libcanberra_gtk_la_rpath) $(libcanberra_gtk_la_OBJECTS) $(libcanberra_gtk_la_LIBADD) $(LIBS)
+libcanberra-gtk3-module.la: $(libcanberra_gtk3_module_la_OBJECTS) $(libcanberra_gtk3_module_la_DEPENDENCIES) 
+	$(AM_V_CCLD)$(libcanberra_gtk3_module_la_LINK) $(am_libcanberra_gtk3_module_la_rpath) $(libcanberra_gtk3_module_la_OBJECTS) $(libcanberra_gtk3_module_la_LIBADD) $(LIBS)
+libcanberra-gtk3.la: $(libcanberra_gtk3_la_OBJECTS) $(libcanberra_gtk3_la_DEPENDENCIES) 
+	$(AM_V_CCLD)$(libcanberra_gtk3_la_LINK) $(am_libcanberra_gtk3_la_rpath) $(libcanberra_gtk3_la_OBJECTS) $(libcanberra_gtk3_la_LIBADD) $(LIBS)
 libcanberra-multi.la: $(libcanberra_multi_la_OBJECTS) $(libcanberra_multi_la_DEPENDENCIES) 
 	$(AM_V_CCLD)$(libcanberra_multi_la_LINK) $(am_libcanberra_multi_la_rpath) $(libcanberra_multi_la_OBJECTS) $(libcanberra_multi_la_LIBADD) $(LIBS)
 libcanberra-null.la: $(libcanberra_null_la_OBJECTS) $(libcanberra_null_la_DEPENDENCIES) 
@@ -1009,6 +1124,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/canberra_gtk_play-canberra-gtk-play.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcanberra_alsa_la-alsa.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcanberra_gstreamer_la-gstreamer.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcanberra_gtk3_la-canberra-gtk.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcanberra_gtk3_module_la-canberra-gtk-module.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcanberra_gtk_la-canberra-gtk.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcanberra_gtk_module_la-canberra-gtk-module.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcanberra_la-alsa.Plo@am__quote@
@@ -1090,6 +1207,22 @@ libcanberra_gtk_la-canberra-gtk.lo: canberra-gtk.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='canberra-gtk.c' object='libcanberra_gtk_la-canberra-gtk.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libcanberra_gtk_la_CFLAGS) $(CFLAGS) -c -o libcanberra_gtk_la-canberra-gtk.lo `test -f 'canberra-gtk.c' || echo '$(srcdir)/'`canberra-gtk.c
+
+libcanberra_gtk3_module_la-canberra-gtk-module.lo: canberra-gtk-module.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libcanberra_gtk3_module_la_CFLAGS) $(CFLAGS) -MT libcanberra_gtk3_module_la-canberra-gtk-module.lo -MD -MP -MF $(DEPDIR)/libcanberra_gtk3_module_la-canberra-gtk-module.Tpo -c -o libcanberra_gtk3_module_la-canberra-gtk-module.lo `test -f 'canberra-gtk-module.c' || echo '$(srcdir)/'`canberra-gtk-module.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libcanberra_gtk3_module_la-canberra-gtk-module.Tpo $(DEPDIR)/libcanberra_gtk3_module_la-canberra-gtk-module.Plo
+@am__fastdepCC_FALSE@	$(AM_V_CC) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='canberra-gtk-module.c' object='libcanberra_gtk3_module_la-canberra-gtk-module.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libcanberra_gtk3_module_la_CFLAGS) $(CFLAGS) -c -o libcanberra_gtk3_module_la-canberra-gtk-module.lo `test -f 'canberra-gtk-module.c' || echo '$(srcdir)/'`canberra-gtk-module.c
+
+libcanberra_gtk3_la-canberra-gtk.lo: canberra-gtk.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libcanberra_gtk3_la_CFLAGS) $(CFLAGS) -MT libcanberra_gtk3_la-canberra-gtk.lo -MD -MP -MF $(DEPDIR)/libcanberra_gtk3_la-canberra-gtk.Tpo -c -o libcanberra_gtk3_la-canberra-gtk.lo `test -f 'canberra-gtk.c' || echo '$(srcdir)/'`canberra-gtk.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libcanberra_gtk3_la-canberra-gtk.Tpo $(DEPDIR)/libcanberra_gtk3_la-canberra-gtk.Plo
+@am__fastdepCC_FALSE@	$(AM_V_CC) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='canberra-gtk.c' object='libcanberra_gtk3_la-canberra-gtk.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libcanberra_gtk3_la_CFLAGS) $(CFLAGS) -c -o libcanberra_gtk3_la-canberra-gtk.lo `test -f 'canberra-gtk.c' || echo '$(srcdir)/'`canberra-gtk.c
 
 libcanberra_multi_la-multi.lo: multi.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libcanberra_multi_la_CFLAGS) $(CFLAGS) -MT libcanberra_multi_la-multi.lo -MD -MP -MF $(DEPDIR)/libcanberra_multi_la-multi.Tpo -c -o libcanberra_multi_la-multi.lo `test -f 'multi.c' || echo '$(srcdir)/'`multi.c
@@ -1438,7 +1571,7 @@ all-am: Makefile $(LTLIBRARIES) $(PROGRAMS) $(SCRIPTS) $(DATA) \
 install-binPROGRAMS: install-libLTLIBRARIES
 
 installdirs:
-	for dir in "$(DESTDIR)$(gtkmoduledir)" "$(DESTDIR)$(libdir)" "$(DESTDIR)$(plugindir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(gnomeshutdowndir)" "$(DESTDIR)$(gdmautostartdir)" "$(DESTDIR)$(gnomeautostartdir)" "$(DESTDIR)$(includedir)"; do \
+	for dir in "$(DESTDIR)$(gtk3moduledir)" "$(DESTDIR)$(gtkmoduledir)" "$(DESTDIR)$(libdir)" "$(DESTDIR)$(plugindir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(gnomeshutdowndir)" "$(DESTDIR)$(gdmautostartdir)" "$(DESTDIR)$(gnomeautostartdir)" "$(DESTDIR)$(includedir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-am
@@ -1467,11 +1600,12 @@ distclean-generic:
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
 	@echo "it deletes files that may require special tools to rebuild."
+@HAVE_GTK3_FALSE@install-exec-hook:
 clean: clean-am
 
-clean-am: clean-binPROGRAMS clean-generic clean-gtkmoduleLTLIBRARIES \
-	clean-libLTLIBRARIES clean-libtool clean-noinstPROGRAMS \
-	clean-pluginLTLIBRARIES mostlyclean-am
+clean-am: clean-binPROGRAMS clean-generic clean-gtk3moduleLTLIBRARIES \
+	clean-gtkmoduleLTLIBRARIES clean-libLTLIBRARIES clean-libtool \
+	clean-noinstPROGRAMS clean-pluginLTLIBRARIES mostlyclean-am
 
 distclean: distclean-am
 	-rm -rf ./$(DEPDIR)
@@ -1492,15 +1626,17 @@ info: info-am
 info-am:
 
 install-data-am: install-gdmautostartDATA install-gnomeautostartDATA \
-	install-gnomeshutdownSCRIPTS install-gtkmoduleLTLIBRARIES \
-	install-includeHEADERS install-pluginLTLIBRARIES
+	install-gnomeshutdownSCRIPTS install-gtk3moduleLTLIBRARIES \
+	install-gtkmoduleLTLIBRARIES install-includeHEADERS \
+	install-pluginLTLIBRARIES
 
 install-dvi: install-dvi-am
 
 install-dvi-am:
 
 install-exec-am: install-binPROGRAMS install-libLTLIBRARIES
-
+	@$(NORMAL_INSTALL)
+	$(MAKE) $(AM_MAKEFLAGS) install-exec-hook
 install-html: install-html-am
 
 install-html-am:
@@ -1541,23 +1677,26 @@ ps-am:
 
 uninstall-am: uninstall-binPROGRAMS uninstall-gdmautostartDATA \
 	uninstall-gnomeautostartDATA uninstall-gnomeshutdownSCRIPTS \
-	uninstall-gtkmoduleLTLIBRARIES uninstall-includeHEADERS \
-	uninstall-libLTLIBRARIES uninstall-pluginLTLIBRARIES
+	uninstall-gtk3moduleLTLIBRARIES uninstall-gtkmoduleLTLIBRARIES \
+	uninstall-includeHEADERS uninstall-libLTLIBRARIES \
+	uninstall-pluginLTLIBRARIES
 
-.MAKE: install-am install-strip
+.MAKE: install-am install-exec-am install-strip
 
 .PHONY: CTAGS GTAGS all all-am check check-am clean clean-binPROGRAMS \
-	clean-generic clean-gtkmoduleLTLIBRARIES clean-libLTLIBRARIES \
-	clean-libtool clean-noinstPROGRAMS clean-pluginLTLIBRARIES \
-	ctags distclean distclean-compile distclean-generic \
-	distclean-libtool distclean-tags distdir dvi dvi-am html \
-	html-am info info-am install install-am install-binPROGRAMS \
-	install-data install-data-am install-dvi install-dvi-am \
-	install-exec install-exec-am install-gdmautostartDATA \
+	clean-generic clean-gtk3moduleLTLIBRARIES \
+	clean-gtkmoduleLTLIBRARIES clean-libLTLIBRARIES clean-libtool \
+	clean-noinstPROGRAMS clean-pluginLTLIBRARIES ctags distclean \
+	distclean-compile distclean-generic distclean-libtool \
+	distclean-tags distdir dvi dvi-am html html-am info info-am \
+	install install-am install-binPROGRAMS install-data \
+	install-data-am install-dvi install-dvi-am install-exec \
+	install-exec-am install-exec-hook install-gdmautostartDATA \
 	install-gnomeautostartDATA install-gnomeshutdownSCRIPTS \
-	install-gtkmoduleLTLIBRARIES install-html install-html-am \
-	install-includeHEADERS install-info install-info-am \
-	install-libLTLIBRARIES install-man install-pdf install-pdf-am \
+	install-gtk3moduleLTLIBRARIES install-gtkmoduleLTLIBRARIES \
+	install-html install-html-am install-includeHEADERS \
+	install-info install-info-am install-libLTLIBRARIES \
+	install-man install-pdf install-pdf-am \
 	install-pluginLTLIBRARIES install-ps install-ps-am \
 	install-strip installcheck installcheck-am installdirs \
 	maintainer-clean maintainer-clean-generic mostlyclean \
@@ -1565,19 +1704,26 @@ uninstall-am: uninstall-binPROGRAMS uninstall-gdmautostartDATA \
 	pdf pdf-am ps ps-am tags uninstall uninstall-am \
 	uninstall-binPROGRAMS uninstall-gdmautostartDATA \
 	uninstall-gnomeautostartDATA uninstall-gnomeshutdownSCRIPTS \
-	uninstall-gtkmoduleLTLIBRARIES uninstall-includeHEADERS \
-	uninstall-libLTLIBRARIES uninstall-pluginLTLIBRARIES
+	uninstall-gtk3moduleLTLIBRARIES uninstall-gtkmoduleLTLIBRARIES \
+	uninstall-includeHEADERS uninstall-libLTLIBRARIES \
+	uninstall-pluginLTLIBRARIES
 
 
-@HAVE_GTK_TRUE@libcanberra-logout-sound.sh: libcanberra-logout-sound.sh.in Makefile
-@HAVE_GTK_TRUE@	sed -e 's,@bindir\@,$(bindir),g' < $< > $@
-@HAVE_GTK_TRUE@	chmod +x $@
+@HAVE_GTK3_TRUE@install-exec-hook:
+@HAVE_GTK3_TRUE@	$(MKDIR_P) -m 755 $(DESTDIR)$(gtk3moduledir)
+@HAVE_GTK3_TRUE@	( cd $(DESTDIR)$(gtk3moduledir) && \
+@HAVE_GTK3_TRUE@		rm -f libcanberra-gtk-module.so && \
+@HAVE_GTK3_TRUE@	        $(LN_S) libcanberra-gtk3-module.so libcanberra-gtk-module.so )
 
-@HAVE_GTK_TRUE@libcanberra-login-sound.desktop: libcanberra-login-sound.desktop.in Makefile
-@HAVE_GTK_TRUE@	sed -e 's,@bindir\@,$(bindir),g' < $< > $@
+@HAVE_GTK_ANY_TRUE@libcanberra-logout-sound.sh: libcanberra-logout-sound.sh.in Makefile
+@HAVE_GTK_ANY_TRUE@	$(AM_V_GEN)sed -e 's,@bindir\@,$(bindir),g' < $< > $@ && \
+@HAVE_GTK_ANY_TRUE@		chmod +x $@
 
-@HAVE_GTK_TRUE@libcanberra-ready-sound.desktop: libcanberra-ready-sound.desktop.in Makefile
-@HAVE_GTK_TRUE@	sed -e 's,@bindir\@,$(bindir),g' < $< > $@
+@HAVE_GTK_ANY_TRUE@libcanberra-login-sound.desktop: libcanberra-login-sound.desktop.in Makefile
+@HAVE_GTK_ANY_TRUE@	$(AM_V_GEN)sed -e 's,@bindir\@,$(bindir),g' < $< > $@
+
+@HAVE_GTK_ANY_TRUE@libcanberra-ready-sound.desktop: libcanberra-ready-sound.desktop.in Makefile
+@HAVE_GTK_ANY_TRUE@	$(AM_V_GEN)sed -e 's,@bindir\@,$(bindir),g' < $< > $@
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
