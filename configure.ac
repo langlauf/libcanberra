@@ -20,7 +20,7 @@
 # <http://www.gnu.org/licenses/>.
 
 m4_define([ca_major],[0])
-m4_define([ca_minor],[26])
+m4_define([ca_minor],[27])
 m4_define([ca_version],[ca_major.ca_minor])
 
 AC_PREREQ(2.63)
@@ -33,8 +33,8 @@ AC_CONFIG_MACRO_DIR(m4)
 AM_INIT_AUTOMAKE([foreign 1.10 -Wall])
 
 AC_SUBST(PACKAGE_URL, [http://0pointer.de/lennart/projects/libcanberra/])
-AC_SUBST(LIBCANBERRA_VERSION_INFO, [2:4:2])
-AC_SUBST(LIBCANBERRA_GTK_VERSION_INFO, [1:7:1])
+AC_SUBST(LIBCANBERRA_VERSION_INFO, [2:5:2])
+AC_SUBST(LIBCANBERRA_GTK_VERSION_INFO, [1:8:1])
 
 AC_CANONICAL_HOST
 AC_DEFINE_UNQUOTED([CANONICAL_HOST], "$host", [Canonical host string.])
@@ -287,6 +287,39 @@ fi
 AC_SUBST(PULSE_CFLAGS)
 AC_SUBST(PULSE_LIBS)
 
+#### UDEV support (optional) ####
+
+AC_ARG_ENABLE([udev],
+    AS_HELP_STRING([--disable-udev], [Disable optional udev support]),
+        [
+            case "${enableval}" in
+                yes) udev=yes ;;
+                no) udev=no ;;
+                *) AC_MSG_ERROR(bad value ${enableval} for --disable-udev) ;;
+            esac
+        ],
+        [udev=auto])
+
+if test "x${udev}" != xno ; then
+    PKG_CHECK_MODULES(UDEV, [ libudev >= 160 ],
+        [
+            HAVE_UDEV=1
+            AC_DEFINE([HAVE_UDEV], 1, [Have udev?])
+        ],
+        [
+            HAVE_UDEV=0
+            if test "x$udev" = xyes ; then
+                AC_MSG_ERROR([*** udev not found ***])
+            fi
+        ])
+else
+    HAVE_UDEV=0
+fi
+
+AC_SUBST(UDEV_CFLAGS)
+AC_SUBST(UDEV_LIBS)
+AM_CONDITIONAL([HAVE_UDEV], [test "x$HAVE_UDEV" = x1])
+
 #### GStreamer support (optional) ####
 
 AC_ARG_ENABLE([gstreamer],
@@ -468,6 +501,18 @@ AM_CONDITIONAL([HAVE_CACHE], [test "x$HAVE_CACHE" = x1])
 if test "x${HAVE_CACHE}" = x1 ; then
      AC_DEFINE([HAVE_CACHE], 1, [Do cacheing?])
 fi
+
+#
+# systemd
+#
+AC_ARG_WITH([systemdsystemunitdir],
+        AS_HELP_STRING([--with-systemdsystemunitdir=DIR], [Directory for systemd service files]),
+        [],
+        [with_systemdsystemunitdir=$($PKG_CONFIG --variable=systemdsystemunitdir systemd)])
+if test "x$with_systemdsystemunitdir" != xno; then
+        AC_SUBST([systemdsystemunitdir], [$with_systemdsystemunitdir])
+fi
+AM_CONDITIONAL(HAVE_SYSTEMD, [test -n "$with_systemdsystemunitdir" -a "x$with_systemdsystemunitdir" != xno ])
 
 ### LYNX documentation generation ###
 
@@ -703,6 +748,11 @@ if test "x$HAVE_CACHE" = "x1" ; then
    ENABLE_CACHE=yes
 fi
 
+ENABLE_UDEV=no
+if test "x$HAVE_UDEV" = "x1" ; then
+   ENABLE_UDEV=yes
+fi
+
 echo "
  ---{ $PACKAGE_NAME $VERSION }---
 
@@ -730,6 +780,8 @@ echo "
     GTK Modules Directory:  ${GTK_MODULES_DIR}
     Enable GTK3+:           ${ENABLE_GTK3}
     GTK3 Modules Directory: ${GTK3_MODULES_DIR}
+    Enable udev:            ${ENABLE_UDEV}
+    systemd Unit Directory: ${with_systemdsystemunitdir}
 "
 
 

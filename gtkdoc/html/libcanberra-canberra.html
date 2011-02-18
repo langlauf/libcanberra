@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>canberra</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="libcanberra Reference Manual">
 <link rel="up" href="ch01.html" title="libcanberra">
 <link rel="prev" href="ch01.html" title="libcanberra">
 <link rel="next" href="libcanberra-canberra-gtk.html" title="canberra-gtk">
-<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.16 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -26,7 +26,7 @@
                   <a href="#libcanberra-canberra.description" class="shortcut">Description</a>
 </td></tr>
 </table>
-<div class="refentry" title="canberra">
+<div class="refentry">
 <a name="libcanberra-canberra"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
@@ -35,7 +35,7 @@
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsynopsisdiv" title="Synopsis">
+<div class="refsynopsisdiv">
 <a name="libcanberra-canberra.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">#define             <a class="link" href="libcanberra-canberra.html#CA-PROP-MEDIA-NAME:CAPS" title="CA_PROP_MEDIA_NAME">CA_PROP_MEDIA_NAME</a>
 #define             <a class="link" href="libcanberra-canberra.html#CA-PROP-MEDIA-TITLE:CAPS" title="CA_PROP_MEDIA_TITLE">CA_PROP_MEDIA_TITLE</a>
@@ -127,7 +127,7 @@ typedef             <a class="link" href="libcanberra-canberra.html#ca-proplist"
                                                          <em class="parameter"><code><span class="type">size_t</span> nbytes</code></em>);
 </pre>
 </div>
-<div class="refsect1" title="Description">
+<div class="refsect1">
 <a name="libcanberra-canberra.description"></a><h2>Description</h2>
 <p>
 libcanberra defines a simple abstract interface for playing event sounds.
@@ -215,9 +215,9 @@ passed. For sound events attached to a widget on the screen, the
 <code class="literal">CA_PROP_WINDOW_xxx</code> properties should be set.
 </p>
 </div>
-<div class="refsect1" title="Details">
+<div class="refsect1">
 <a name="libcanberra-canberra.details"></a><h2>Details</h2>
-<div class="refsect2" title="CA_PROP_MEDIA_NAME">
+<div class="refsect2">
 <a name="CA-PROP-MEDIA-NAME:CAPS"></a><h3>CA_PROP_MEDIA_NAME</h3>
 <pre class="programlisting">#define CA_PROP_MEDIA_NAME                         "media.name"
 </pre>
@@ -226,7 +226,7 @@ A name describing the media being played. Localized if possible and applicable.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="CA_PROP_MEDIA_TITLE">
+<div class="refsect2">
 <a name="CA-PROP-MEDIA-TITLE:CAPS"></a><h3>CA_PROP_MEDIA_TITLE</h3>
 <pre class="programlisting">#define CA_PROP_MEDIA_TITLE                        "media.title"
 </pre>
@@ -235,7 +235,7 @@ A (song) title describing the media being played. Localized if possible and appl
 </p>
 </div>
 <hr>
-<div class="refsect2" title="CA_PROP_MEDIA_ARTIST">
+<div class="refsect2">
 <a name="CA-PROP-MEDIA-ARTIST:CAPS"></a><h3>CA_PROP_MEDIA_ARTIST</h3>
 <pre class="programlisting">#define CA_PROP_MEDIA_ARTIST                       "media.artist"
 </pre>
@@ -244,7 +244,7 @@ The artist of this media. Localized if possible and applicable.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="CA_PROP_MEDIA_LANGUAGE">
+<div class="refsect2">
 <a name="CA-PROP-MEDIA-LANGUAGE:CAPS"></a><h3>CA_PROP_MEDIA_LANGUAGE</h3>
 <pre class="programlisting">#define CA_PROP_MEDIA_LANGUAGE                     "media.language"
 </pre>
@@ -253,7 +253,7 @@ The language this media is in, in some standard POSIX locale string, such as "de
 </p>
 </div>
 <hr>
-<div class="refsect2" title="CA_PROP_MEDIA_FILENAME">
+<div class="refsect2">
 <a name="CA-PROP-MEDIA-FILENAME:CAPS"></a><h3>CA_PROP_MEDIA_FILENAME</h3>
 <pre class="programlisting">#define CA_PROP_MEDIA_FILENAME                     "media.filename"
 </pre>
@@ -262,7 +262,7 @@ The file name this media was or can be loaded from.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="CA_PROP_MEDIA_ICON">
+<div class="refsect2">
 <a name="CA-PROP-MEDIA-ICON:CAPS"></a><h3>CA_PROP_MEDIA_ICON</h3>
 <pre class="programlisting">#define CA_PROP_MEDIA_ICON                         "media.icon"
 </pre>
@@ -271,7 +271,7 @@ An icon for this media in binary PNG format.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="CA_PROP_MEDIA_ICON_NAME">
+<div class="refsect2">
 <a name="CA-PROP-MEDIA-ICON-NAME:CAPS"></a><h3>CA_PROP_MEDIA_ICON_NAME</h3>
 <pre class="programlisting">#define CA_PROP_MEDIA_ICON_NAME                    "media.icon_name"
 </pre>
@@ -280,7 +280,7 @@ An icon name as defined in the XDG icon naming specifcation.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="CA_PROP_MEDIA_ROLE">
+<div class="refsect2">
 <a name="CA-PROP-MEDIA-ROLE:CAPS"></a><h3>CA_PROP_MEDIA_ROLE</h3>
 <pre class="programlisting">#define CA_PROP_MEDIA_ROLE                         "media.role"
 </pre>
@@ -290,7 +290,7 @@ The "role" this media is played in. For event sounds the string
 </p>
 </div>
 <hr>
-<div class="refsect2" title="CA_PROP_EVENT_ID">
+<div class="refsect2">
 <a name="CA-PROP-EVENT-ID:CAPS"></a><h3>CA_PROP_EVENT_ID</h3>
 <pre class="programlisting">#define CA_PROP_EVENT_ID                           "event.id"
 </pre>
@@ -299,7 +299,7 @@ A textual id for an event sound, as mandated by the XDG sound naming specificati
 </p>
 </div>
 <hr>
-<div class="refsect2" title="CA_PROP_EVENT_DESCRIPTION">
+<div class="refsect2">
 <a name="CA-PROP-EVENT-DESCRIPTION:CAPS"></a><h3>CA_PROP_EVENT_DESCRIPTION</h3>
 <pre class="programlisting">#define CA_PROP_EVENT_DESCRIPTION                  "event.description"
 </pre>
@@ -308,7 +308,7 @@ A descriptive string for the sound event. Localized if possible and applicable.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="CA_PROP_EVENT_MOUSE_X">
+<div class="refsect2">
 <a name="CA-PROP-EVENT-MOUSE-X:CAPS"></a><h3>CA_PROP_EVENT_MOUSE_X</h3>
 <pre class="programlisting">#define CA_PROP_EVENT_MOUSE_X                      "event.mouse.x"
 </pre>
@@ -318,7 +318,7 @@ position of the mouse cursor on the screen, formatted as string.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="CA_PROP_EVENT_MOUSE_Y">
+<div class="refsect2">
 <a name="CA-PROP-EVENT-MOUSE-Y:CAPS"></a><h3>CA_PROP_EVENT_MOUSE_Y</h3>
 <pre class="programlisting">#define CA_PROP_EVENT_MOUSE_Y                      "event.mouse.y"
 </pre>
@@ -328,7 +328,7 @@ position of the mouse cursor on the screen, formatted as string.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="CA_PROP_EVENT_MOUSE_HPOS">
+<div class="refsect2">
 <a name="CA-PROP-EVENT-MOUSE-HPOS:CAPS"></a><h3>CA_PROP_EVENT_MOUSE_HPOS</h3>
 <pre class="programlisting">#define CA_PROP_EVENT_MOUSE_HPOS                   "event.mouse.hpos"
 </pre>
@@ -340,7 +340,7 @@ the right side.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="CA_PROP_EVENT_MOUSE_VPOS">
+<div class="refsect2">
 <a name="CA-PROP-EVENT-MOUSE-VPOS:CAPS"></a><h3>CA_PROP_EVENT_MOUSE_VPOS</h3>
 <pre class="programlisting">#define CA_PROP_EVENT_MOUSE_VPOS                   "event.mouse.vpos"
 </pre>
@@ -352,7 +352,7 @@ the bottom end.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="CA_PROP_EVENT_MOUSE_BUTTON">
+<div class="refsect2">
 <a name="CA-PROP-EVENT-MOUSE-BUTTON:CAPS"></a><h3>CA_PROP_EVENT_MOUSE_BUTTON</h3>
 <pre class="programlisting">#define CA_PROP_EVENT_MOUSE_BUTTON                 "event.mouse.button"
 </pre>
@@ -363,7 +363,7 @@ for left mouse button, 3 for right, 2 for middle.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="CA_PROP_WINDOW_NAME">
+<div class="refsect2">
 <a name="CA-PROP-WINDOW-NAME:CAPS"></a><h3>CA_PROP_WINDOW_NAME</h3>
 <pre class="programlisting">#define CA_PROP_WINDOW_NAME                        "window.name"
 </pre>
@@ -373,7 +373,7 @@ name of this window as human readable string.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="CA_PROP_WINDOW_ID">
+<div class="refsect2">
 <a name="CA-PROP-WINDOW-ID:CAPS"></a><h3>CA_PROP_WINDOW_ID</h3>
 <pre class="programlisting">#define CA_PROP_WINDOW_ID                          "window.id"
 </pre>
@@ -384,7 +384,7 @@ recognize specific windows.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="CA_PROP_WINDOW_ICON">
+<div class="refsect2">
 <a name="CA-PROP-WINDOW-ICON:CAPS"></a><h3>CA_PROP_WINDOW_ICON</h3>
 <pre class="programlisting">#define CA_PROP_WINDOW_ICON                        "window.icon"
 </pre>
@@ -394,7 +394,7 @@ icon data in PNG format for this window.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="CA_PROP_WINDOW_ICON_NAME">
+<div class="refsect2">
 <a name="CA-PROP-WINDOW-ICON-NAME:CAPS"></a><h3>CA_PROP_WINDOW_ICON_NAME</h3>
 <pre class="programlisting">#define CA_PROP_WINDOW_ICON_NAME                   "window.icon_name"
 </pre>
@@ -405,7 +405,7 @@ specification.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="CA_PROP_WINDOW_X11_DISPLAY">
+<div class="refsect2">
 <a name="CA-PROP-WINDOW-X11-DISPLAY:CAPS"></a><h3>CA_PROP_WINDOW_X11_DISPLAY</h3>
 <pre class="programlisting">#define CA_PROP_WINDOW_X11_DISPLAY                 "window.x11.display"
 </pre>
@@ -415,7 +415,7 @@ windowing system is X11, the X display name of the window (e.g. ":0").
 </p>
 </div>
 <hr>
-<div class="refsect2" title="CA_PROP_WINDOW_X11_SCREEN">
+<div class="refsect2">
 <a name="CA-PROP-WINDOW-X11-SCREEN:CAPS"></a><h3>CA_PROP_WINDOW_X11_SCREEN</h3>
 <pre class="programlisting">#define CA_PROP_WINDOW_X11_SCREEN                  "window.x11.screen"
 </pre>
@@ -426,7 +426,7 @@ string (e.g. "0").
 </p>
 </div>
 <hr>
-<div class="refsect2" title="CA_PROP_WINDOW_X11_MONITOR">
+<div class="refsect2">
 <a name="CA-PROP-WINDOW-X11-MONITOR:CAPS"></a><h3>CA_PROP_WINDOW_X11_MONITOR</h3>
 <pre class="programlisting">#define CA_PROP_WINDOW_X11_MONITOR                 "window.x11.monitor"
 </pre>
@@ -437,7 +437,7 @@ string (e.g. "0").
 </p>
 </div>
 <hr>
-<div class="refsect2" title="CA_PROP_WINDOW_X11_XID">
+<div class="refsect2">
 <a name="CA-PROP-WINDOW-X11-XID:CAPS"></a><h3>CA_PROP_WINDOW_X11_XID</h3>
 <pre class="programlisting">#define CA_PROP_WINDOW_X11_XID                     "window.x11.xid"
 </pre>
@@ -447,7 +447,7 @@ windowing system is X11, the XID of the window formatted as string.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="CA_PROP_APPLICATION_NAME">
+<div class="refsect2">
 <a name="CA-PROP-APPLICATION-NAME:CAPS"></a><h3>CA_PROP_APPLICATION_NAME</h3>
 <pre class="programlisting">#define CA_PROP_APPLICATION_NAME                   "application.name"
 </pre>
@@ -458,7 +458,7 @@ applicable.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="CA_PROP_APPLICATION_ID">
+<div class="refsect2">
 <a name="CA-PROP-APPLICATION-ID:CAPS"></a><h3>CA_PROP_APPLICATION_ID</h3>
 <pre class="programlisting">#define CA_PROP_APPLICATION_ID                     "application.id"
 </pre>
@@ -468,7 +468,7 @@ by. (e.g. "org.gnu.emacs").
 </p>
 </div>
 <hr>
-<div class="refsect2" title="CA_PROP_APPLICATION_VERSION">
+<div class="refsect2">
 <a name="CA-PROP-APPLICATION-VERSION:CAPS"></a><h3>CA_PROP_APPLICATION_VERSION</h3>
 <pre class="programlisting">#define CA_PROP_APPLICATION_VERSION                "application.version"
 </pre>
@@ -478,7 +478,7 @@ by. (e.g. "22.2")
 </p>
 </div>
 <hr>
-<div class="refsect2" title="CA_PROP_APPLICATION_ICON">
+<div class="refsect2">
 <a name="CA-PROP-APPLICATION-ICON:CAPS"></a><h3>CA_PROP_APPLICATION_ICON</h3>
 <pre class="programlisting">#define CA_PROP_APPLICATION_ICON                   "application.icon"
 </pre>
@@ -488,7 +488,7 @@ is triggered by.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="CA_PROP_APPLICATION_ICON_NAME">
+<div class="refsect2">
 <a name="CA-PROP-APPLICATION-ICON-NAME:CAPS"></a><h3>CA_PROP_APPLICATION_ICON_NAME</h3>
 <pre class="programlisting">#define CA_PROP_APPLICATION_ICON_NAME              "application.icon_name"
 </pre>
@@ -498,7 +498,7 @@ as defined in the XDG icon naming specification.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="CA_PROP_APPLICATION_LANGUAGE">
+<div class="refsect2">
 <a name="CA-PROP-APPLICATION-LANGUAGE:CAPS"></a><h3>CA_PROP_APPLICATION_LANGUAGE</h3>
 <pre class="programlisting">#define CA_PROP_APPLICATION_LANGUAGE               "application.language"
 </pre>
@@ -508,7 +508,7 @@ event is running in. A POSIX locale string such as de_DE<em class="parameter"><c
 </p>
 </div>
 <hr>
-<div class="refsect2" title="CA_PROP_APPLICATION_PROCESS_ID">
+<div class="refsect2">
 <a name="CA-PROP-APPLICATION-PROCESS-ID:CAPS"></a><h3>CA_PROP_APPLICATION_PROCESS_ID</h3>
 <pre class="programlisting">#define CA_PROP_APPLICATION_PROCESS_ID             "application.process.id"
 </pre>
@@ -517,7 +517,7 @@ The unix PID of the process that is triggering this sound event, formatted as st
 </p>
 </div>
 <hr>
-<div class="refsect2" title="CA_PROP_APPLICATION_PROCESS_BINARY">
+<div class="refsect2">
 <a name="CA-PROP-APPLICATION-PROCESS-BINARY:CAPS"></a><h3>CA_PROP_APPLICATION_PROCESS_BINARY</h3>
 <pre class="programlisting">#define CA_PROP_APPLICATION_PROCESS_BINARY         "application.process.binary"
 </pre>
@@ -526,7 +526,7 @@ The path to the process binary of the process that is triggering this sound even
 </p>
 </div>
 <hr>
-<div class="refsect2" title="CA_PROP_APPLICATION_PROCESS_USER">
+<div class="refsect2">
 <a name="CA-PROP-APPLICATION-PROCESS-USER:CAPS"></a><h3>CA_PROP_APPLICATION_PROCESS_USER</h3>
 <pre class="programlisting">#define CA_PROP_APPLICATION_PROCESS_USER           "application.process.user"
 </pre>
@@ -535,7 +535,7 @@ The user that owns the process that is triggering this sound event.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="CA_PROP_APPLICATION_PROCESS_HOST">
+<div class="refsect2">
 <a name="CA-PROP-APPLICATION-PROCESS-HOST:CAPS"></a><h3>CA_PROP_APPLICATION_PROCESS_HOST</h3>
 <pre class="programlisting">#define CA_PROP_APPLICATION_PROCESS_HOST           "application.process.host"
 </pre>
@@ -544,7 +544,7 @@ The host name of the host the process that is triggering this sound event runs o
 </p>
 </div>
 <hr>
-<div class="refsect2" title="CA_PROP_CANBERRA_CACHE_CONTROL">
+<div class="refsect2">
 <a name="CA-PROP-CANBERRA-CACHE-CONTROL:CAPS"></a><h3>CA_PROP_CANBERRA_CACHE_CONTROL</h3>
 <pre class="programlisting">#define CA_PROP_CANBERRA_CACHE_CONTROL             "canberra.cache-control"
 </pre>
@@ -571,7 +571,7 @@ property is stripped from it.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="CA_PROP_CANBERRA_VOLUME">
+<div class="refsect2">
 <a name="CA-PROP-CANBERRA-VOLUME:CAPS"></a><h3>CA_PROP_CANBERRA_VOLUME</h3>
 <pre class="programlisting">#define CA_PROP_CANBERRA_VOLUME                    "canberra.volume"
 </pre>
@@ -587,7 +587,7 @@ property is stripped from it.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="CA_PROP_CANBERRA_XDG_THEME_NAME">
+<div class="refsect2">
 <a name="CA-PROP-CANBERRA-XDG-THEME-NAME:CAPS"></a><h3>CA_PROP_CANBERRA_XDG_THEME_NAME</h3>
 <pre class="programlisting">#define CA_PROP_CANBERRA_XDG_THEME_NAME            "canberra.xdg-theme.name"
 </pre>
@@ -601,7 +601,7 @@ property is stripped from it.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="CA_PROP_CANBERRA_XDG_THEME_OUTPUT_PROFILE">
+<div class="refsect2">
 <a name="CA-PROP-CANBERRA-XDG-THEME-OUTPUT-PROFILE:CAPS"></a><h3>CA_PROP_CANBERRA_XDG_THEME_OUTPUT_PROFILE</h3>
 <pre class="programlisting">#define CA_PROP_CANBERRA_XDG_THEME_OUTPUT_PROFILE  "canberra.xdg-theme.output-profile"
 </pre>
@@ -615,7 +615,7 @@ property is stripped from it.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="ca_context">
+<div class="refsect2">
 <a name="ca-context"></a><h3>ca_context</h3>
 <pre class="programlisting">typedef struct ca_context ca_context;
 </pre>
@@ -624,7 +624,7 @@ A libcanberra context object.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="ca_finish_callback_t ()">
+<div class="refsect2">
 <a name="ca-finish-callback-t"></a><h3>ca_finish_callback_t ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                (*ca_finish_callback_t)             (<em class="parameter"><code><a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context"><span class="type">ca_context</span></a> *c</code></em>,
                                                          <em class="parameter"><code><span class="type">uint32_t</span> id</code></em>,
@@ -644,29 +644,25 @@ used to asynchronously signal some kind of notification object
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>c</code></em> :</span></p></td>
-<td>The libcanberra context this callback is called for
-</td>
+<td>The libcanberra context this callback is called for</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>id</code></em> :</span></p></td>
-<td>The numerical id passed to the <a class="link" href="libcanberra-canberra.html#ca-context-play-full" title="ca_context_play_full ()"><code class="function">ca_context_play_full()</code></a> when starting the event sound playback.
-</td>
+<td>The numerical id passed to the <a class="link" href="libcanberra-canberra.html#ca-context-play-full" title="ca_context_play_full ()"><code class="function">ca_context_play_full()</code></a> when starting the event sound playback.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error_code</code></em> :</span></p></td>
-<td>A numerical error code describing the reason this callback is called. If CA_SUCCESS is passed in the playback of the event sound was successfully completed.
-</td>
+<td>A numerical error code describing the reason this callback is called. If CA_SUCCESS is passed in the playback of the event sound was successfully completed.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>userdata</code></em> :</span></p></td>
-<td>Some arbitrary user data the caller of <a class="link" href="libcanberra-canberra.html#ca-context-play-full" title="ca_context_play_full ()"><code class="function">ca_context_play_full()</code></a> passed in.
-</td>
+<td>Some arbitrary user data the caller of <a class="link" href="libcanberra-canberra.html#ca-context-play-full" title="ca_context_play_full ()"><code class="function">ca_context_play_full()</code></a> passed in.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="ca_context_create ()">
+<div class="refsect2">
 <a name="ca-context-create"></a><h3>ca_context_create ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>                 ca_context_create                   (<em class="parameter"><code><a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context"><span class="type">ca_context</span></a> **c</code></em>);</pre>
 <p>
@@ -680,19 +676,17 @@ available call <a class="link" href="libcanberra-canberra.html#ca-context-open" 
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>c</code></em> :</span></p></td>
-<td>A pointer wheere to fill in the newly created context object.
-</td>
+<td>A pointer wheere to fill in the newly created context object.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> 0 on success, negative error code on error.
-</td>
+<td>0 on success, negative error code on error.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="ca_context_destroy ()">
+<div class="refsect2">
 <a name="ca-context-destroy"></a><h3>ca_context_destroy ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>                 ca_context_destroy                  (<em class="parameter"><code><a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context"><span class="type">ca_context</span></a> *c</code></em>);</pre>
 <p>
@@ -703,19 +697,17 @@ Destroy a (connected or unconnected) context object.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>c</code></em> :</span></p></td>
-<td>the context to destroy.
-</td>
+<td>the context to destroy.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> 0 on success, negative error code on error.
-</td>
+<td>0 on success, negative error code on error.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="ca_context_open ()">
+<div class="refsect2">
 <a name="ca-context-open"></a><h3>ca_context_open ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>                 ca_context_open                     (<em class="parameter"><code><a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context"><span class="type">ca_context</span></a> *c</code></em>);</pre>
 <p>
@@ -729,19 +721,17 @@ with <a class="link" href="libcanberra-canberra.html#ca-context-change-props" ti
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>c</code></em> :</span></p></td>
-<td>the context to connect.
-</td>
+<td>the context to connect.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> 0 on success, negative error code on error.
-</td>
+<td>0 on success, negative error code on error.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="ca_context_set_driver ()">
+<div class="refsect2">
 <a name="ca-context-set-driver"></a><h3>ca_context_set_driver ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>                 ca_context_set_driver               (<em class="parameter"><code><a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context"><span class="type">ca_context</span></a> *c</code></em>,
                                                          <em class="parameter"><code>const <span class="type">char</span> *driver</code></em>);</pre>
@@ -756,24 +746,21 @@ the specified driver backend is not available. Use
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>c</code></em> :</span></p></td>
-<td>the context to change the backend driver for
-</td>
+<td>the context to change the backend driver for</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>driver</code></em> :</span></p></td>
-<td>the backend driver to use (e.g. "alsa", "pulse", "null", ...)
-</td>
+<td>the backend driver to use (e.g. "alsa", "pulse", "null", ...)</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> 0 on success, negative error code on error.
-</td>
+<td>0 on success, negative error code on error.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="ca_context_change_device ()">
+<div class="refsect2">
 <a name="ca-context-change-device"></a><h3>ca_context_change_device ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>                 ca_context_change_device            (<em class="parameter"><code><a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context"><span class="type">ca_context</span></a> *c</code></em>,
                                                          <em class="parameter"><code>const <span class="type">char</span> *device</code></em>);</pre>
@@ -792,24 +779,21 @@ currently playing event sounds to be moved to the new device..
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>c</code></em> :</span></p></td>
-<td>the context to change the backend device for
-</td>
+<td>the context to change the backend device for</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>device</code></em> :</span></p></td>
-<td>the backend device to use, in a format that is specific to the backend.
-</td>
+<td>the backend device to use, in a format that is specific to the backend.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> 0 on success, negative error code on error.
-</td>
+<td>0 on success, negative error code on error.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="ca_context_change_props ()">
+<div class="refsect2">
 <a name="ca-context-change-props"></a><h3>ca_context_change_props ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>                 ca_context_change_props             (<em class="parameter"><code><a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context"><span class="type">ca_context</span></a> *c</code></em>,
                                                          <em class="parameter"><code>...</code></em>);</pre>
@@ -829,24 +813,21 @@ already been set before will be overwritten.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>c</code></em> :</span></p></td>
-<td>the context to set the properties on.
-</td>
+<td>the context to set the properties on.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
-<td>the list of string pairs for the properties. Needs to be a NULL terminated list.
-</td>
+<td>the list of string pairs for the properties. Needs to be a NULL terminated list.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> 0 on success, negative error code on error.
-</td>
+<td>0 on success, negative error code on error.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="ca_context_change_props_full ()">
+<div class="refsect2">
 <a name="ca-context-change-props-full"></a><h3>ca_context_change_props_full ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>                 ca_context_change_props_full        (<em class="parameter"><code><a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context"><span class="type">ca_context</span></a> *c</code></em>,
                                                          <em class="parameter"><code><a class="link" href="libcanberra-canberra.html#ca-proplist" title="ca_proplist"><span class="type">ca_proplist</span></a> *p</code></em>);</pre>
@@ -860,24 +841,21 @@ properties such as <a class="link" href="libcanberra-canberra.html#CA-PROP-APPLI
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>c</code></em> :</span></p></td>
-<td>the context to set the properties on.
-</td>
+<td>the context to set the properties on.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>p</code></em> :</span></p></td>
-<td>the property list to set.
-</td>
+<td>the property list to set.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> 0 on success, negative error code on error.
-</td>
+<td>0 on success, negative error code on error.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="ca_context_play ()">
+<div class="refsect2">
 <a name="ca-context-play"></a><h3>ca_context_play ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>                 ca_context_play                     (<em class="parameter"><code><a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context"><span class="type">ca_context</span></a> *c</code></em>,
                                                          <em class="parameter"><code><span class="type">uint32_t</span> id</code></em>,
@@ -924,8 +902,7 @@ that matches the XDG sound name in <a class="link" href="libcanberra-canberra.ht
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>c</code></em> :</span></p></td>
-<td>the context to play the event sound on
-</td>
+<td>the context to play the event sound on</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>id</code></em> :</span></p></td>
@@ -934,19 +911,17 @@ that matches the XDG sound name in <a class="link" href="libcanberra-canberra.ht
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
-<td>additional properties for this sound event.
-</td>
+<td>additional properties for this sound event.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> 0 on success, negative error code on error.
-</td>
+<td>0 on success, negative error code on error.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="ca_context_play_full ()">
+<div class="refsect2">
 <a name="ca-context-play-full"></a><h3>ca_context_play_full ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>                 ca_context_play_full                (<em class="parameter"><code><a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context"><span class="type">ca_context</span></a> *c</code></em>,
                                                          <em class="parameter"><code><span class="type">uint32_t</span> id</code></em>,
@@ -969,34 +944,29 @@ properly.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>c</code></em> :</span></p></td>
-<td>the context to play the event sound on
-</td>
+<td>the context to play the event sound on</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>id</code></em> :</span></p></td>
-<td>an integer id this sound can be later be identified with when calling <a class="link" href="libcanberra-canberra.html#ca-context-cancel" title="ca_context_cancel ()"><code class="function">ca_context_cancel()</code></a> or when the callback is called.
-</td>
+<td>an integer id this sound can be later be identified with when calling <a class="link" href="libcanberra-canberra.html#ca-context-cancel" title="ca_context_cancel ()"><code class="function">ca_context_cancel()</code></a> or when the callback is called.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>p</code></em> :</span></p></td>
-<td>A property list of properties for this event sound
-</td>
+<td>A property list of properties for this event sound</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cb</code></em> :</span></p></td>
-<td>A callback to call when this sound event sucessfully finished playing or when an error occured during playback.
-</td>
+<td>A callback to call when this sound event sucessfully finished playing or when an error occured during playback.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> 0 on success, negative error code on error.
-</td>
+<td>0 on success, negative error code on error.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="ca_context_cancel ()">
+<div class="refsect2">
 <a name="ca-context-cancel"></a><h3>ca_context_cancel ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>                 ca_context_cancel                   (<em class="parameter"><code><a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context"><span class="type">ca_context</span></a> *c</code></em>,
                                                          <em class="parameter"><code><span class="type">uint32_t</span> id</code></em>);</pre>
@@ -1012,24 +982,21 @@ error code.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>c</code></em> :</span></p></td>
-<td>the context to cancel the sounds on
-</td>
+<td>the context to cancel the sounds on</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>id</code></em> :</span></p></td>
-<td>the id that identify the sounds to cancel.
-</td>
+<td>the id that identify the sounds to cancel.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> 0 on success, negative error code on error.
-</td>
+<td>0 on success, negative error code on error.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="ca_context_cache ()">
+<div class="refsect2">
 <a name="ca-context-cache"></a><h3>ca_context_cache ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>                 ca_context_cache                    (<em class="parameter"><code><a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context"><span class="type">ca_context</span></a> *c</code></em>,
                                                          <em class="parameter"><code>...</code></em>);</pre>
@@ -1051,24 +1018,21 @@ will return <code class="literal">CA_ERROR_NOTSUPPORTED</code>.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>c</code></em> :</span></p></td>
-<td>The context to use for uploading.
-</td>
+<td>The context to use for uploading.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
-<td>The properties for this event sound. Terminated with NULL.
-</td>
+<td>The properties for this event sound. Terminated with NULL.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> 0 on success, negative error code on error.
-</td>
+<td>0 on success, negative error code on error.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="ca_context_cache_full ()">
+<div class="refsect2">
 <a name="ca-context-cache-full"></a><h3>ca_context_cache_full ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>                 ca_context_cache_full               (<em class="parameter"><code><a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context"><span class="type">ca_context</span></a> *c</code></em>,
                                                          <em class="parameter"><code><a class="link" href="libcanberra-canberra.html#ca-proplist" title="ca_proplist"><span class="type">ca_proplist</span></a> *p</code></em>);</pre>
@@ -1086,24 +1050,21 @@ will return CA_ERROR_NOTSUPPORTED.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>c</code></em> :</span></p></td>
-<td>The context to use for uploading.
-</td>
+<td>The context to use for uploading.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>p</code></em> :</span></p></td>
-<td>The property list for this event sound.
-</td>
+<td>The property list for this event sound.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> 0 on success, negative error code on error.
-</td>
+<td>0 on success, negative error code on error.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="ca_context_playing ()">
+<div class="refsect2">
 <a name="ca-context-playing"></a><h3>ca_context_playing ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>                 ca_context_playing                  (<em class="parameter"><code><a class="link" href="libcanberra-canberra.html#ca-context" title="ca_context"><span class="type">ca_context</span></a> *c</code></em>,
                                                          <em class="parameter"><code><span class="type">uint32_t</span> id</code></em>,
@@ -1118,30 +1079,26 @@ anymore or non-zero if there is at least one playing.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>c</code></em> :</span></p></td>
-<td>the context to check if sound is still playing
-</td>
+<td>the context to check if sound is still playing</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>id</code></em> :</span></p></td>
-<td>the id that identify the sounds to check
-</td>
+<td>the id that identify the sounds to check</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>playing</code></em> :</span></p></td>
-<td>a pointer to a boolean that will be updated with the play status
-</td>
+<td>a pointer to a boolean that will be updated with the play status</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> 0 on success, negative error code on error.
-</td>
+<td>0 on success, negative error code on error.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 0.16</p>
 </div>
 <hr>
-<div class="refsect2" title="ca_strerror ()">
+<div class="refsect2">
 <a name="ca-strerror"></a><h3>ca_strerror ()</h3>
 <pre class="programlisting">const <span class="returnvalue">char</span> *        ca_strerror                         (<em class="parameter"><code><span class="type">int</span> code</code></em>);</pre>
 <p>
@@ -1152,19 +1109,17 @@ Converts a numerical error code as returned by most libcanberra API functions in
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>code</code></em> :</span></p></td>
-<td>Numerical error code as returned by a libcanberra API function
-</td>
+<td>Numerical error code as returned by a libcanberra API function</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a human readable error string.
-</td>
+<td>a human readable error string.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="ca_proplist">
+<div class="refsect2">
 <a name="ca-proplist"></a><h3>ca_proplist</h3>
 <pre class="programlisting">typedef struct ca_proplist ca_proplist;
 </pre>
@@ -1173,7 +1128,7 @@ A canberra property list object. Basically a hashtable.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="ca_proplist_create ()">
+<div class="refsect2">
 <a name="ca-proplist-create"></a><h3>ca_proplist_create ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>                 ca_proplist_create                  (<em class="parameter"><code><a class="link" href="libcanberra-canberra.html#ca-proplist" title="ca_proplist"><span class="type">ca_proplist</span></a> **p</code></em>);</pre>
 <p>
@@ -1184,19 +1139,17 @@ Allocate a new empty property list.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>p</code></em> :</span></p></td>
-<td>A pointer where to fill in a pointer for the new property list.
-</td>
+<td>A pointer where to fill in a pointer for the new property list.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> 0 on success, negative error code on error.
-</td>
+<td>0 on success, negative error code on error.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="ca_proplist_destroy ()">
+<div class="refsect2">
 <a name="ca-proplist-destroy"></a><h3>ca_proplist_destroy ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>                 ca_proplist_destroy                 (<em class="parameter"><code><a class="link" href="libcanberra-canberra.html#ca-proplist" title="ca_proplist"><span class="type">ca_proplist</span></a> *p</code></em>);</pre>
 <p>
@@ -1207,19 +1160,17 @@ Destroys a property list that was created with <a class="link" href="libcanberra
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>p</code></em> :</span></p></td>
-<td>The property list to destroy
-</td>
+<td>The property list to destroy</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> 0 on success, negative error code on error.
-</td>
+<td>0 on success, negative error code on error.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="ca_proplist_sets ()">
+<div class="refsect2">
 <a name="ca-proplist-sets"></a><h3>ca_proplist_sets ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>                 ca_proplist_sets                    (<em class="parameter"><code><a class="link" href="libcanberra-canberra.html#ca-proplist" title="ca_proplist"><span class="type">ca_proplist</span></a> *p</code></em>,
                                                          <em class="parameter"><code>const <span class="type">char</span> *key</code></em>,
@@ -1232,29 +1183,25 @@ Add a new string key/value pair to the property list.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>p</code></em> :</span></p></td>
-<td>The property list to add this key/value pair to
-</td>
+<td>The property list to add this key/value pair to</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>The key for this key/value pair
-</td>
+<td>The key for this key/value pair</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>The value for this key/value pair
-</td>
+<td>The value for this key/value pair</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> 0 on success, negative error code on error.
-</td>
+<td>0 on success, negative error code on error.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="ca_proplist_setf ()">
+<div class="refsect2">
 <a name="ca-proplist-setf"></a><h3>ca_proplist_setf ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>                 ca_proplist_setf                    (<em class="parameter"><code><a class="link" href="libcanberra-canberra.html#ca-proplist" title="ca_proplist"><span class="type">ca_proplist</span></a> *p</code></em>,
                                                          <em class="parameter"><code>const <span class="type">char</span> *key</code></em>,
@@ -1270,34 +1217,29 @@ and formats a string of it.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>p</code></em> :</span></p></td>
-<td>The property list to add this key/value pair to
-</td>
+<td>The property list to add this key/value pair to</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>The key for this key/value pair
-</td>
+<td>The key for this key/value pair</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>format</code></em> :</span></p></td>
-<td>The format string for the value for this key/value pair
-</td>
+<td>The format string for the value for this key/value pair</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
-<td>The parameters for the format string
-</td>
+<td>The parameters for the format string</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> 0 on success, negative error code on error.
-</td>
+<td>0 on success, negative error code on error.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="ca_proplist_set ()">
+<div class="refsect2">
 <a name="ca-proplist-set"></a><h3>ca_proplist_set ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>                 ca_proplist_set                     (<em class="parameter"><code><a class="link" href="libcanberra-canberra.html#ca-proplist" title="ca_proplist"><span class="type">ca_proplist</span></a> *p</code></em>,
                                                          <em class="parameter"><code>const <span class="type">char</span> *key</code></em>,
@@ -1311,28 +1253,23 @@ Add a new binary key/value pair to the property list.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>p</code></em> :</span></p></td>
-<td>The property list to add this key/value pair to
-</td>
+<td>The property list to add this key/value pair to</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>The key for this key/value pair
-</td>
+<td>The key for this key/value pair</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
-<td>The binary value for this key value pair
-</td>
+<td>The binary value for this key value pair</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>nbytes</code></em> :</span></p></td>
-<td>The size of thebinary value for this key value pair.
-</td>
+<td>The size of thebinary value for this key value pair.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> 0 on success, negative error code on error.
-</td>
+<td>0 on success, negative error code on error.</td>
 </tr>
 </tbody>
 </table></div>
@@ -1341,6 +1278,6 @@ Add a new binary key/value pair to the property list.
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.14</div>
+          Generated by GTK-Doc V1.16</div>
 </body>
 </html>

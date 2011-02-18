@@ -273,9 +273,50 @@ libcanberra_null_la_LDFLAGS = \
 endif
 endif
 
+bin_PROGRAMS =
+CLEANFILES =
+
+if HAVE_UDEV
+if HAVE_ALSA
+
+bin_PROGRAMS += \
+	canberra-boot
+
+canberra_boot_SOURCES = \
+	canberra-boot.c
+
+canberra_boot_LDADD = \
+	$(UDEV_LIBS) \
+	libcanberra.la
+
+canberra_boot_CFLAGS = \
+	$(UDEV_CFLAGS)
+
+if HAVE_SYSTEMD
+
+systemdsystemunit_DATA = \
+	canberra-system-bootup.service \
+	canberra-system-shutdown.service \
+	canberra-system-shutdown-reboot.service
+
+EXTRA_DIST += \
+	canberra-system-bootup.service.in \
+	canberra-system-shutdown.service.in \
+	canberra-system-shutdown-reboot.service.in
+
+%.service: %.service.in
+	$(AM_V_GEN)sed -e 's,@bindir\@,$(bindir),g' $< > $@
+
+CLEANFILES += \
+	$(systemdsystemunit_DATA)
+
+endif
+endif
+endif
+
 if HAVE_GTK_ANY
 
-bin_PROGRAMS = \
+bin_PROGRAMS += \
 	canberra-gtk-play
 
 include_HEADERS += \
@@ -394,7 +435,7 @@ gdmautostart_DATA = \
 gnomeshutdown_SCRIPTS = \
 	libcanberra-logout-sound.sh
 
-CLEANFILES = \
+CLEANFILES += \
 	libcanberra-login-sound.desktop \
 	libcanberra-ready-sound.desktop \
 	libcanberra-logout-sound.sh
