@@ -161,7 +161,8 @@ bin_PROGRAMS = $(am__EXEEXT_1) $(am__EXEEXT_2)
 @HAVE_GTK_ANY_TRUE@	libcanberra-logout-sound.sh
 
 subdir = src
-DIST_COMMON = $(am__include_HEADERS_DIST) $(srcdir)/Makefile.am \
+DIST_COMMON = $(am__dist_gsdgtkmodules_DATA_DIST) \
+	$(am__include_HEADERS_DIST) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in $(srcdir)/canberra.h.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/attributes.m4 \
@@ -199,7 +200,8 @@ am__base_list = \
 am__installdirs = "$(DESTDIR)$(gtk3moduledir)" \
 	"$(DESTDIR)$(gtkmoduledir)" "$(DESTDIR)$(libdir)" \
 	"$(DESTDIR)$(plugindir)" "$(DESTDIR)$(bindir)" \
-	"$(DESTDIR)$(gnomeshutdowndir)" "$(DESTDIR)$(gdmautostartdir)" \
+	"$(DESTDIR)$(gnomeshutdowndir)" \
+	"$(DESTDIR)$(gsdgtkmodulesdir)" "$(DESTDIR)$(gdmautostartdir)" \
 	"$(DESTDIR)$(gnomeautostartdir)" \
 	"$(DESTDIR)$(systemdsystemunitdir)" "$(DESTDIR)$(includedir)"
 LTLIBRARIES = $(gtk3module_LTLIBRARIES) $(gtkmodule_LTLIBRARIES) \
@@ -451,8 +453,9 @@ DIST_SOURCES = $(am__libcanberra_alsa_la_SOURCES_DIST) \
 	$(am__libcanberra_la_SOURCES_DIST) \
 	$(am__canberra_boot_SOURCES_DIST) \
 	$(am__canberra_gtk_play_SOURCES_DIST) $(test_canberra_SOURCES)
-DATA = $(gdmautostart_DATA) $(gnomeautostart_DATA) \
-	$(systemdsystemunit_DATA)
+am__dist_gsdgtkmodules_DATA_DIST = canberra-gtk-module.desktop
+DATA = $(dist_gsdgtkmodules_DATA) $(gdmautostart_DATA) \
+	$(gnomeautostart_DATA) $(systemdsystemunit_DATA)
 am__include_HEADERS_DIST = canberra.h canberra-gtk.h
 HEADERS = $(include_HEADERS)
 ETAGS = etags
@@ -640,7 +643,8 @@ gtk3moduledir = @GTK3_MODULES_DIR@
 plugindir = $(libdir)/libcanberra-@PACKAGE_VERSION@
 gnomeshutdowndir = $(datadir)/gnome/shutdown
 gnomeautostartdir = $(datadir)/gnome/autostart
-gdmautostartdir = $(datadir)/gdm/autostart/LoginWindow/
+gdmautostartdir = $(datadir)/gdm/autostart/LoginWindow
+gsdgtkmodulesdir = $(libdir)/gnome-settings-daemon-3.0/gtk-modules
 AM_CFLAGS = $(PTHREAD_CFLAGS) -DCA_PLUGIN_PATH=\"$(plugindir)\"
 #AM_CFLAGS = $(PTHREAD_CFLAGS) -DCA_PLUGIN_PATH=\"/home/lennart/projects/libcanberra/src/.libs\"
 AM_CXXFLAGS = $(PTHREAD_CFLAGS)
@@ -871,6 +875,9 @@ CLEANFILES = $(am__append_26) $(am__append_32)
 
 @HAVE_GTK3_TRUE@canberra_gtk_play_CFLAGS = \
 @HAVE_GTK3_TRUE@	$(GTK3_CFLAGS)
+
+@HAVE_GTK_ANY_TRUE@dist_gsdgtkmodules_DATA = \
+@HAVE_GTK_ANY_TRUE@	canberra-gtk-module.desktop
 
 @HAVE_GTK_ANY_TRUE@canberra_gtk_play_SOURCES = \
 @HAVE_GTK_ANY_TRUE@	canberra-gtk-play.c
@@ -1492,6 +1499,26 @@ mostlyclean-libtool:
 
 clean-libtool:
 	-rm -rf .libs _libs
+install-dist_gsdgtkmodulesDATA: $(dist_gsdgtkmodules_DATA)
+	@$(NORMAL_INSTALL)
+	test -z "$(gsdgtkmodulesdir)" || $(MKDIR_P) "$(DESTDIR)$(gsdgtkmodulesdir)"
+	@list='$(dist_gsdgtkmodules_DATA)'; test -n "$(gsdgtkmodulesdir)" || list=; \
+	for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  echo "$$d$$p"; \
+	done | $(am__base_list) | \
+	while read files; do \
+	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(gsdgtkmodulesdir)'"; \
+	  $(INSTALL_DATA) $$files "$(DESTDIR)$(gsdgtkmodulesdir)" || exit $$?; \
+	done
+
+uninstall-dist_gsdgtkmodulesDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(dist_gsdgtkmodules_DATA)'; test -n "$(gsdgtkmodulesdir)" || list=; \
+	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
+	test -n "$$files" || exit 0; \
+	echo " ( cd '$(DESTDIR)$(gsdgtkmodulesdir)' && rm -f" $$files ")"; \
+	cd "$(DESTDIR)$(gsdgtkmodulesdir)" && rm -f $$files
 install-gdmautostartDATA: $(gdmautostart_DATA)
 	@$(NORMAL_INSTALL)
 	test -z "$(gdmautostartdir)" || $(MKDIR_P) "$(DESTDIR)$(gdmautostartdir)"
@@ -1662,7 +1689,7 @@ all-am: Makefile $(LTLIBRARIES) $(PROGRAMS) $(SCRIPTS) $(DATA) \
 install-binPROGRAMS: install-libLTLIBRARIES
 
 installdirs:
-	for dir in "$(DESTDIR)$(gtk3moduledir)" "$(DESTDIR)$(gtkmoduledir)" "$(DESTDIR)$(libdir)" "$(DESTDIR)$(plugindir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(gnomeshutdowndir)" "$(DESTDIR)$(gdmautostartdir)" "$(DESTDIR)$(gnomeautostartdir)" "$(DESTDIR)$(systemdsystemunitdir)" "$(DESTDIR)$(includedir)"; do \
+	for dir in "$(DESTDIR)$(gtk3moduledir)" "$(DESTDIR)$(gtkmoduledir)" "$(DESTDIR)$(libdir)" "$(DESTDIR)$(plugindir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(gnomeshutdowndir)" "$(DESTDIR)$(gsdgtkmodulesdir)" "$(DESTDIR)$(gdmautostartdir)" "$(DESTDIR)$(gnomeautostartdir)" "$(DESTDIR)$(systemdsystemunitdir)" "$(DESTDIR)$(includedir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-am
@@ -1716,7 +1743,8 @@ info: info-am
 
 info-am:
 
-install-data-am: install-gdmautostartDATA install-gnomeautostartDATA \
+install-data-am: install-dist_gsdgtkmodulesDATA \
+	install-gdmautostartDATA install-gnomeautostartDATA \
 	install-gnomeshutdownSCRIPTS install-gtk3moduleLTLIBRARIES \
 	install-gtkmoduleLTLIBRARIES install-includeHEADERS \
 	install-pluginLTLIBRARIES install-systemdsystemunitDATA
@@ -1766,11 +1794,12 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-binPROGRAMS uninstall-gdmautostartDATA \
-	uninstall-gnomeautostartDATA uninstall-gnomeshutdownSCRIPTS \
-	uninstall-gtk3moduleLTLIBRARIES uninstall-gtkmoduleLTLIBRARIES \
-	uninstall-includeHEADERS uninstall-libLTLIBRARIES \
-	uninstall-pluginLTLIBRARIES uninstall-systemdsystemunitDATA
+uninstall-am: uninstall-binPROGRAMS uninstall-dist_gsdgtkmodulesDATA \
+	uninstall-gdmautostartDATA uninstall-gnomeautostartDATA \
+	uninstall-gnomeshutdownSCRIPTS uninstall-gtk3moduleLTLIBRARIES \
+	uninstall-gtkmoduleLTLIBRARIES uninstall-includeHEADERS \
+	uninstall-libLTLIBRARIES uninstall-pluginLTLIBRARIES \
+	uninstall-systemdsystemunitDATA
 
 .MAKE: install-am install-exec-am install-strip
 
@@ -1781,24 +1810,24 @@ uninstall-am: uninstall-binPROGRAMS uninstall-gdmautostartDATA \
 	distclean-compile distclean-generic distclean-libtool \
 	distclean-tags distdir dvi dvi-am html html-am info info-am \
 	install install-am install-binPROGRAMS install-data \
-	install-data-am install-dvi install-dvi-am install-exec \
-	install-exec-am install-exec-hook install-gdmautostartDATA \
-	install-gnomeautostartDATA install-gnomeshutdownSCRIPTS \
-	install-gtk3moduleLTLIBRARIES install-gtkmoduleLTLIBRARIES \
-	install-html install-html-am install-includeHEADERS \
-	install-info install-info-am install-libLTLIBRARIES \
-	install-man install-pdf install-pdf-am \
+	install-data-am install-dist_gsdgtkmodulesDATA install-dvi \
+	install-dvi-am install-exec install-exec-am install-exec-hook \
+	install-gdmautostartDATA install-gnomeautostartDATA \
+	install-gnomeshutdownSCRIPTS install-gtk3moduleLTLIBRARIES \
+	install-gtkmoduleLTLIBRARIES install-html install-html-am \
+	install-includeHEADERS install-info install-info-am \
+	install-libLTLIBRARIES install-man install-pdf install-pdf-am \
 	install-pluginLTLIBRARIES install-ps install-ps-am \
 	install-strip install-systemdsystemunitDATA installcheck \
 	installcheck-am installdirs maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-compile \
 	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
 	tags uninstall uninstall-am uninstall-binPROGRAMS \
-	uninstall-gdmautostartDATA uninstall-gnomeautostartDATA \
-	uninstall-gnomeshutdownSCRIPTS uninstall-gtk3moduleLTLIBRARIES \
-	uninstall-gtkmoduleLTLIBRARIES uninstall-includeHEADERS \
-	uninstall-libLTLIBRARIES uninstall-pluginLTLIBRARIES \
-	uninstall-systemdsystemunitDATA
+	uninstall-dist_gsdgtkmodulesDATA uninstall-gdmautostartDATA \
+	uninstall-gnomeautostartDATA uninstall-gnomeshutdownSCRIPTS \
+	uninstall-gtk3moduleLTLIBRARIES uninstall-gtkmoduleLTLIBRARIES \
+	uninstall-includeHEADERS uninstall-libLTLIBRARIES \
+	uninstall-pluginLTLIBRARIES uninstall-systemdsystemunitDATA
 
 
 @HAVE_ALSA_TRUE@@HAVE_SYSTEMD_TRUE@@HAVE_UDEV_TRUE@%.service: %.service.in
