@@ -19,10 +19,8 @@
 dist_doc_DATA = README
 
 EXTRA_DIST = \
-	bootstrap.sh \
 	autogen.sh \
 	LGPL \
-	libcanberra.schemas \
 	vala/libcanberra.vapi \
 	vala/libcanberra-gtk.vapi
 
@@ -49,21 +47,6 @@ endif
 
 vapi_DATA += vala/libcanberra-gtk.vapi
 
-schemasdir = $(GCONF_SCHEMA_FILE_DIR)
-schemas_DATA = libcanberra.schemas
-
-if GCONF_SCHEMAS_INSTALL
-install-data-local:
-	if test -z "$(DESTDIR)" ; then \
-		for p in $(schemas_DATA) ; do \
-			GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(top_srcdir)/$$p ; \
-                done ; \
-	fi
-else
-install-data-local:
-endif
-else
-install-data-local:
 endif
 
 DISTCHECK_CONFIGURE_FLAGS =  \
@@ -80,7 +63,7 @@ README:
 homepage: dist
 	test -d $$HOME/homepage/private
 	mkdir -p $$HOME/homepage/private/projects/libcanberra $$HOME/homepage/private/projects/libcanberra/gtkdoc
-	cp libcanberra-@PACKAGE_VERSION@.tar.gz $$HOME/homepage/private/projects/libcanberra
+	cp libcanberra-@PACKAGE_VERSION@.tar.xz $$HOME/homepage/private/projects/libcanberra
 	cp doc/README.html doc/style.css $$HOME/homepage/private/projects/libcanberra
 	cp -a gtkdoc/html/* $$HOME/homepage/private/projects/libcanberra/gtkdoc
 	ln -sf README.html $$HOME/homepage/private/projects/libcanberra/index.html

@@ -370,6 +370,8 @@ static gboolean window_is_xembed(GdkDisplay *d, GdkWindow *w) {
 
         xembed = gdk_x11_get_xatom_by_name_for_display(d, "_XEMBED_INFO");
 
+        /* be robust against not existing XIDs (LP: #834403) */
+        gdk_error_trap_push();
         if (XGetWindowProperty(GDK_DISPLAY_XDISPLAY(d), GDK_WINDOW_XID(w),
                                xembed,
                                0, 2, False, xembed, &type_return,
@@ -377,6 +379,13 @@ static gboolean window_is_xembed(GdkDisplay *d, GdkWindow *w) {
                                &data) != Success) {
                 return FALSE;
         }
+
+#if GTK_CHECK_VERSION(3,0,0)
+        gdk_error_trap_pop_ignored();
+#else
+        gdk_flush();
+        gdk_error_trap_pop();
+#endif
 
         if (type_return == xembed && format_return == 32 && data)
                 ret = TRUE;

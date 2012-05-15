@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="iso-8859-1"?> <!-- -*-html-helper-*- -->
+<?xml version="1.0" encoding="utf-8"?> <!-- -*-html-helper-*- -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -10,7 +10,7 @@
 <body>
 <h1><a name="top">libcanberra @PACKAGE_VERSION@</a></h1>
 
-<p><i>Copyright 2008-2011 Lennart Poettering &lt;@PACKAGE_BUGREPORT@&gt;</i></p>
+<p><i>Copyright 2008-2012 Lennart Poettering &lt;@PACKAGE_BUGREPORT@&gt;</i></p>
 
 <ul class="toc">
     <li><a href="#license">License</a></li>
@@ -37,6 +37,10 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
 Lesser General Public License for more details.</p>
 
 <h2><a name="news">News</a></h2>
+
+<div class="news-date">Tue 15 May
+2012: </div> <p class="news-text"><a href="@PACKAGE_URL@libcanberra-0.29.tar.xz">Version
+0.29</a> released; A couple of bugfixes, drop GConf usage.</p>
 
 <div class="news-date">Thu 24 Feb
 2011: </div> <p class="news-text"><a href="@PACKAGE_URL@libcanberra-0.28.tar.gz">Version
@@ -216,17 +220,17 @@ compilation and <tt>make install</tt> (as root) for installation of
 
 <h2><a name="acks">Acknowledgements</a></h2>
 
-<p>Marc-André Lureau and Brian Cameron for the GStreamer backend.</p>
+<p>Marc-AndrÃ© Lureau and Brian Cameron for the GStreamer backend.</p>
 
 <p>Joe Marcus Clarke for the OSS backend.</p>
 
-<p>Diego Elio Pettenò for various build system fixes.</p>
+<p>Diego Elio PettenÃ² for various build system fixes.</p>
 
 <h2><a name="download">Download</a></h2>
 
 <p>The newest release is always available from <a href="@PACKAGE_URL@">@PACKAGE_URL@</a></p>
 
-<p>The current release is <a href="@PACKAGE_URL@libcanberra-@PACKAGE_VERSION@.tar.gz">@PACKAGE_VERSION@</a></p>
+<p>The current release is <a href="@PACKAGE_URL@libcanberra-@PACKAGE_VERSION@.tar.xz">@PACKAGE_VERSION@</a></p>
 
 <p>Get <tt>libcanberra</tt>'s development sources from the <a href="http://git-scm.com/">GIT</a> <a href="git://git.0pointer.de/libcanberra">repository</a> (<a href="http://git.0pointer.de/?p=libcanberra.git">gitweb</a>): </p>
 
@@ -239,7 +243,7 @@ compilation and <tt>make install</tt> (as root) for installation of
 <p><tt>libcanberra</tt>'s bugs are tracked at <a href="http://bugs.freedesktop.org/buglist.cgi?bug_status=__open__&amp;product=libcanberra">bugs.freedesktop.org</a>.</p>
 
 <hr/>
-<address class="grey">Lennart Poettering &lt;@PACKAGE_BUGREPORT@&gt;, February 2011</address>
+<address class="grey">Lennart Poettering &lt;@PACKAGE_BUGREPORT@&gt;, May 2012</address>
 
 </body>
 </html>
