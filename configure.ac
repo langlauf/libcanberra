@@ -20,7 +20,7 @@
 # <http://www.gnu.org/licenses/>.
 
 m4_define([ca_major],[0])
-m4_define([ca_minor],[29])
+m4_define([ca_minor],[30])
 m4_define([ca_version],[ca_major.ca_minor])
 
 AC_PREREQ([2.68])
@@ -40,7 +40,7 @@ AM_INIT_AUTOMAKE([foreign 1.11 -Wall silent-rules tar-pax no-dist-gzip dist-xz])
 AM_SILENT_RULES([yes])
 
 AC_SUBST(LIBCANBERRA_VERSION_INFO, [2:5:2])
-AC_SUBST(LIBCANBERRA_GTK_VERSION_INFO, [1:8:1])
+AC_SUBST(LIBCANBERRA_GTK_VERSION_INFO, [1:9:1])
 
 AC_CANONICAL_HOST
 AC_DEFINE_UNQUOTED([CANONICAL_HOST], "$host", [Canonical host string.])
@@ -54,6 +54,7 @@ fi
 
 AC_PROG_MKDIR_P
 AC_PROG_LN_S
+AM_PROG_AR
 
 # CC
 
@@ -383,7 +384,7 @@ AC_ARG_ENABLE([gstreamer],
         [gstreamer=auto])
 
 if test "x${gstreamer}" != xno ; then
-    PKG_CHECK_MODULES(GST, [ gstreamer-0.10 >= 0.10.15 ],
+    PKG_CHECK_MODULES(GST, [ gstreamer-1.0 >= 0.10.15 ],
         [
             HAVE_GSTREAMER=1
             AC_DEFINE([HAVE_GSTREAMER], 1, [Have GStreamer?])
@@ -436,7 +437,7 @@ AC_ARG_ENABLE([gtk],
 
 AM_CONDITIONAL([GCONF_SCHEMAS_INSTALL], [false])
 if test "x${gtk}" != xno ; then
-    PKG_CHECK_MODULES(GTK, [ gtk+-2.0 >= 2.20.0 gthread-2.0 ],
+    PKG_CHECK_MODULES(GTK, [ gtk+-2.0 >= 2.20.0 gthread-2.0 glib-2.0 >= 2.32 gdk-2.0 x11 ],
         [
             HAVE_GTK=1
             AC_DEFINE([HAVE_GTK], 1, [Have GTK?])
@@ -472,7 +473,7 @@ AC_ARG_ENABLE([gtk3],
         [gtk3=auto])
 
 if test "x${gtk3}" != xno ; then
-    PKG_CHECK_MODULES(GTK3, [ gtk+-3.0 gthread-2.0 ],
+    PKG_CHECK_MODULES(GTK3, [ gtk+-3.0 gthread-2.0 glib-2.0 >= 2.32 gdk-3.0 x11 ],
         [
             HAVE_GTK3=1
             AC_DEFINE([HAVE_GTK3], 1, [Have GTK3?])

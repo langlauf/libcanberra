@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>canberra</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.77.1">
 <link rel="home" href="index.html" title="libcanberra Reference Manual">
 <link rel="up" href="ch01.html" title="libcanberra">
 <link rel="prev" href="ch01.html" title="libcanberra">
@@ -639,8 +639,11 @@ callback -- this might result in a deadlock. Instead it may only be
 used to asynchronously signal some kind of notification object
 (semaphore, message queue, ...).
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>c</code></em> :</span></p></td>
@@ -671,8 +674,11 @@ to the sound system, calling this function might even suceed if no
 working driver backend is available. To find out if one is
 available call <a class="link" href="libcanberra-canberra.html#ca-context-open" title="ca_context_open ()"><code class="function">ca_context_open()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>c</code></em> :</span></p></td>
@@ -692,8 +698,11 @@ available call <a class="link" href="libcanberra-canberra.html#ca-context-open" 
 <p>
 Destroy a (connected or unconnected) context object.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>c</code></em> :</span></p></td>
@@ -716,8 +725,11 @@ called in <a class="link" href="libcanberra-canberra.html#ca-context-play" title
 explicitly. It is recommended to initialize application properties
 with <a class="link" href="libcanberra-canberra.html#ca-context-change-props" title="ca_context_change_props ()"><code class="function">ca_context_change_props()</code></a> before calling this function.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>c</code></em> :</span></p></td>
@@ -741,8 +753,11 @@ Specify the backend driver used. This function may not be called again after
 the specified driver backend is not available. Use
 <a class="link" href="libcanberra-canberra.html#ca-context-open" title="ca_context_open ()"><code class="function">ca_context_open()</code></a> to find out whether the backend is available.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>c</code></em> :</span></p></td>
@@ -774,8 +789,11 @@ the specified driver backend is not available. Use
 Depending on the backend use this might or might not cause all
 currently playing event sounds to be moved to the new device..
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>c</code></em> :</span></p></td>
@@ -808,8 +826,11 @@ connection to the sound system. This function can be called both
 before and after the <a class="link" href="libcanberra-canberra.html#ca-context-open" title="ca_context_open ()"><code class="function">ca_context_open()</code></a> call. Properties that have
 already been set before will be overwritten.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>c</code></em> :</span></p></td>
@@ -836,8 +857,11 @@ Similar to <a class="link" href="libcanberra-canberra.html#ca-context-change-pro
 instead of a variable list of properties. Can be used to set binary
 properties such as <a class="link" href="libcanberra-canberra.html#CA-PROP-APPLICATION-ICON:CAPS" title="CA_PROP_APPLICATION_ICON"><code class="literal">CA_PROP_APPLICATION_ICON</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>c</code></em> :</span></p></td>
@@ -897,8 +921,11 @@ locale, <a class="link" href="libcanberra-canberra.html#CA-PROP-CANBERRA-XDG-THE
 Theming Specification. On non-Unix systems the native event sound
 that matches the XDG sound name in <a class="link" href="libcanberra-canberra.html#CA-PROP-EVENT-ID:CAPS" title="CA_PROP_EVENT_ID"><code class="literal">CA_PROP_EVENT_ID</code></a> is played.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>c</code></em> :</span></p></td>
@@ -939,8 +966,11 @@ It is guaranteed that the callback is called exactly once if
 allocated memory to the callback and assume that it is freed
 properly.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>c</code></em> :</span></p></td>
@@ -977,8 +1007,11 @@ Cancel one or more event sounds that have been started via
 might cause this function to be called with <code class="literal">CA_ERROR_CANCELED</code> as
 error code.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>c</code></em> :</span></p></td>
@@ -1013,8 +1046,11 @@ find the sounds for <a class="link" href="libcanberra-canberra.html#ca-context-p
 If the backend doesn't support caching sound samples this function
 will return <code class="literal">CA_ERROR_NOTSUPPORTED</code>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>c</code></em> :</span></p></td>
@@ -1045,8 +1081,11 @@ a ca_proplist instead of a variable number of arguments.
 If the backend doesn't support caching sound samples this function
 will return CA_ERROR_NOTSUPPORTED.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>c</code></em> :</span></p></td>
@@ -1074,8 +1113,11 @@ Check if at least one sound with the specified id is still
 playing. Returns 0 in *playing if no sound with this id is playing
 anymore or non-zero if there is at least one playing.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>c</code></em> :</span></p></td>
@@ -1104,8 +1146,11 @@ anymore or non-zero if there is at least one playing.
 <p>
 Converts a numerical error code as returned by most libcanberra API functions into a human readable error string.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>code</code></em> :</span></p></td>
@@ -1134,8 +1179,11 @@ A canberra property list object. Basically a hashtable.
 <p>
 Allocate a new empty property list.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>p</code></em> :</span></p></td>
@@ -1155,8 +1203,11 @@ Allocate a new empty property list.
 <p>
 Destroys a property list that was created with <a class="link" href="libcanberra-canberra.html#ca-proplist-create" title="ca_proplist_create ()"><code class="function">ca_proplist_create()</code></a> earlier.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>p</code></em> :</span></p></td>
@@ -1178,8 +1229,11 @@ Destroys a property list that was created with <a class="link" href="libcanberra
 <p>
 Add a new string key/value pair to the property list.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>p</code></em> :</span></p></td>
@@ -1212,8 +1266,11 @@ Much like <a class="link" href="libcanberra-canberra.html#ca-proplist-sets" titl
 the property list. Takes a standard C format string plus arguments
 and formats a string of it.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>p</code></em> :</span></p></td>
@@ -1248,8 +1305,11 @@ and formats a string of it.
 <p>
 Add a new binary key/value pair to the property list.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>p</code></em> :</span></p></td>
